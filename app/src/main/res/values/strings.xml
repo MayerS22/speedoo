@@ -43,4 +43,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="sign_in">Sign In</string>
+    <string name="speedo_transfer">Speedo Transfer</string>
+    <string name="email">Email</string>
+    <string name="enter_you_email">Enter you email</string>
+    <string name="password">Password</string>
+    <string name="enter_you_password">Enter you password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

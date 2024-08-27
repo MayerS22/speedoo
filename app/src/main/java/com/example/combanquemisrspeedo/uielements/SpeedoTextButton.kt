@@ -2,6 +2,7 @@ package com.example.combanquemisrspeedo.uielements
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +27,7 @@ fun SpeedoTextButton(text: String, textColor: Color, backgroundColor: Color,bord
                 color = borderColor,
                 shape = RoundedCornerShape(6.dp)
             )
+            .fillMaxWidth()
             .background(
                 color = backgroundColor,
                 shape = RoundedCornerShape(6.dp))
