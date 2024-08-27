@@ -38,7 +38,7 @@ import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.White
 
 @Composable
-fun SignInScreen(modifier: Modifier = Modifier) {
+fun SignUpScreen1(modifier: Modifier = Modifier) {
     val passwordVisible = remember { mutableStateOf(false) }
 
     Column(
@@ -55,7 +55,7 @@ fun SignInScreen(modifier: Modifier = Modifier) {
             )
     ) {
         Text(
-            text = stringResource(R.string.sign_in),
+            text = stringResource(R.string.sign_up),
             fontSize = 20.sp,
             modifier = Modifier
                 .padding(top = 15.dp)
@@ -70,6 +70,15 @@ fun SignInScreen(modifier: Modifier = Modifier) {
                 .padding(top = 70.dp, bottom = 70.dp)
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally) // Center text
+        )
+        SpeedoTextField(
+            labelText = stringResource(R.string.full_name),
+            placeholderText = stringResource(R.string.enter_you_full_name),
+            trailingIcon = painterResource(id = R.drawable.user),
+            onTextChange = {},
+            modifier = Modifier
+                .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
+                .fillMaxWidth()
         )
         SpeedoTextField(
             labelText = stringResource(R.string.email),
@@ -92,22 +101,34 @@ fun SignInScreen(modifier: Modifier = Modifier) {
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
+        SpeedoTextField(
+            labelText = stringResource(R.string.confirm_password),
+            placeholderText = stringResource(R.string.enter_you_password),
+            trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
+            onTextChange = {},
+            isPassword = true,
+            passwordVisible = passwordVisible,
+            onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
+            modifier = Modifier
+                .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
+                .fillMaxWidth()
+        )
         SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = White)
         Row(
             modifier = Modifier
                 .padding(16.dp)
         ) {
             Text(
-                text = stringResource(R.string.don_t_have_an_account),
+                text = stringResource(R.string.already_have_an_account),
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = G100,
 
-                ),
+                    ),
             )
             ClickableText(
-                modifier = modifier.padding(start=5.dp),
-                text = AnnotatedString(stringResource(R.string.sign_up)),
+                modifier = modifier.padding(start = 5.dp),
+                text = AnnotatedString(stringResource(R.string.sign_in)),
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
@@ -126,5 +147,5 @@ fun SignInScreen(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun SignInScreenPreview() {
-    SignInScreen()
+    SignUpScreen1()
 }

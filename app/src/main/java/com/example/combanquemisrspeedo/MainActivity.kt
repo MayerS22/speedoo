@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.combanquemisrspeedo.authentication.SignInScreen
+import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
             Column(Modifier.padding(10.dp))
             {
 
-                SignInScreen()
+                SignUpScreen1()
             }
         }
 
