@@ -31,7 +31,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
         }
     }
 }
-
+//
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun SplashScreenPreview() {
