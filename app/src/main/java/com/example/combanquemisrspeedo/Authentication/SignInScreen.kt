@@ -92,7 +92,7 @@ fun SignInScreen(modifier: Modifier = Modifier) {
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
-        SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = White)
+        SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
         Row(
             modifier = Modifier
                 .padding(16.dp)
