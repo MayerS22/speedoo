@@ -1,6 +1,7 @@
 package com.example.combanquemisrspeedo.uielements
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,7 +27,7 @@ import com.example.combanquemisrspeedo.R
 fun MoreMenuItem(
     text: String,
     @DrawableRes startIcon: Int,
-    @DrawableRes endIcon: Int,
+    @DrawableRes endIcon: Int? = null,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -34,6 +35,7 @@ fun MoreMenuItem(
             .height(56.dp)
             .fillMaxSize()
             .padding(horizontal = 16.dp)
+            .clickable {  }
     ) {
         Column {
             Icon(
@@ -60,14 +62,17 @@ fun MoreMenuItem(
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
-                painter = painterResource(id = endIcon),
-                contentDescription = null,
-                tint = Color(0XFF7C7A78),
-                modifier = Modifier
+            endIcon?.let {icon->
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    tint = Color(0XFF7C7A78),
+                    modifier = Modifier
 
 
-            )
+                )
+            }
+
         }
 
     }
@@ -79,6 +84,6 @@ fun MoreMenuItemPreview() {
     MoreMenuItem(
         "Profile",
         R.drawable.user,
-        R.drawable.back_arrow
+       // R.drawable.back_arrow
     )
 }
