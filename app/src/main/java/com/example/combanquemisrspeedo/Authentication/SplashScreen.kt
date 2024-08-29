@@ -12,13 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.Navigation.Route
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.SplashScreenHeading
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
     val circleRadius = remember { Animatable(0f) }
     val scope = rememberCoroutineScope()
 
@@ -29,7 +33,9 @@ fun SplashScreen(modifier: Modifier = Modifier) {
                 animationSpec = tween(durationMillis = 5500)
             )
         }
+
     }
+
 
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -47,12 +53,13 @@ fun SplashScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            if (circleRadius.value > 1000f) {
+            if (circleRadius.value > 2000f) {
                 Text(
                     text = "Speedo Transfer",
                     color = G0,
                     style = SplashScreenHeading
                 )
+                navController.navigate(Route.SIGNUP)
             }
         }
     }
@@ -61,5 +68,5 @@ fun SplashScreen(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun SplashScreenPreview() {
-    SplashScreen()
+    SplashScreen(rememberNavController())
 }

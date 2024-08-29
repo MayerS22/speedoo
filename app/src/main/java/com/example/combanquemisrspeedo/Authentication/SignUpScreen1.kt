@@ -26,6 +26,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.Navigation.Route
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
@@ -39,7 +42,7 @@ import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.White
 
 @Composable
-fun SignUpScreen1(modifier: Modifier = Modifier) {
+fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
     val passwordVisible = remember { mutableStateOf(false) }
 
     Column(
@@ -114,7 +117,10 @@ fun SignUpScreen1(modifier: Modifier = Modifier) {
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
-        SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
+        SpeedoTextButton(text = stringResource(R.string.sign_up), textColor = White, backgroundColor = P300, borderColor = P300){
+            navController.navigate(Route.SIGNIN)
+        }
+
         SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in))
 
     }
@@ -123,5 +129,5 @@ fun SignUpScreen1(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun SignInScreenPreview() {
-    SignUpScreen1()
+    SignUpScreen1(rememberNavController())
 }

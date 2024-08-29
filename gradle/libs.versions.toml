@@ -9,6 +9,7 @@ lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 appcompat = "1.7.0"
+navigationCompose = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +30,7 @@ appcenter-analytics = { group = "com.microsoft.appcenter", name = "appcenter-ana
 appcenter-crashes = { group = "com.microsoft.appcenter", name = "appcenter-crashes", version = "5.0.1" }
 appcenter-distribute = { group = "com.microsoft.appcenter", name = "appcenter-distribute", version = "2.5.1" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 
 [plugins]
