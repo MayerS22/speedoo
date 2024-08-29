@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.combanquemisrspeedo.Authentication.SplashScreen
 import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Column(Modifier.padding(10.dp))
             {
-                SplashScreen()
+                SignUpScreen1()
             }
         }
 

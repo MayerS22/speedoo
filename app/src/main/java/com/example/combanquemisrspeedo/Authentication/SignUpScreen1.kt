@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G100
@@ -114,33 +115,8 @@ fun SignUpScreen1(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
         )
         SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            Text(
-                text = stringResource(R.string.already_have_an_account),
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    color = G100,
+        SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in))
 
-                    ),
-            )
-            ClickableText(
-                modifier = modifier.padding(start = 5.dp),
-                text = AnnotatedString(stringResource(R.string.sign_in)),
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = P300,
-                    textDecoration = TextDecoration.Underline
-                ),
-                onClick = {
-
-
-                }
-            )
-        }
     }
 }
 
