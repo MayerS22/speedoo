@@ -1,5 +1,7 @@
 package com.example.combanquemisrspeedo.uielements
 
+
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,44 +31,9 @@ import edu.android_security.ui.theme.G40
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
-import edu.android_security.ui.theme.P500
 
 @Composable
-fun TransferCard(
-    fromName: String,
-    fromAccount: String,
-    toName: String,
-    toAccount: String,
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .background(P500, RoundedCornerShape(8.dp))
-            .height(280.dp)
-    ) {
-        CardContent(
-            label = "From",
-            name = fromName,
-            account = fromAccount
-        )
-        Image(
-            modifier = Modifier.fillMaxWidth(),
-            painter = painterResource(id = R.drawable.swap),
-            contentDescription = "Swap Icon",
-            alignment = Alignment.Center,
-            colorFilter = ColorFilter.tint(Color.White) // White color for the icon
-        )
-        CardContent(
-            label = "To",
-            name = toName,
-            account = toAccount
-        )
-    }
-}
-
-@Composable
-fun CardContent(label: String, name: String, account: String) {
+fun CardContent(label: String , name: String, account: String, modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -77,6 +42,7 @@ fun CardContent(label: String, name: String, account: String) {
             .height(100.dp) // Increased height to make the card bigger
             .background(P50, RoundedCornerShape(8.dp)) // Light pink background
     ) {
+
         Spacer(modifier = Modifier.width(16.dp))
 
         Box(
@@ -121,11 +87,13 @@ fun CardContent(label: String, name: String, account: String) {
                 fontWeight = FontWeight.Normal,
             )
         }
+
+        Spacer(modifier = Modifier.width(16.dp))
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Preview
 @Composable
-private fun TransferCardPreview() {
-    TransferCard("Hazem", "123456789", "Ahmed", "987654321")
+private fun CardContentPreview() {
+    CardContent(label = "From", name = "Hazem", account = "01271169552")
 }

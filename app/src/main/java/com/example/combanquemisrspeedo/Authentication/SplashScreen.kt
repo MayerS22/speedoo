@@ -26,7 +26,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
         scope.launch {
             circleRadius.animateTo(
                 targetValue = 3000f,
-                animationSpec = tween(durationMillis = 3500)
+                animationSpec = tween(durationMillis = 5500)
             )
         }
     }
