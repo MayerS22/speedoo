@@ -2,13 +2,11 @@ package com.example.combanquemisrspeedo.authentication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,21 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.Navigation.Route
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
-import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
@@ -118,7 +112,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
         )
         SpeedoTextButton(text = stringResource(R.string.sign_up), textColor = White, backgroundColor = P300, borderColor = P300){
-
+            navController.navigate(Route.SIGNUP2)
         }
 
         SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in) ,

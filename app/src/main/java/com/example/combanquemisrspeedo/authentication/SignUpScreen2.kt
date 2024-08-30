@@ -1,7 +1,8 @@
-package com.example.combanquemisrspeedo.Authentication
+package com.example.combanquemisrspeedo.authentication
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.Navigation.Route
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.Country
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.CountrySelector
 import com.example.combanquemisrspeedo.uielements.DatePickerTextField
 import com.example.combanquemisrspeedo.uielements.SignText
@@ -89,6 +90,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id = R.drawable.drop_down), contentDescription = "Back",
             modifier = Modifier.align(Alignment.Start)
+                .clickable { navController.navigate(Route.SIGNUP) }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(

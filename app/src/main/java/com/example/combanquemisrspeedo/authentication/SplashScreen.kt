@@ -1,4 +1,4 @@
-package com.example.combanquemisrspeedo.Authentication
+package com.example.combanquemisrspeedo.authentication
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -14,11 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.Navigation.Route
+import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.SplashScreenHeading
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable

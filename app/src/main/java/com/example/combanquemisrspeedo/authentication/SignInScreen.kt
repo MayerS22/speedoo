@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.Navigation.Route
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
