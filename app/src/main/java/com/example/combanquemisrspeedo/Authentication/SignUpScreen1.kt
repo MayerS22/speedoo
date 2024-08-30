@@ -1,7 +1,6 @@
 package com.example.combanquemisrspeedo.authentication
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -38,9 +36,6 @@ import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
-import edu.android_security.ui.theme.P400
-import edu.android_security.ui.theme.P50
-import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.White
 
 @Composable

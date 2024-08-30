@@ -13,10 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.Authentication.SplashScreen
 import com.example.combanquemisrspeedo.Navigation.AppNavHost
-import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 
 class MainActivity : ComponentActivity() {
 
@@ -36,9 +33,7 @@ class MainActivity : ComponentActivity() {
     fun DText() {
         Box(Modifier.background(Color.White)) {
             Text(text = "Hello World")
-
         }
-
     }
 
 
