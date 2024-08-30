@@ -25,7 +25,7 @@ fun SignText(
     secondTextColor: Color = P300,
     firstTextFontSize: TextUnit = 16.sp,
     secondTextFontSize: TextUnit = 16.sp,
-    onSecondTextClick: () -> Unit = {}
+    onSecondTextClick: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -47,8 +47,7 @@ fun SignText(
                 color = secondTextColor,
                 textDecoration = TextDecoration.Underline
             ),
-            onClick = {
-            }
+           onClick =onSecondTextClick
         )
     }
 }

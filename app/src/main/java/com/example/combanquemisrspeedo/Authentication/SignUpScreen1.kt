@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +59,10 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
                     )
                 )
             )
-    ) {
+            .verticalScroll(
+                rememberScrollState()
+            )
+            ) {
         Text(
             text = stringResource(R.string.sign_up),
             fontSize = 20.sp,
@@ -71,7 +76,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(top = 70.dp, bottom = 70.dp)
+                .padding(top = 50.dp, bottom = 50.dp)
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally) // Center text
         )
@@ -118,10 +123,11 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
         )
         SpeedoTextButton(text = stringResource(R.string.sign_up), textColor = White, backgroundColor = P300, borderColor = P300){
-            navController.navigate(Route.SIGNIN)
+
         }
 
-        SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in))
+        SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in) ,
+            onSecondTextClick = {navController.navigate(Route.SIGNIN)})
 
     }
 }

@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SpeedoTextButton(text: String, textColor: Color, backgroundColor: Color,borderColor: Color,  onclick: () -> Unit) {
+fun SpeedoTextButton(text: String, textColor: Color, backgroundColor: Color,borderColor: Color,
+                     onclick: () -> Unit) {
     TextButton(
         onClick = onclick,
         modifier = Modifier

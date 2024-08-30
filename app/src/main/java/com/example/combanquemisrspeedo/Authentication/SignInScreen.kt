@@ -87,9 +87,10 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
         )
         SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
         {
-
         }
-        SignText(firstText = stringResource(R.string.don_t_have_an_account), secondText = stringResource(R.string.sign_up))
+        SignText(firstText = stringResource(R.string.don_t_have_an_account), secondText = stringResource(R.string.sign_up)){
+            navController.navigate(Route.SIGNUP)
+        }
 
     }
 }
