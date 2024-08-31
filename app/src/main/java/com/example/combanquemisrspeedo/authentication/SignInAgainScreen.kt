@@ -2,13 +2,7 @@ package com.example.combanquemisrspeedo.Authentication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G900
@@ -31,8 +24,14 @@ import edu.android_security.ui.theme.White
 
 @Composable
 fun SignInAgain(modifier: Modifier = Modifier) {
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
-    var showTimeoutDialog by remember { mutableStateOf(true) } // Control the visibility of the dialog
+    var showTimeoutDialog by remember { mutableStateOf(true) }
+
+    // Determine if the button should be fully opaque or semi-transparent
+    val isButtonEnabled = email.value.isNotEmpty() && password.value.isNotEmpty()
+    val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,11 +46,7 @@ fun SignInAgain(modifier: Modifier = Modifier) {
                 )
             )
     ) {
-        /*if (showTimeoutDialog) {
-            TimeoutAlertDialog(onDismiss = { showTimeoutDialog = false })
-        }*/
-
-        Spacer(modifier = Modifier.height(70.dp)) // To push the content down if needed
+        Spacer(modifier = Modifier.height(70.dp))
 
         Text(
             text = stringResource(R.string.welcome_back),
@@ -61,7 +56,7 @@ fun SignInAgain(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 70.dp)
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.CenterHorizontally) // Center text
+                .wrapContentWidth(Alignment.CenterHorizontally)
         )
         Text(
             text = stringResource(R.string.login_to_your_account),
@@ -70,13 +65,13 @@ fun SignInAgain(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 20.dp, bottom = 70.dp)
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.CenterHorizontally) // Center text
+                .wrapContentWidth(Alignment.CenterHorizontally)
         )
         SpeedoTextField(
             labelText = stringResource(R.string.email),
             placeholderText = stringResource(R.string.enter_you_email),
             trailingIcon = painterResource(id = R.drawable.email),
-            onTextChange = {},
+            onTextChange = { email.value = it },
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
                 .fillMaxWidth()
@@ -85,7 +80,7 @@ fun SignInAgain(modifier: Modifier = Modifier) {
             labelText = stringResource(R.string.password),
             placeholderText = stringResource(R.string.enter_you_password),
             trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
-            onTextChange = {},
+            onTextChange = { password.value = it },
             isPassword = true,
             passwordVisible = passwordVisible,
             onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
@@ -93,15 +88,20 @@ fun SignInAgain(modifier: Modifier = Modifier) {
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
-        SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
-        {
-
+        SpeedoTextButton(
+            text = stringResource(R.string.sign_in),
+            textColor = White,
+            backgroundColor = buttonColor,
+            borderColor = buttonColor
+        ) {
+            if (isButtonEnabled) {
+                // Perform sign-in action
+            }
         }
     }
 }
-/*
 
-@Composable
+/*@Composable
 fun TimeoutAlertDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -124,8 +124,7 @@ fun TimeoutAlertDialog(onDismiss: () -> Unit) {
         },
         modifier = Modifier.padding(top = 16.dp) // Adjust padding as needed
     )
-}
-*/
+}*/
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

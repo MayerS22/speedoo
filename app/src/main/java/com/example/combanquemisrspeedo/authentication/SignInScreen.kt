@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +34,13 @@ import edu.android_security.ui.theme.White
 
 @Composable
 fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
+
+    // Determine the button color based on whether both fields have input
+    val isButtonEnabled = email.value.isNotEmpty() && password.value.isNotEmpty()
+    val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,13 +72,13 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(top = 70.dp, bottom = 70.dp)
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.CenterHorizontally) // Center text
+                .wrapContentWidth(Alignment.CenterHorizontally)
         )
         SpeedoTextField(
             labelText = stringResource(R.string.email),
             placeholderText = stringResource(R.string.enter_you_email),
             trailingIcon = painterResource(id = R.drawable.email),
-            onTextChange = {},
+            onTextChange = { email.value = it },
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
                 .fillMaxWidth()
@@ -80,7 +87,7 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             labelText = stringResource(R.string.password),
             placeholderText = stringResource(R.string.enter_you_password),
             trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
-            onTextChange = {},
+            onTextChange = { password.value = it },
             isPassword = true,
             passwordVisible = passwordVisible,
             onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
@@ -88,13 +95,22 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth()
         )
-        SpeedoTextButton(text = stringResource(R.string.sign_in), textColor = White, backgroundColor = P300, borderColor = P300)
-        {
+        SpeedoTextButton(
+            text = stringResource(R.string.sign_in),
+            textColor = White,
+            backgroundColor = buttonColor,
+            borderColor = buttonColor
+        ) {
+            if (isButtonEnabled) {
+                // Handle sign-in logic here
+            }
         }
-        SignText(firstText = stringResource(R.string.don_t_have_an_account), secondText = stringResource(R.string.sign_up)){
+        SignText(
+            firstText = stringResource(R.string.don_t_have_an_account),
+            secondText = stringResource(R.string.sign_up)
+        ) {
             navController.navigate(Route.SIGNUP)
         }
-
     }
 }
 
