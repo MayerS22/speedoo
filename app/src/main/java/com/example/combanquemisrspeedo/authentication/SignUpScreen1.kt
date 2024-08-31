@@ -51,7 +51,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             .verticalScroll(
                 rememberScrollState()
             )
-            ) {
+    ) {
         Text(
             text = stringResource(R.string.sign_up),
             fontSize = 20.sp,

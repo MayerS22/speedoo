@@ -1,6 +1,8 @@
 package com.example.combanquemisrspeedo.uielements
 
 import android.app.DatePickerDialog
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,11 +10,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import edu.android_security.ui.theme.White
 import java.util.Calendar
 
 
@@ -24,16 +31,15 @@ fun DatePickerTextField(
     onDateSelected: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current // Get the current context
-    val calendar = Calendar.getInstance() // Get the current instance of Calendar
-    val date = remember { mutableStateOf("") }
+    var selectedDate by remember { mutableStateOf("") }
 
-    // DatePickerDialog Setup
+    val context = LocalContext.current
+    val calendar = Calendar.getInstance()
+
     val datePickerDialog = DatePickerDialog(
         context,
         { _, year, month, dayOfMonth ->
-            val selectedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
-            date.value = selectedDate
+            selectedDate = "$dayOfMonth/${month + 1}/$year"
             onDateSelected(selectedDate)
         },
         calendar.get(Calendar.YEAR),
@@ -41,30 +47,38 @@ fun DatePickerTextField(
         calendar.get(Calendar.DAY_OF_MONTH)
     )
 
+    val borderColor = Color.Gray
+    val textColor = Color.Black
+    val placeholderColor = Color.Gray
+    val backgroundColor = White
+
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = labelText,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
         )
-        Spacer(modifier = Modifier.size(10.dp))
-        OutlinedTextField(
-            value = date.value,
-            onValueChange = { },
+
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 8.dp)
-                .clickable { datePickerDialog.show() }, // Show DatePickerDialog on click
-            shape = RoundedCornerShape(6.dp),
-            placeholder = { Text(text = placeholderText) },
-            trailingIcon = {
-                Icon(
-                    painter = trailingIcon,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp) // Set icon size to 24.dp
-                )
-            },
-            readOnly = true // Make the text field read-only
-        )
+                .clickable { datePickerDialog.show() }
+                .border(1.dp, borderColor, RoundedCornerShape(6.dp))
+                .background(backgroundColor, RoundedCornerShape(6.dp))
+                .padding(16.dp)
+        ) {
+            Text(
+                text = if (selectedDate.isEmpty()) placeholderText else selectedDate,
+                color = if (selectedDate.isEmpty()) placeholderColor else textColor,
+                style = TextStyle(fontSize = 16.sp)
+            )
+            Icon(
+                painter = trailingIcon,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(24.dp)
+                    .align(Alignment.CenterEnd)
+            )
+        }
     }
 }

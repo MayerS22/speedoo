@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.Country
+import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.CountrySelector
 import com.example.combanquemisrspeedo.uielements.DatePickerTextField
@@ -42,9 +43,15 @@ import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
 
 @Composable
-fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
+fun SignUpScreen2(navController:NavController , modifier: Modifier = Modifier) {
 
     val countries = listOf(
+        Country("United States", R.drawable.email),
+        Country("Canada", R.drawable.email),
+        Country("United Kingdom", R.drawable.email),
+        Country("United States", R.drawable.email),
+        Country("Canada", R.drawable.email),
+        Country("United Kingdom", R.drawable.email),
         Country("United States", R.drawable.email),
         Country("Canada", R.drawable.email),
         Country("United Kingdom", R.drawable.email),
