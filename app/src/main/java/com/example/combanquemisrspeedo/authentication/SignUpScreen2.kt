@@ -139,8 +139,10 @@ fun SignUpScreen2(navController:NavController , modifier: Modifier = Modifier) {
             textColor = White,
             backgroundColor = P300,
             borderColor = P300
-        ) {}
-//     TODO   Naviagtion
+        ) {
+            navController.navigate(Route.SIGNINADAIN)
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
         SignText(firstText = stringResource(R.string.already_have_an_account), secondText = stringResource(R.string.sign_in) ,
             onSecondTextClick = {navController.navigate(Route.SIGNIN)})
