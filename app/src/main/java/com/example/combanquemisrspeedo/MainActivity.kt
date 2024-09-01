@@ -13,20 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.combanquemisrspeedo.uielements.SpeedoTextField
+import com.example.combanquemisrspeedo.navigation.AppNavHost
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column(Modifier.padding(10.dp))
+            Column()
             {
-                SpeedoTextField()
-                SpeedoTextField()
-                SpeedoTextField()
-                SpeedoTextField()
-
+                AppNavHost()
             }
         }
 
@@ -37,9 +33,7 @@ class MainActivity : ComponentActivity() {
     fun DText() {
         Box(Modifier.background(Color.White)) {
             Text(text = "Hello World")
-
         }
-
     }
 
 
