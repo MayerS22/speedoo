@@ -58,4 +58,11 @@
     <string name="you_logged_out">We Logged you out because you were inactive for 2 minutes – it\'s to help keep your account secure</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="login_to_your_account">Login to your account</string>
+    <string name="enter_cardholder_name">Enter Cardholder Name</string>
+    <string name="enter_cardholder_email">Enter Cardholder Email</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="country">Country</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="date_of_brith">Date Of Brith</string>
+    <string name="save">Save</string>
 </resources>
