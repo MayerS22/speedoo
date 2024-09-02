@@ -48,7 +48,7 @@
     <string name="email">Email</string>
     <string name="enter_you_email">Enter you email</string>
     <string name="password">Password</string>
-    <string name="enter_you_password">Enter you password</string>
+    <string name="enter_your_password">Enter your password</string>
     <string name="sign_up">Sign Up</string>
     <string name="don_t_have_an_account">"Don't have an account? "</string>
     <string name="full_name">Full Name</string>
@@ -65,4 +65,7 @@
     <string name="select_your_country">Select your country</string>
     <string name="date_of_brith">Date Of Brith</string>
     <string name="save">Save</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
 </resources>
