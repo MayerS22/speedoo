@@ -65,7 +65,7 @@ fun EditProfile(onBackClick: () -> Unit) {
                         text = stringResource(R.string.edit_profile),
                         fontSize = 20.sp,
                         color = G900,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Bold
                     )
                 },
                 navigationIcon = {

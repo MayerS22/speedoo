@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
 import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.profile.EditProfile
+import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-           SignUpScreen2(rememberNavController())
+            ProfileInformationScreen(onBackClick={})
 
         }
 
