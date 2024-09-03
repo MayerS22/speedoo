@@ -71,4 +71,12 @@
     <string name="profile_information">Profile Information</string>
     <string name="settings">Settings</string>
     <string name="change_your_information">Change your information</string>
+    <string name="profile">Profile</string>
+    <string name="your_information">Your information</string>
+    <string name="setting">Setting</string>
+    <string name="change_your_settings">Change your settings</string>
+    <string name="payment_history">Payment history</string>
+    <string name="view_your_transactions">View your transactions</string>
+    <string name="my_favorite_list">My Favorite list</string>
+    <string name="view_your_favourites">View your favourites</string>
 </resources>
