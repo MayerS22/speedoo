@@ -67,28 +67,26 @@ fun SpeedoTextField(
                 VisualTransformation.None
             },
             trailingIcon = {
-                when {
-                    isPassword && passwordVisible != null -> {
-                        val icon = if (passwordVisible.value) {
-                            painterResource(id = R.drawable.openeye)
-                        } else {
-                            painterResource(id = R.drawable.eyeclose)
-                        }
-                        IconButton(onClick = { onPasswordVisibilityToggle?.invoke() }) {
-                            Icon(
-                                painter = icon,
-                                contentDescription = null,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
+                if (isPassword) {
+                    val icon = if (passwordVisible?.value == true) {
+                        painterResource(id = R.drawable.openeye)
+                    } else {
+                        painterResource(id = R.drawable.eyeclose)
                     }
-                    trailingIcon != null -> {
+                    IconButton(onClick = { onPasswordVisibilityToggle?.invoke() }) {
+                        Icon(
+                            painter = icon,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
+                        )
+                    }
+                } else {
+                    trailingIcon?.let {icon->
                         Icon(
                             painter = trailingIcon,
                             contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
+                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
+                        )}
                 }
             }
         )
