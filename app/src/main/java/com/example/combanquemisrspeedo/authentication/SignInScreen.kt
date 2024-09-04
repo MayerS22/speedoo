@@ -40,6 +40,7 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
     val passwordVisible = remember { mutableStateOf(false) }
 
     // Determine the button color based on whether both fields have input
+
     val isButtonEnabled = email.value.isNotEmpty() && password.value.isNotEmpty()
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
@@ -50,8 +51,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        White,
-                        P,
+                        Color(0xFFFFF8E7),
+                        Color(0xFFFFEAEE),
                     )
                 )
             )
@@ -89,7 +90,7 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
         )
         SpeedoTextField(
             labelText = stringResource(R.string.password),
-            placeholderText = stringResource(R.string.enter_you_password),
+            placeholderText = stringResource(R.string.enter_your_password),
             trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
             onTextChange = { password.value = it },
             isPassword = true,

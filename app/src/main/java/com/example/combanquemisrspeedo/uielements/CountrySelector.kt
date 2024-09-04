@@ -18,15 +18,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +48,9 @@ import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P50
 import edu.android_security.ui.theme.P75
 import edu.android_security.ui.theme.White
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CountrySelector(
     labelText: String,
@@ -53,11 +61,8 @@ fun CountrySelector(
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedCountry by remember { mutableStateOf<Country?>(null) }
-    val dropdownHeight = 200.dp // Set a fixed height for the dropdown
-    val borderColor = Color.Gray
-    val textColor = Color.Black
-    val placeholderColor = Color.Gray
-    val backgroundColor = White
+    val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
 
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
@@ -76,13 +81,13 @@ fun CountrySelector(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(1.dp, borderColor, RoundedCornerShape(6.dp))
-                    .background(backgroundColor, RoundedCornerShape(6.dp))
+                    .border(1.dp, Color.Gray, RoundedCornerShape(6.dp))
+                    .background(White, RoundedCornerShape(6.dp))
                     .padding(16.dp)
             ) {
                 Text(
                     text = selectedCountry?.name ?: placeholderText,
-                    color = if (selectedCountry == null) placeholderColor else textColor,
+                    color = if (selectedCountry == null) Color.Gray else Color.Black,
                     style = TextStyle(fontSize = 16.sp)
                 )
                 Icon(
@@ -95,44 +100,44 @@ fun CountrySelector(
             }
         }
 
+        // Show ModalBottomSheet when expanded is true
         if (expanded) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(dropdownHeight) // Fixed height for dropdown
-                    .background(Color.White, shape = RoundedCornerShape(12.dp))
-                    .border(1.dp, Color.Gray, RoundedCornerShape(12.dp))
-                    .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
-            ) {
+            scope.launch {
+                sheetState.show()
+            }
+            ModalBottomSheet(
+                onDismissRequest = { expanded = false },
+                sheetState = sheetState,
+                containerColor = Color.White
+                ) {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize() // Ensure LazyColumn fills the Box
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp) // Set a fixed height for the dropdown
+                        .background(Color.White)
+                        .padding(8.dp)
                 ) {
                     items(countries) { country ->
-                        Column {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        selectedCountry = country
-                                        onCountrySelected(country)
-                                        expanded = false
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    selectedCountry = country
+                                    onCountrySelected(country)
+                                    expanded = false
+                                    scope.launch {
+                                        sheetState.hide()
                                     }
-                                    .padding(8.dp)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = country.flagResId),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(text = country.name)
-                            }
-//                            Divider(
-//                                color = Color.Gray,
-//                                thickness = 1.dp,
-//                                modifier = Modifier.padding(horizontal = 8.dp)
-//                            )
+                                }
+                                .padding(8.dp)
+                        ) {
+                            Image(
+                                painter = painterResource(id = country.flagResId),
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(text = country.name)
                         }
                     }
                 }

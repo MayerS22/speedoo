@@ -48,7 +48,7 @@
     <string name="email">Email</string>
     <string name="enter_you_email">Enter you email</string>
     <string name="password">Password</string>
-    <string name="enter_you_password">Enter you password</string>
+    <string name="enter_your_password">Enter your password</string>
     <string name="sign_up">Sign Up</string>
     <string name="don_t_have_an_account">"Don't have an account? "</string>
     <string name="full_name">Full Name</string>
@@ -58,4 +58,25 @@
     <string name="you_logged_out">We Logged you out because you were inactive for 2 minutes – it\'s to help keep your account secure</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="login_to_your_account">Login to your account</string>
+    <string name="enter_cardholder_name">Enter Cardholder Name</string>
+    <string name="enter_cardholder_email">Enter Cardholder Email</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="country">Country</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="date_of_brith">Date Of Brith</string>
+    <string name="save">Save</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="settings">Settings</string>
+    <string name="change_your_information">Change your information</string>
+    <string name="profile">Profile</string>
+    <string name="your_information">Your information</string>
+    <string name="setting">Setting</string>
+    <string name="change_your_settings">Change your settings</string>
+    <string name="payment_history">Payment history</string>
+    <string name="view_your_transactions">View your transactions</string>
+    <string name="my_favorite_list">My Favorite list</string>
+    <string name="view_your_favourites">View your favourites</string>
 </resources>

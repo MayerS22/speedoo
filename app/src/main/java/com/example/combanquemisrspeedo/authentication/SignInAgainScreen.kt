@@ -60,8 +60,8 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
                     .background(
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                White,
-                                P,
+                                Color(0xFFFFF8E7),
+                                Color(0xFFFFEAEE),
                             )
                         )
                     )
@@ -105,7 +105,7 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
                 )
                 SpeedoTextField(
                     labelText = stringResource(R.string.password),
-                    placeholderText = stringResource(R.string.enter_you_password),
+                    placeholderText = stringResource(R.string.enter_your_password),
                     trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
                     onTextChange = { password.value = it },
                     isPassword = true,
