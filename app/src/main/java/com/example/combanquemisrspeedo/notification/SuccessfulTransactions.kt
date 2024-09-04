@@ -109,7 +109,7 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
                     }
 
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                  Column(
                      verticalArrangement = Arrangement.Center,
                      horizontalAlignment = Alignment.CenterHorizontally,
@@ -124,6 +124,7 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
                          fontSize = 24.sp,
                          textAlign = TextAlign.Center
                          )
+                     Spacer(modifier = Modifier.height(12.dp))
 
                      Text(text = "Transfer amount",
                          fontWeight = FontWeight.W400,
@@ -131,7 +132,7 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
                          textAlign = TextAlign.Center,
                          color = G700
                      )
-
+                     Spacer(modifier = Modifier.height(12.dp))
 
                      Text(text = "Received money",
                          fontWeight = FontWeight.W500,
@@ -140,7 +141,9 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
                          color = P300
                          )
 
-                     Spacer(modifier = modifier.height(10.dp))
+                     Spacer(modifier = modifier.height(20.dp))
+
+              //change---
 
                      CardContent(
                          label = "From",

@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.uielements
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,12 +24,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
+import edu.android_security.ui.theme.White
 
 @Composable
 fun SpeedoTextField(
     labelText: String,
     placeholderText: String,
-    trailingIcon: Painter? =null,
+    trailingIcon: Painter? = null,
     onTextChange: (String) -> Unit,
     isPassword: Boolean = false,
     passwordVisible: MutableState<Boolean>? = null, // Optional for password fields
@@ -37,11 +39,15 @@ fun SpeedoTextField(
 ) {
     val text = remember { mutableStateOf("") }
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+
+    ) {
         Text(
             text = labelText,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+
         )
         Spacer(modifier = Modifier.size(10.dp))
         OutlinedTextField(
@@ -52,7 +58,7 @@ fun SpeedoTextField(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 8.dp),
+                .padding(start = 8.dp, end = 8.dp).background(color = White),
             shape = RoundedCornerShape(6.dp),
             placeholder = { Text(text = placeholderText) },
             visualTransformation = if (isPassword && passwordVisible?.value == false) {
@@ -76,11 +82,11 @@ fun SpeedoTextField(
                     }
                 } else {
                     trailingIcon?.let {icon->
-                    Icon(
-                        painter = trailingIcon,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp) // Set icon size to 24.dp
-                    )}
+                        Icon(
+                            painter = trailingIcon,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
+                        )}
                 }
             }
         )
@@ -94,7 +100,7 @@ fun SpeedoTextFieldPreview() {
     SpeedoTextField(
         labelText = "Password",
         placeholderText = "Enter your password",
-        trailingIcon = painterResource(id = R.drawable.email), // This is just a placeholder
+        trailingIcon = null, // This can be null now
         onTextChange = { /* Handle text change */ },
         isPassword = true,
         passwordVisible = passwordVisible,
