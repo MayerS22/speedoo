@@ -11,8 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+
+import com.example.combanquemisrspeedo.more.MoreScreen
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
+
 import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.profile.EditProfile
 import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
