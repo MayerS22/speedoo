@@ -65,8 +65,8 @@ fun ProfileInformationScreen(onBackClick: () -> Unit) {
                         .background(
                             brush = Brush.verticalGradient(
                                 colors = listOf(
-                                    White,
-                                    P,
+                                    Color(0xFFFFF8E7),
+                                    Color(0xFFFFEAEE),
                                 )
                             )
                         )

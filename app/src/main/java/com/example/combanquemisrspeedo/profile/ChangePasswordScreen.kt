@@ -21,6 +21,7 @@ import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangePassword(onBackClick: () -> Unit) {
@@ -39,7 +40,10 @@ fun ChangePassword(onBackClick: () -> Unit) {
             .padding(top = 20.dp)
             .background(
                 brush = Brush.verticalGradient(
-                    colors = listOf(White, P)
+                    colors = listOf(
+                        Color(0xFFFFF8E7),
+                        Color(0xFFFFEAEE),
+                    )
                 )
             ),
         topBar = {
@@ -85,7 +89,9 @@ fun ChangePassword(onBackClick: () -> Unit) {
                     onTextChange = { currentPassword = it },
                     isPassword = true,
                     passwordVisible = currentPasswordVisible,
-                    onPasswordVisibilityToggle = { currentPasswordVisible.value = !currentPasswordVisible.value },
+                    onPasswordVisibilityToggle = {
+                        currentPasswordVisible.value = !currentPasswordVisible.value
+                    },
                     modifier = Modifier
                         .padding(bottom = 24.dp)
                         .fillMaxWidth()
@@ -102,7 +108,9 @@ fun ChangePassword(onBackClick: () -> Unit) {
                     onTextChange = { newPassword = it },
                     isPassword = true,
                     passwordVisible = newPasswordVisible,
-                    onPasswordVisibilityToggle = { newPasswordVisible.value = !newPasswordVisible.value },
+                    onPasswordVisibilityToggle = {
+                        newPasswordVisible.value = !newPasswordVisible.value
+                    },
                     modifier = Modifier
                         .padding(bottom = 24.dp)
                         .fillMaxWidth()
