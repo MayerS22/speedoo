@@ -40,12 +40,38 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
     val password = remember { mutableStateOf("") }
     val confirmPassword = remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
+    val passwordError = remember { mutableStateOf<String?>(null) }
+    val confirmPasswordError = remember { mutableStateOf<String?>(null) }
+    val hasTypedPassword = remember { mutableStateOf(false) } // Track if the user has started typing in the password field
+    val hasTypedConfirmPassword = remember { mutableStateOf(false) } // Track if the user has started typing in the confirm password field
 
-    // Determine if the button should be fully opaque or semi-transparent
+    // Password validation function
+    fun validatePassword(password: String): String? {
+        return when {
+            password.length < 6 -> "Password must be at least 6 characters long"
+            !password.any { it.isUpperCase() } -> "Password must contain at least one uppercase letter"
+            !password.any { it.isLowerCase() } -> "Password must contain at least one lowercase letter"
+            !password.any { it.isDigit() } -> "Password must contain at least one digit"
+            !password.any { "!@#$%^&*()_+[]{}|;:'\",.<>?".contains(it) } -> "Password must contain at least one special character"
+            else -> null
+        }
+    }
+
+    // Confirm password validation function
+    fun validateConfirmPassword(password: String, confirmPassword: String): String? {
+        return if (confirmPassword.isNotEmpty() && password != confirmPassword) {
+            "Passwords do not match"
+        } else {
+            null
+        }
+    }
+
     val isButtonEnabled = fullName.value.isNotEmpty() &&
             email.value.isNotEmpty() &&
             password.value.isNotEmpty() &&
-            confirmPassword.value.isNotEmpty()
+            confirmPassword.value.isNotEmpty() &&
+            passwordError.value == null &&
+            confirmPasswordError.value == null
 
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
@@ -101,26 +127,39 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         SpeedoTextField(
             labelText = stringResource(R.string.password),
             placeholderText = stringResource(R.string.enter_your_password),
-            trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
-            onTextChange = { password.value = it },
+            trailingIcon = painterResource(id = R.drawable.eyeclose), // Replace with the correct icon
+            onTextChange = {
+                hasTypedPassword.value = true // Mark that the user has typed in the password field
+                password.value = it
+                passwordError.value = validatePassword(it)
+                confirmPasswordError.value = validateConfirmPassword(it, confirmPassword.value)
+            },
             isPassword = true,
             passwordVisible = passwordVisible,
             onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
             modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
-                .fillMaxWidth()
+                .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
+                .fillMaxWidth(),
+            errorMessage = if (hasTypedPassword.value) passwordError.value else null, // Show error only after typing starts
+            errorColor = if (hasTypedPassword.value) Color.Red else Color.Transparent // Show the red color only after typing starts
         )
         SpeedoTextField(
             labelText = stringResource(R.string.confirm_password),
             placeholderText = stringResource(R.string.enter_your_password),
-            trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
-            onTextChange = { confirmPassword.value = it },
+            trailingIcon = painterResource(id = R.drawable.eyeclose), // Replace with the correct icon
+            onTextChange = {
+                hasTypedConfirmPassword.value = true // Mark that the user has typed in the confirm password field
+                confirmPassword.value = it
+                confirmPasswordError.value = validateConfirmPassword(password.value, it)
+            },
             isPassword = true,
             passwordVisible = passwordVisible,
             onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            errorMessage = if (hasTypedConfirmPassword.value) confirmPasswordError.value else null, // Show error only after typing starts
+            errorColor = if (hasTypedConfirmPassword.value) Color.Red else Color.Transparent // Show the red color only after typing starts
         )
         SpeedoTextButton(
             text = stringResource(R.string.sign_up),
@@ -140,6 +179,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         )
     }
 }
+
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

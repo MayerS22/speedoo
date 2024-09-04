@@ -16,6 +16,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -33,21 +34,21 @@ fun SpeedoTextField(
     trailingIcon: Painter? = null,
     onTextChange: (String) -> Unit,
     isPassword: Boolean = false,
-    passwordVisible: MutableState<Boolean>? = null, // Optional for password fields
-    onPasswordVisibilityToggle: (() -> Unit)? = null, // Optional for password fields
-    modifier: Modifier = Modifier
+    passwordVisible: MutableState<Boolean>? = null,
+    onPasswordVisibilityToggle: (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    errorMessage: String? = null, // Error message
+    errorColor: Color = Color.Red // Error color
 ) {
     val text = remember { mutableStateOf("") }
 
     Column(
         modifier = modifier.fillMaxWidth()
-
     ) {
         Text(
             text = labelText,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-
         )
         Spacer(modifier = Modifier.size(10.dp))
         OutlinedTextField(
@@ -58,7 +59,8 @@ fun SpeedoTextField(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 8.dp).background(color = White),
+                .padding(start = 8.dp, end = 8.dp)
+                .background(color = White),
             shape = RoundedCornerShape(6.dp),
             placeholder = { Text(text = placeholderText) },
             visualTransformation = if (isPassword && passwordVisible?.value == false) {
@@ -77,33 +79,28 @@ fun SpeedoTextField(
                         Icon(
                             painter = icon,
                             contentDescription = null,
-                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 } else {
-                    trailingIcon?.let {icon->
+                    trailingIcon?.let { icon ->
                         Icon(
-                            painter = trailingIcon,
+                            painter = icon,
                             contentDescription = null,
-                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
-                        )}
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
                 }
-            }
+            },
+            isError = errorMessage != null // Set isError to true if there is an error
         )
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = errorColor,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(start = 8.dp, top = 4.dp)
+            )
+        }
     }
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun SpeedoTextFieldPreview() {
-    val passwordVisible = remember { mutableStateOf(false) }
-    SpeedoTextField(
-        labelText = "Password",
-        placeholderText = "Enter your password",
-        trailingIcon = null, // This can be null now
-        onTextChange = { /* Handle text change */ },
-        isPassword = true,
-        passwordVisible = passwordVisible,
-        onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value }
-    )
 }
