@@ -190,7 +190,8 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             borderColor = buttonColor
         ) {
             if (isButtonEnabled) {
-                // Implement your continue logic here
+                //Only for testing-------
+                navController.navigate(Route.PROFILE)
             }
         }
 

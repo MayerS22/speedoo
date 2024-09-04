@@ -14,11 +14,13 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import com.example.combanquemisrspeedo.more.MoreScreen
 import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
 
 import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.profile.EditProfile
 import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
+import com.example.combanquemisrspeedo.profile.ProfileScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            ProfileInformationScreen(onBackClick={})
+            AppNavHost ()
 
         }
 

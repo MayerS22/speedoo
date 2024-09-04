@@ -36,6 +36,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.FavouriteListItem
@@ -44,7 +46,7 @@ import edu.android_security.ui.theme.P
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavouriteScreen(modifier: Modifier = Modifier) {
+fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -164,5 +166,5 @@ fun FavouriteScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun FavouriteScreenPreview() {
-    FavouriteScreen()
+    FavouriteScreen(rememberNavController())
 }

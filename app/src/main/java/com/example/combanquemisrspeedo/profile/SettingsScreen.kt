@@ -25,13 +25,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SettingsItem
 import edu.android_security.ui.theme.G900
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
+fun SettingsScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
 
         topBar = {
@@ -45,7 +48,9 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
+                    IconButton(onClick = {
+                        navController.navigate(Route.PROFILE)
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
                             contentDescription = "Back"
@@ -78,10 +83,10 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(id = R.string.change_password),
                     description = stringResource(id = R.string.change_password),
                             onClick = {
-                        // Handle click on the entire item
+                                navController.navigate(Route.CHANGPASS)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.CHANGPASS)
                     }
                 )
                 SettingsItem(
@@ -89,10 +94,10 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(id = R.string.edit_profile),
                     description = stringResource(R.string.change_your_information),
                     onClick = {
-
+                        navController.navigate(Route.EDITPROFILE)
                     },
                     onArrowClick = {
-
+                        navController.navigate(Route.EDITPROFILE)
                     }
                 )
                 HorizontalDivider()
@@ -105,5 +110,5 @@ fun SettingsScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
 @Preview
 @Composable
 private fun SettingsScreenPreview() {
-    SettingsScreen(onBackClick = {})
+    SettingsScreen(rememberNavController())
 }

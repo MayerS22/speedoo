@@ -3,13 +3,19 @@ package com.example.combanquemisrspeedo.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.authentication.SignInAgain
 import com.example.combanquemisrspeedo.authentication.SignInScreen
 import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
 import com.example.combanquemisrspeedo.authentication.SplashScreen
+import com.example.combanquemisrspeedo.more.FavouriteScreen
+import com.example.combanquemisrspeedo.more.MoreScreen
+import com.example.combanquemisrspeedo.profile.ChangePassword
+import com.example.combanquemisrspeedo.profile.EditProfile
+import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
+import com.example.combanquemisrspeedo.profile.ProfileScreen
+import com.example.combanquemisrspeedo.profile.SettingsScreen
 
 object Route {
     const val START= "splash"
@@ -17,6 +23,14 @@ object Route {
     const val SIGNUP2="signUp2"
     const val SIGNIN="signIn"
     const val SIGNINADAIN="signInAgain"
+    const val PROFILE="Profile"
+    const val PROFILEINFO="ProfileInfo"
+    const val EDITPROFILE="EditProfile"
+    const val SETTING="Setting"
+    const val CHANGPASS="ChangePass"
+    const val FAVOURITESCREEN="FavouriteScreen"
+    const val MORESCREEN="MoreScreen"
+
 
 }
 
@@ -30,6 +44,13 @@ fun AppNavHost() {
         composable(route=Route.SIGNUP2){ SignUpScreen2(navController) }
         composable(route=Route.SIGNIN){ SignInScreen(navController) }
         composable(route=Route.SIGNINADAIN){ SignInAgain(navController) }
+        composable(route=Route.PROFILE){ ProfileScreen(navController)}
+        composable(route=Route.PROFILEINFO){ ProfileInformationScreen(navController)}
+        composable(route=Route.EDITPROFILE){ EditProfile (navController)}
+        composable(route=Route.SETTING){ SettingsScreen(navController)}
+        composable(route=Route.CHANGPASS){ ChangePassword(navController) }
+        composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
+        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
 
 
         }

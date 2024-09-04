@@ -14,7 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G900
@@ -24,7 +27,7 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChangePassword(onBackClick: () -> Unit) {
+fun ChangePassword(navController: NavController) {
 
     var currentPassword by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
@@ -57,7 +60,9 @@ fun ChangePassword(onBackClick: () -> Unit) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
+                    IconButton(onClick = {
+                        navController.navigate(Route.SETTING)
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
                             contentDescription = "Back"
@@ -143,5 +148,5 @@ fun ChangePassword(onBackClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun ChangePasswordPreview() {
-    ChangePassword(onBackClick = {})
+    ChangePassword( rememberNavController())
 }
