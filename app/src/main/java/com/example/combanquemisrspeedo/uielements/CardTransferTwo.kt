@@ -45,7 +45,7 @@ fun TransferCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(P500, RoundedCornerShape(8.dp))
+            .background(Color.Transparent, RoundedCornerShape(8.dp))
             .height(280.dp)
     ) {
         CardContent(
@@ -58,7 +58,7 @@ fun TransferCard(
             painter = painterResource(id = R.drawable.swap),
             contentDescription = "Swap Icon",
             alignment = Alignment.Center,
-            colorFilter = ColorFilter.tint(Color.White) // White color for the icon
+            colorFilter = ColorFilter.tint(Color.White)
         )
         CardContent(
             label = "To",
@@ -125,7 +125,7 @@ fun CardContent(label: String, name: String, account: String) {
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showSystemUi = false, showBackground = false)
 @Composable
 private fun TransferCardPreview() {
     TransferCard("Hazem", "123456789", "Ahmed", "987654321")
