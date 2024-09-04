@@ -55,7 +55,9 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
                             contentDescription = "Back"
@@ -150,10 +152,10 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     title = stringResource(R.string.payment_history),
                     description = stringResource(R.string.view_your_transactions),
                     onClick = {
-                        // Handle click on the entire item
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     }
                 )
 

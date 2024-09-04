@@ -1,5 +1,7 @@
 package com.example.combanquemisrspeedo.authentication
 
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,8 +12,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -32,6 +36,8 @@ import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
+import kotlin.system.exitProcess
+
 
 @Composable
 fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
@@ -73,7 +79,12 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             passwordError.value == null &&
             confirmPasswordError.value == null
 
+
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
+
+
+    
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

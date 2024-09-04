@@ -20,7 +20,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.more.MoreScreen
+import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.G200
 import edu.android_security.ui.theme.P50
@@ -28,6 +31,11 @@ import edu.android_security.ui.theme.P50
 
 @Composable
 fun BottomAppBar(
+//    homeClick:() -> Unit,
+//    transferClick:() -> Unit,
+//    transactionClick:() -> Unit,
+//    cardClick:() -> Unit,
+//    moreClick:() -> Unit,
 ) {
 
     Row(
@@ -43,7 +51,10 @@ fun BottomAppBar(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = { })
+            IconButton(
+                //homeClick
+                {}
+            )
             {
                 Icon(
                     painter = painterResource(id = R.drawable.home),
@@ -64,7 +75,10 @@ fun BottomAppBar(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = {})
+            IconButton(onClick =
+            {}
+            //transferClick
+            )
             { Icon(painter = painterResource(id = R.drawable.transfer_1), contentDescription = "", tint = G200) }
             Text("Transfer",
                 fontWeight = FontWeight.W500,
@@ -77,7 +91,10 @@ fun BottomAppBar(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = {})
+            IconButton(onClick =
+            {}
+            //transactionClick
+            )
             { Icon(painter = painterResource(id = R.drawable.history_1), contentDescription = "", tint = G200) }
             Text("Transaction",
                 fontWeight = FontWeight.W500,
@@ -90,7 +107,10 @@ fun BottomAppBar(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = {})
+            IconButton(onClick =
+            //cardClick
+            {}
+            )
             { Icon(painter = painterResource(id = R.drawable.cards_1), contentDescription = "", tint = G200) }
             Text("My Cards",
                 fontWeight = FontWeight.W500,
@@ -103,7 +123,9 @@ fun BottomAppBar(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = {})
+            IconButton(onClick =
+            {}
+            )
             { Icon(painter = painterResource(id = R.drawable.more), contentDescription = "", tint = G200) }
             Text("More",
                 fontWeight = FontWeight.W500,

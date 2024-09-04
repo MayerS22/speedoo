@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.FavouriteListItem
 import edu.android_security.ui.theme.G900
@@ -109,7 +110,7 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                                 modifier = Modifier
                                     //.align(Alignment.Start)
                                     .clickable {
-                                        //navigation
+                                        navController.popBackStack()
                                     }
                             )
                         }
@@ -134,7 +135,7 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                         fontWeight = FontWeight.W600,
                         color = G900
                     )
-                    //Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
                     FavouriteListItem(
                         name = "Asmaa Dosuky",
                         account = "xxxx7890",
@@ -147,6 +148,7 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
 
                         }
                     )
+                    Spacer(modifier = Modifier.height(20.dp))
                     FavouriteListItem(
                         name = "Asmaa Dosuky",
                         account = "xxxx7890",
@@ -155,7 +157,9 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                         onclickEdit = {
                             showBottomSheet = true
                         },
-                        onclickDelete = {}
+                        onclickDelete = {
+                            //only for test
+                            navController.navigate(Route.MORESCREEN)}
                     )
                 }
             }

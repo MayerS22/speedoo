@@ -32,7 +32,7 @@ fun EditSheet(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .fillMaxSize()
+            .height(515.dp)
             .padding(bottom = 100.dp)
     ) {
         Spacer(modifier = Modifier.height(20.dp))
@@ -74,9 +74,7 @@ fun EditSheet(modifier: Modifier = Modifier) {
             textColor = White,
             backgroundColor = P300,
             borderColor = P300
-        ) {
-
-        }
+        ) {}
     }
 }
 

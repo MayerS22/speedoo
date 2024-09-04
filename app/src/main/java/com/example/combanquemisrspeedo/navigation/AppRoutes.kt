@@ -16,6 +16,7 @@ import com.example.combanquemisrspeedo.profile.EditProfile
 import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
 import com.example.combanquemisrspeedo.profile.ProfileScreen
 import com.example.combanquemisrspeedo.profile.SettingsScreen
+import com.example.combanquemisrspeedo.transactions.TransactionScreen
 
 object Route {
     const val START= "splash"
@@ -30,6 +31,7 @@ object Route {
     const val CHANGPASS="ChangePass"
     const val FAVOURITESCREEN="FavouriteScreen"
     const val MORESCREEN="MoreScreen"
+    const val TRANSACTIONSCREEN="TransactionScreen"
 
 
 }
@@ -51,6 +53,7 @@ fun AppNavHost() {
         composable(route=Route.CHANGPASS){ ChangePassword(navController) }
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
+        composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
 
 
         }

@@ -48,7 +48,6 @@ fun FavouriteListItem(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
             .height(100.dp)
             .background(P50, RoundedCornerShape(8.dp))
     ) {
@@ -78,22 +77,22 @@ fun FavouriteListItem(
             Text(
                 text = name,
                 color = G900,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.W500,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Text(
                 text = "Account $account",
                 color = G100,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
+                fontWeight = FontWeight.W400,
             )
         }
         editIcon?.let {icon->
         Icon(
             painter = painterResource(id = editIcon),
             contentDescription = "",
-            tint = Color.DarkGray,
+            tint = G100,
             modifier = modifier.clickable { onclickEdit() }
         )}
 

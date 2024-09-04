@@ -34,24 +34,36 @@ import edu.android_security.ui.theme.P50
 
 @Composable
 fun HelpSheet(modifier: Modifier = Modifier) {
+    Column(
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            ContactOption(
-                iconRes = R.drawable.outline_email_24,
-                text = "Send Email",
-                onClick = { /* Handle Send Email click */ }
-            )
+            Column(
+                modifier = modifier.weight(1f)
+            ) {
+                ContactOption(
+                    iconRes = R.drawable.outline_email_24,
+                    text = "Send Email",
+                    onClick = { /* Handle Send Email click */ }
+                )
+            }
             Spacer(modifier = Modifier.width(13.dp))
-            ContactOption(
-                iconRes = R.drawable.call,
-                text = "Call Us\n000000",
-                onClick = { /* Handle Call Us click */ }
-            )
+            Column(
+                modifier = modifier.weight(1f)
+            ) {
+                ContactOption(
+                    iconRes = R.drawable.call,
+                    text = "Call Us\n000000",
+                    onClick = { /* Handle Call Us click */ }
+                )
+            }
         }
+        Spacer(modifier = Modifier.height(60.dp))
+    }
     }
 
 
@@ -83,7 +95,8 @@ fun ContactOption(iconRes: Int, text: String, onClick: () -> Unit) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .shadow(0.dp, RoundedCornerShape(6.dp))
                 ) {
                     Icon(

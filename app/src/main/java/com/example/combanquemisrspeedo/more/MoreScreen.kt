@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.MoreMenuItem
 import edu.android_security.ui.theme.P
@@ -96,7 +97,7 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 //.align(Alignment.Start)
                                 .clickable {
-                                    //navigation
+                                    navController.popBackStack()
                                 }
                         )
                     }
@@ -114,27 +115,27 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                MoreMenuItem("Transfer From Website", R.drawable.website, R.drawable.back_arrow)
+                MoreMenuItem("Transfer From Website", R.drawable.website, R.drawable.arrow_right)
                 { }
                 HorizontalDivider(
                     thickness = 0.5.dp,
                     color = Color.LightGray
                 )
-                MoreMenuItem("Favorite", R.drawable.favorite, R.drawable.back_arrow)
-                { }
+                MoreMenuItem("Favorite", R.drawable.favorite, R.drawable.arrow_right)
+                { navController.navigate(Route.FAVOURITESCREEN)}
                 HorizontalDivider(
                     thickness = 0.5.dp,
                     color = Color.LightGray
                 )
-                MoreMenuItem("Profile", R.drawable.user, R.drawable.back_arrow)
+                MoreMenuItem("Profile", R.drawable.user, R.drawable.arrow_right)
                 {
-
+                    navController.navigate(Route.PROFILE)
                 }
                 HorizontalDivider(
                     thickness = 0.5.dp,
                     color = Color.LightGray
                 )
-                MoreMenuItem("Help", R.drawable.fill, R.drawable.back_arrow)
+                MoreMenuItem("Help", R.drawable.fill, R.drawable.arrow_right)
                 { showBottomSheet = true }
                 HorizontalDivider(
                     thickness = 0.5.dp,
@@ -142,6 +143,7 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
                 )
                 MoreMenuItem("Logout", R.drawable.logout)
                 {}
+                Spacer(modifier = Modifier.height(100.dp))
             }
         }
     )

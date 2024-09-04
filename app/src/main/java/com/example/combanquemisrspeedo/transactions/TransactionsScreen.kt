@@ -34,6 +34,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import edu.android_security.ui.theme.G100
@@ -45,7 +47,7 @@ import edu.android_security.ui.theme.P50
 import edu.android_security.ui.theme.P500
 
 @Composable
-fun TransactionScreen(modifier: Modifier = Modifier) {
+fun TransactionScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
         bottomBar = { BottomAppBar() },
         content = { innerPadding ->
@@ -83,7 +85,7 @@ fun TransactionScreen(modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 //.align(Alignment.Start)
                                 .clickable {
-                                    //navigation
+                                    navController.popBackStack()
                                 }
                         )
                     }
@@ -295,5 +297,5 @@ fun textFaildOrSucess(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun TransactionScreenPreview() {
-    TransactionScreen()
+    TransactionScreen(rememberNavController())
 }
