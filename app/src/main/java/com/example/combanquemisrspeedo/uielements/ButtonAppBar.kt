@@ -27,14 +27,16 @@ import edu.android_security.ui.theme.P50
 
 
 @Composable
-fun BottomAppBar() {
+fun BottomAppBar(
+) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(130.dp)
             .padding(16.dp)
             .background(G0, RoundedCornerShape(24.dp)),
-        horizontalArrangement = Arrangement.SpaceBetween,
+       horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(

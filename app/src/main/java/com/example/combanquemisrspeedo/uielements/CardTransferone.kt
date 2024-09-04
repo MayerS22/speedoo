@@ -38,8 +38,8 @@ fun CardContent(label: String , name: String, account: String, modifier: Modifie
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .height(100.dp) // Increased height to make the card bigger
+            //.padding(16.dp)
+            .height(126.dp) // Increased height to make the card bigger
             .background(P50, RoundedCornerShape(8.dp)) // Light pink background
     ) {
 

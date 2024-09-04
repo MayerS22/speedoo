@@ -28,7 +28,7 @@ import com.example.combanquemisrspeedo.R
 fun SpeedoTextField(
     labelText: String,
     placeholderText: String,
-    trailingIcon: Painter,
+    trailingIcon: Painter? =null,
     onTextChange: (String) -> Unit,
     isPassword: Boolean = false,
     passwordVisible: MutableState<Boolean>? = null, // Optional for password fields
@@ -75,11 +75,12 @@ fun SpeedoTextField(
                         )
                     }
                 } else {
+                    trailingIcon?.let {icon->
                     Icon(
                         painter = trailingIcon,
                         contentDescription = null,
                         modifier = Modifier.size(24.dp) // Set icon size to 24.dp
-                    )
+                    )}
                 }
             }
         )

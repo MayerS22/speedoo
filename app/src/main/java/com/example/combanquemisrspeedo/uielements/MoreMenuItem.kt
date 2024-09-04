@@ -28,6 +28,7 @@ fun MoreMenuItem(
     text: String,
     @DrawableRes startIcon: Int,
     @DrawableRes endIcon: Int? = null,
+    onclick:() -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -35,7 +36,7 @@ fun MoreMenuItem(
             .height(56.dp)
             .fillMaxSize()
             .padding(horizontal = 16.dp)
-            .clickable {  }
+            .clickable { onclick() }
     ) {
         Column {
             Icon(
@@ -85,5 +86,5 @@ fun MoreMenuItemPreview() {
         "Profile",
         R.drawable.user,
        // R.drawable.back_arrow
-    )
+    ){}
 }

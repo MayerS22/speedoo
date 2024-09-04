@@ -3,6 +3,7 @@ package com.example.combanquemisrspeedo.uielements
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,7 +40,9 @@ fun FavouriteListItem(
     account: String,
     @DrawableRes editIcon: Int? = null,
     @DrawableRes deleteIcon: Int? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onclickEdit:() -> Unit,
+    onclickDelete: () -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -90,7 +93,8 @@ fun FavouriteListItem(
         Icon(
             painter = painterResource(id = editIcon),
             contentDescription = "",
-            tint = Color.DarkGray
+            tint = Color.DarkGray,
+            modifier = modifier.clickable { onclickEdit() }
         )}
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -99,7 +103,8 @@ fun FavouriteListItem(
         Icon(
             painter = painterResource(id = deleteIcon),
             contentDescription = "",
-            tint = D300
+            tint = D300,
+            modifier = modifier.clickable { onclickDelete() }
         )}
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -110,5 +115,11 @@ fun FavouriteListItem(
 @Preview
 @Composable
 private fun FavouriteListItemPreview() {
-    FavouriteListItem( "Dina",  "1111",R.drawable.edit,R.drawable.delete)
+    FavouriteListItem( "Dina",
+        "1111",
+        R.drawable.edit,
+        R.drawable.delete,
+        onclickDelete = {},
+        onclickEdit = {}
+        )
 }
