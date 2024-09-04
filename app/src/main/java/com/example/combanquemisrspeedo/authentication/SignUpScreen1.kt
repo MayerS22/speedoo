@@ -100,7 +100,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         )
         SpeedoTextField(
             labelText = stringResource(R.string.password),
-            placeholderText = stringResource(R.string.enter_you_password),
+            placeholderText = stringResource(R.string.enter_your_password),
             trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
             onTextChange = { password.value = it },
             isPassword = true,
@@ -112,7 +112,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         )
         SpeedoTextField(
             labelText = stringResource(R.string.confirm_password),
-            placeholderText = stringResource(R.string.enter_you_password),
+            placeholderText = stringResource(R.string.enter_your_password),
             trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
             onTextChange = { confirmPassword.value = it },
             isPassword = true,
