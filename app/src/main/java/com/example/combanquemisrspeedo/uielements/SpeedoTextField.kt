@@ -47,11 +47,13 @@ fun SpeedoTextField(
 
     Column(
         modifier = modifier.fillMaxWidth()
+
     ) {
         Text(
             text = labelText,
             fontSize = 16.sp,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+
         )
         Spacer(modifier = Modifier.size(10.dp))
         OutlinedTextField(
@@ -62,8 +64,10 @@ fun SpeedoTextField(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 8.dp)
-                .background(color = White),
+
+                .padding(start = 8.dp, end = 8.dp).background(color = White),
+
+
             shape = RoundedCornerShape(6.dp),
             placeholder = { Text(text = placeholderText) },
             visualTransformation = if (isPassword && passwordVisible?.value == false) {
@@ -86,13 +90,14 @@ fun SpeedoTextField(
                         )
                     }
                 } else {
-                    trailingIcon?.let { icon ->
+
+                    trailingIcon?.let {icon->
                         Icon(
-                            painter = icon,
+                            painter = trailingIcon,
                             contentDescription = null,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
+                            modifier = Modifier.size(24.dp) // Set icon size to 24.dp
+                        )}
+
                 }
             },
             isError = errorMessage != null // Set isError to true if there is an error
@@ -107,3 +112,19 @@ fun SpeedoTextField(
         }
     }
 }
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SpeedoTextFieldPreview() {
+    val passwordVisible = remember { mutableStateOf(false) }
+    SpeedoTextField(
+        labelText = "Password",
+        placeholderText = "Enter your password",
+        trailingIcon = null, // This can be null now
+        onTextChange = { /* Handle text change */ },
+        isPassword = true,
+        passwordVisible = passwordVisible,
+        onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value }
+    )
+}
+

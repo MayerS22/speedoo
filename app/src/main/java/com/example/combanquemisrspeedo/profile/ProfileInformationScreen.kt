@@ -25,7 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.ProfileInfoItem
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
@@ -33,7 +36,7 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileInformationScreen(onBackClick: () -> Unit) {
+fun ProfileInformationScreen(navController: NavController) {
 
         Scaffold(
             topBar = {
@@ -47,7 +50,9 @@ fun ProfileInformationScreen(onBackClick: () -> Unit) {
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = onBackClick) {
+                        IconButton(onClick = {
+                            navController.navigate(Route.PROFILE)
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.back_arrow),
                                 contentDescription = "Back"
@@ -93,5 +98,5 @@ fun ProfileInformationScreen(onBackClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileInformationScreenPreview() {
-    ProfileInformationScreen(onBackClick = {})
+    ProfileInformationScreen(rememberNavController())
 }

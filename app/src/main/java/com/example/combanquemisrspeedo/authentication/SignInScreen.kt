@@ -109,6 +109,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
         ) {
             if (isButtonEnabled) {
                 // Handle sign-in logic here
+                //only for test
+                navController.navigate(Route.SIGNINADAIN)
             }
         }
         SignText(

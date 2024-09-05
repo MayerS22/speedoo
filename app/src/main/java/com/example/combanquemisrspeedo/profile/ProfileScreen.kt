@@ -30,7 +30,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SettingsItem
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G900
@@ -38,7 +41,7 @@ import edu.android_security.ui.theme.P50
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
+fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
 
         topBar = {
@@ -52,7 +55,9 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
+                    IconButton(onClick = {
+                        navController.popBackStack()
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
                             contentDescription = "Back"
@@ -121,10 +126,10 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(id = R.string.profile_information),
                     description = stringResource(R.string.your_information),
                     onClick = {
-                        // Handle click on the entire item
+                        navController.navigate(Route.PROFILEINFO)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.PROFILEINFO)
                     }
                 )
 
@@ -134,10 +139,10 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(R.string.setting),
                     description = stringResource(R.string.change_your_settings),
                     onClick = {
-                        // Handle click on the entire item
+                        navController.navigate(Route.SETTING)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.SETTING)
                     }
                 )
 
@@ -147,10 +152,10 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(R.string.payment_history),
                     description = stringResource(R.string.view_your_transactions),
                     onClick = {
-                        // Handle click on the entire item
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     }
                 )
 
@@ -160,10 +165,10 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
                     title = stringResource(R.string.my_favorite_list),
                     description = stringResource(R.string.view_your_favourites),
                     onClick = {
-                        // Handle click on the entire item
+                        navController.navigate(Route.FAVOURITESCREEN)
                     },
                     onArrowClick = {
-                        // Handle arrow button click to navigate to another page
+                        navController.navigate(Route.FAVOURITESCREEN)
                     }
                 )
 
@@ -175,7 +180,5 @@ fun ProfileScreen(modifier: Modifier = Modifier, onBackClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileScreenPreview() {
-    ProfileScreen {
-
-    }
+    ProfileScreen (rememberNavController())
 }

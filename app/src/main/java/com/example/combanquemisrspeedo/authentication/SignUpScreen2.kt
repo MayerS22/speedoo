@@ -193,7 +193,8 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             modifier = Modifier.animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
-                // Implement your continue logic here
+                //Only for testing-------
+                navController.navigate(Route.PROFILE)
             }
         }
 

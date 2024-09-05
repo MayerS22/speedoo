@@ -18,8 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.Country
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.CountrySelector
 import com.example.combanquemisrspeedo.uielements.DatePickerTextField
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
@@ -31,7 +34,7 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditProfile(onBackClick: () -> Unit) {
+fun EditProfile(navController: NavController) {
 
     val countries = listOf(
         Country("United States", R.drawable.email),
@@ -69,7 +72,9 @@ fun EditProfile(onBackClick: () -> Unit) {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
+                    IconButton(onClick = {
+                        navController.navigate(Route.SETTING)
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
                             contentDescription = "Back"
@@ -145,5 +150,5 @@ fun EditProfile(onBackClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun EditProfilePreview() {
-    EditProfile(onBackClick = {})
+    EditProfile(rememberNavController())
 }

@@ -3,6 +3,7 @@ package com.example.combanquemisrspeedo.uielements
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,13 +40,14 @@ fun FavouriteListItem(
     account: String,
     @DrawableRes editIcon: Int? = null,
     @DrawableRes deleteIcon: Int? = null,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onclickEdit:() -> Unit,
+    onclickDelete: () -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
             .height(100.dp)
             .background(P50, RoundedCornerShape(8.dp))
     ) {
@@ -75,22 +77,23 @@ fun FavouriteListItem(
             Text(
                 text = name,
                 color = G900,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.W500,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             Text(
                 text = "Account $account",
                 color = G100,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
+                fontWeight = FontWeight.W400,
             )
         }
         editIcon?.let {icon->
         Icon(
             painter = painterResource(id = editIcon),
             contentDescription = "",
-            tint = Color.DarkGray
+            tint = G100,
+            modifier = modifier.clickable { onclickEdit() }
         )}
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -99,7 +102,8 @@ fun FavouriteListItem(
         Icon(
             painter = painterResource(id = deleteIcon),
             contentDescription = "",
-            tint = D300
+            tint = D300,
+            modifier = modifier.clickable { onclickDelete() }
         )}
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -110,5 +114,11 @@ fun FavouriteListItem(
 @Preview
 @Composable
 private fun FavouriteListItemPreview() {
-    FavouriteListItem( "Dina",  "1111",R.drawable.edit,R.drawable.delete)
+    FavouriteListItem( "Dina",
+        "1111",
+        R.drawable.edit,
+        R.drawable.delete,
+        onclickDelete = {},
+        onclickEdit = {}
+        )
 }
