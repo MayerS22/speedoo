@@ -3,6 +3,7 @@ package com.example.combanquemisrspeedo.transactions
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.CardContent
+import com.example.combanquemisrspeedo.uielements.SuccessCardWithIcon
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G700
 import edu.android_security.ui.theme.P
@@ -95,7 +97,7 @@ fun TransactionsDetails(modifier: Modifier = Modifier) {
                     }
 
                 }
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -112,7 +114,7 @@ fun TransactionsDetails(modifier: Modifier = Modifier) {
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    Text(text = "Transfer amount",
+                    Text(text = "Send money",
                         fontWeight = FontWeight.W400,
                         fontSize = 16.sp,
                         textAlign = TextAlign.Center,
@@ -127,20 +129,8 @@ fun TransactionsDetails(modifier: Modifier = Modifier) {
                         color = P300
                     )
 
-                    Spacer(modifier = modifier.height(10.dp))
-
-                    //change---
-
-                    CardContent(
-                        label = "From",
-                        name = "Asmaa Dosuky",
-                        account = "Account xxxx7890"
-                    )
-                    CardContent(
-                        label = "From",
-                        name = "Asmaa Dosuky",
-                        account = "Account xxxx7890"
-                    )
+                    //Spacer(modifier = modifier.height(10.dp))
+                    SuccessCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
                     DataTransferDetails()
                 }
             }

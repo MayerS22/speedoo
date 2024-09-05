@@ -44,6 +44,7 @@ import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.CardContent
 import com.example.combanquemisrspeedo.uielements.MoreMenuItem
+import com.example.combanquemisrspeedo.uielements.SuccessCardWithIcon
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G40
 import edu.android_security.ui.theme.G700
@@ -143,18 +144,7 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
 
                      Spacer(modifier = modifier.height(20.dp))
 
-              //change---
-
-                     CardContent(
-                         label = "From",
-                         name = "Asmaa Dosuky",
-                         account = "Account xxxx7890"
-                     )
-                     CardContent(
-                         label = "From",
-                         name = "Asmaa Dosuky",
-                         account = "Account xxxx7890"
-                     )
+              SuccessCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
                      DataTransfer()
                  }
             }

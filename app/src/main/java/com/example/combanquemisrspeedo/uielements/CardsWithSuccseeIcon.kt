@@ -1,6 +1,5 @@
 package com.example.combanquemisrspeedo.uielements
 
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +36,7 @@ import edu.android_security.ui.theme.P50
 import edu.android_security.ui.theme.P500
 
 @Composable
-fun TransactionCardWithIcon(
+fun SuccessCardWithIcon(
     fromName: String,
     fromAccount: String,
     toName: String,
@@ -47,10 +46,10 @@ fun TransactionCardWithIcon(
         Column {
             Spacer(modifier = Modifier.height(16.dp))
             CardContent(
-           label = "From",
+                label = "From",
                 name = fromName,
-            account = fromAccount
-      )
+                account = fromAccount
+            )
             CardContent(
                 label = "To",
                 name = toName,
@@ -65,7 +64,7 @@ fun TransactionCardWithIcon(
                 .align(Alignment.Center)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.transfer),
+                painter = painterResource(id = R.drawable.sucsses),
                 contentDescription = "Swap Icon",
                 modifier = Modifier
                     .size(60.dp)
@@ -74,64 +73,10 @@ fun TransactionCardWithIcon(
         }
     }
 }
-@Composable
-fun CardContent(label: String, name: String, account: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding( vertical = 8.dp)
-            .height(126.dp)
-            .background(P50, RoundedCornerShape(8.dp))
-    ) {
-        Spacer(modifier = Modifier.width(16.dp))
 
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(56.dp)
-                .background(G40, shape = CircleShape)
-                .padding(8.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.bank),
-                contentDescription = null,
-                modifier = Modifier.size(32.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.width(16.dp))
-
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = label,
-                color = P300,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            Text(
-                text = name,
-                color = G900,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-            Text(
-                text = "Account $account",
-                color = G100,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Normal,
-            )
-        }
-    }
-}
 
 @Preview(showSystemUi = false, showBackground = false)
 @Composable
-private fun TransferCardPreview() {
-    TransactionCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
+private fun SuccessCardWithIconPreview() {
+    SuccessCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
 }
