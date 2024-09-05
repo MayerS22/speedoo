@@ -4,21 +4,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,6 +31,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.model.animateTranslation
 import com.example.combanquemisrspeedo.uielements.SignText
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
@@ -42,10 +48,18 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
     val passwordVisible = remember { mutableStateOf(false) }
     val passwordError = remember { mutableStateOf<String?>(null) }
     val confirmPasswordError = remember { mutableStateOf<String?>(null) }
-    val hasTypedPassword = remember { mutableStateOf(false) } // Track if the user has started typing in the password field
-    val hasTypedConfirmPassword = remember { mutableStateOf(false) } // Track if the user has started typing in the confirm password field
+    val emailError = remember { mutableStateOf<String?>(null) }
+    val hasTypedPassword = remember { mutableStateOf(false) }
+    val hasTypedConfirmPassword = remember { mutableStateOf(false) }
+    val hasTypedEmail = remember { mutableStateOf(false) }
+    val buttonColor = remember { mutableStateOf(P300) }
+    val scope = rememberCoroutineScope()
 
-    // Password validation function
+    // Animation for Sign Up Button
+    val animatedModifier = Modifier.animateTranslation(scope)
+
+
+    // Functions for validation
     fun validatePassword(password: String): String? {
         return when {
             password.length < 6 -> "Password must be at least 6 characters long"
@@ -57,10 +71,17 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         }
     }
 
-    // Confirm password validation function
     fun validateConfirmPassword(password: String, confirmPassword: String): String? {
         return if (confirmPassword.isNotEmpty() && password != confirmPassword) {
             "Passwords do not match"
+        } else {
+            null
+        }
+    }
+
+    fun validateEmail(email: String): String? {
+        return if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            "Invalid email address"
         } else {
             null
         }
@@ -71,9 +92,8 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             password.value.isNotEmpty() &&
             confirmPassword.value.isNotEmpty() &&
             passwordError.value == null &&
-            confirmPasswordError.value == null
-
-    val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
+            confirmPasswordError.value == null &&
+            emailError.value == null
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -87,6 +107,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
                     )
                 )
             )
+            .imePadding()
             .verticalScroll(rememberScrollState())
     ) {
         Text(
@@ -119,17 +140,24 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             labelText = stringResource(R.string.email),
             placeholderText = stringResource(R.string.enter_you_email),
             trailingIcon = painterResource(id = R.drawable.email),
-            onTextChange = { email.value = it },
+            onTextChange = {
+                hasTypedEmail.value = true
+                email.value = it
+                emailError.value = validateEmail(it)
+            },
+            keyboardType = KeyboardType.Email,
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            errorMessage = if (hasTypedEmail.value) emailError.value else null,
+            errorColor = if (hasTypedEmail.value) Color.Red else Color.Transparent
         )
         SpeedoTextField(
             labelText = stringResource(R.string.password),
             placeholderText = stringResource(R.string.enter_your_password),
-            trailingIcon = painterResource(id = R.drawable.eyeclose), // Replace with the correct icon
+            trailingIcon = painterResource(id = R.drawable.eyeclose),
             onTextChange = {
-                hasTypedPassword.value = true // Mark that the user has typed in the password field
+                hasTypedPassword.value = true
                 password.value = it
                 passwordError.value = validatePassword(it)
                 confirmPasswordError.value = validateConfirmPassword(it, confirmPassword.value)
@@ -140,15 +168,15 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
                 .fillMaxWidth(),
-            errorMessage = if (hasTypedPassword.value) passwordError.value else null, // Show error only after typing starts
-            errorColor = if (hasTypedPassword.value) Color.Red else Color.Transparent // Show the red color only after typing starts
+            errorMessage = if (hasTypedPassword.value) passwordError.value else null,
+            errorColor = if (hasTypedPassword.value) Color.Red else Color.Transparent
         )
         SpeedoTextField(
             labelText = stringResource(R.string.confirm_password),
             placeholderText = stringResource(R.string.enter_your_password),
-            trailingIcon = painterResource(id = R.drawable.eyeclose), // Replace with the correct icon
+            trailingIcon = painterResource(id = R.drawable.eyeclose),
             onTextChange = {
-                hasTypedConfirmPassword.value = true // Mark that the user has typed in the confirm password field
+                hasTypedConfirmPassword.value = true
                 confirmPassword.value = it
                 confirmPasswordError.value = validateConfirmPassword(password.value, it)
             },
@@ -158,14 +186,15 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp, bottom = 24.dp)
                 .fillMaxWidth(),
-            errorMessage = if (hasTypedConfirmPassword.value) confirmPasswordError.value else null, // Show error only after typing starts
-            errorColor = if (hasTypedConfirmPassword.value) Color.Red else Color.Transparent // Show the red color only after typing starts
+            errorMessage = if (hasTypedConfirmPassword.value) confirmPasswordError.value else null,
+            errorColor = if (hasTypedConfirmPassword.value) Color.Red else Color.Transparent
         )
         SpeedoTextButton(
             text = stringResource(R.string.sign_up),
             textColor = White,
-            backgroundColor = buttonColor,
-            borderColor = buttonColor
+            backgroundColor = buttonColor.value,
+            borderColor = buttonColor.value,
+            modifier = Modifier.animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
                 navController.navigate(Route.SIGNUP2)

@@ -42,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.Country
+import com.example.combanquemisrspeedo.model.animateTranslation
 import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.CountrySelector
@@ -180,14 +181,16 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             placeholderText = "DD/MM/YYYY",
             trailingIcon = painterResource(id = R.drawable.date),
             onDateSelected = { dateOfBirth = it },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+
         )
         Spacer(modifier = Modifier.height(32.dp))
         SpeedoTextButton(
             text = "Continue",
             textColor = White,
             backgroundColor = buttonColor,
-            borderColor = buttonColor
+            borderColor = buttonColor,
+            modifier = Modifier.animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
                 // Implement your continue logic here

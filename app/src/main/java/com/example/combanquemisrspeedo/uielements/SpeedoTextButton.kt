@@ -14,10 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.combanquemisrspeedo.model.animateTranslation
 
 @Composable
-fun SpeedoTextButton(text: String, textColor: Color, backgroundColor: Color,borderColor: Color,
-                     onclick: () -> Unit) {
+fun SpeedoTextButton(text: String,
+                     textColor: Color,
+                     backgroundColor: Color,
+                     borderColor: Color,
+                     modifier: Modifier = Modifier,
+                     onclick: () -> Unit,
+){
     TextButton(
         onClick = onclick,
         modifier = Modifier
@@ -28,6 +34,7 @@ fun SpeedoTextButton(text: String, textColor: Color, backgroundColor: Color,bord
                 color = borderColor,
                 shape = RoundedCornerShape(6.dp)
             )
+
             .fillMaxWidth()
             .background(
                 color = backgroundColor,

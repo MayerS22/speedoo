@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,8 +40,9 @@ fun SpeedoTextField(
     onPasswordVisibilityToggle: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     errorMessage: String? = null, // Error message
-    errorColor: Color = Color.Red // Error color
-) {
+    errorColor: Color = Color.Red,// Error color
+    keyboardType: KeyboardType = KeyboardType.Text
+     ) {
     val text = remember { mutableStateOf("") }
 
     Column(
