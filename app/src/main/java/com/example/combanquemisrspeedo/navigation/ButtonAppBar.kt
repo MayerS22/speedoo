@@ -13,12 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
 import edu.android_security.ui.theme.G0
+import edu.android_security.ui.theme.G200
 import edu.android_security.ui.theme.P
+import edu.android_security.ui.theme.P300
 
 @Composable
 fun BottomNavigationBar(
@@ -31,7 +32,7 @@ fun BottomNavigationBar(
             .height(80.dp)
             .background(P)
             .shadow(0.5.dp, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
-        backgroundColor = G0, // Make background transparent
+        backgroundColor = G0,
         elevation = 10.dp
     ) {
         val items = listOf(
@@ -49,14 +50,17 @@ fun BottomNavigationBar(
                     Icon(
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                        modifier = Modifier.wrapContentWidth()
+                                modifier = Modifier.wrapContentWidth(),
+                        tint = if (index == selectedIndex) P300 else G200
                     )
                 },
-                label = { Text(item.label, fontSize = 10.sp) },
+                label = { Text(item.label,
+                    fontSize = 10.sp,
+                    color = if (index == selectedIndex) P300 else G200
+                    ) },
                 selected = index == selectedIndex,
                 onClick = {
                     onItemSelected(index)
-                    // Add a log or print statement here to verify if the callback is being called
                     println("Item clicked: $index")
                 }
             )

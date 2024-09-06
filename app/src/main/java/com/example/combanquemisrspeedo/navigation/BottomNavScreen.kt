@@ -37,7 +37,6 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
             Box(modifier = Modifier.padding(innerPadding)) {
 
                 println("++++++++++++++++++$selectedIndex")
-// Adjust the padding value as needed
                 when (selectedIndex) {
 
                     // 0 -> HomeScreen()
