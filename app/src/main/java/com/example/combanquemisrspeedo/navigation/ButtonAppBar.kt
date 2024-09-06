@@ -28,7 +28,7 @@ fun BottomNavigationBar(
     BottomNavigation(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height(80.dp)
             .background(P)
             .shadow(0.5.dp, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
         backgroundColor = G0, // Make background transparent
