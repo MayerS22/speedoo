@@ -3,8 +3,8 @@ package com.example.combanquemisrspeedo.transactions
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,16 +13,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,39 +31,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.uielements.BottomAppBar
-import com.example.combanquemisrspeedo.uielements.CardContent
+import com.example.combanquemisrspeedo.more.MoreScreen
+import com.example.combanquemisrspeedo.navigation.BottomNavigationBar
 import com.example.combanquemisrspeedo.uielements.SuccessCardWithIcon
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G700
-import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
 fun TransactionsDetails(modifier: Modifier = Modifier) {
+    var selectedIndex by remember { mutableStateOf(0) }
     Scaffold(
-        bottomBar = { BottomAppBar() },
-        content = { innerPadding ->
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
-                    .padding()  //RoundCorner??
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(0xFFFFF8E7),
-                                P,
-                            )
-                        )
-                    )
-                    .padding(16.dp)
-                    .verticalScroll(
-                        rememberScrollState()
-                    )
-            ) {
+        bottomBar = {
+            BottomNavigationBar(
+                selectedIndex = selectedIndex,
+                onItemSelected = { selectedIndex = it }
+            )
+        },
+        content = {innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) { // Adjust the padding value as needed
+                when (selectedIndex) {
+                    // 0 -> HomeScreen()
+                    //1 -> ()
+                    2 -> TransactionScreen(rememberNavController())
+                    // 3 -> SettingsScreen()
+                    4-> MoreScreen(rememberNavController())
+                    else -> Text("Unknown Screen")
+                }}
+
                 Spacer(modifier = Modifier.height(10.dp))
                 Row(
                     horizontalArrangement = Arrangement.Center,
@@ -133,7 +132,6 @@ fun TransactionsDetails(modifier: Modifier = Modifier) {
                     SuccessCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
                     DataTransferDetails()
                 }
-            }
         }
     )
 }

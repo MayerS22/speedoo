@@ -32,6 +32,7 @@ object Route {
     const val FAVOURITESCREEN="FavouriteScreen"
     const val MORESCREEN="MoreScreen"
     const val TRANSACTIONSCREEN="TransactionScreen"
+    const val BOTTOMNAVSCREEN="BottomNavScreen"
 
 
 }
@@ -54,6 +55,7 @@ fun AppNavHost() {
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
+        composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
 
 
         }

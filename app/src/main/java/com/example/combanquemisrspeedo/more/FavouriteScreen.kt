@@ -40,7 +40,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.navigation.Route
-import com.example.combanquemisrspeedo.uielements.BottomAppBar
+import com.example.combanquemisrspeedo.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.navigation.BottomNavigationBar
 import com.example.combanquemisrspeedo.uielements.FavouriteListItem
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
@@ -63,11 +64,25 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
             EditSheet()
         }
     }
-
+    var selectedIndex by remember { mutableStateOf(0) }
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = { (BottomAppBar()) },
-        content = { innerPadding ->
+        bottomBar = {
+            BottomNavigationBar(
+                selectedIndex = selectedIndex,
+                onItemSelected = { selectedIndex = it }
+            )
+        },
+        content = {innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) { // Adjust the padding value as needed
+                when (selectedIndex) {
+                    // 0 -> HomeScreen()
+                    //1 -> ()
+                    2 -> TransactionScreen(rememberNavController())
+                    // 3 -> SettingsScreen()
+                    4-> MoreScreen(rememberNavController())
+                    else -> Text("Unknown Screen")
+                }
+            }
             Box(
                 modifier = Modifier
                     .fillMaxSize()

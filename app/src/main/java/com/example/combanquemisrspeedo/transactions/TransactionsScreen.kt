@@ -18,14 +18,15 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -37,20 +38,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G700
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
-import edu.android_security.ui.theme.P500
 
 @Composable
 fun TransactionScreen(navController: NavController, modifier: Modifier = Modifier) {
-    Scaffold(
-        bottomBar = { BottomAppBar() },
-        content = { innerPadding ->
+    var selectedIndex by remember { mutableStateOf(0) }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier
@@ -138,8 +135,6 @@ fun TransactionScreen(navController: NavController, modifier: Modifier = Modifie
 
 
             }
-        }
-    )
 }
 
 @Composable

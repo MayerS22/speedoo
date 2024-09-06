@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -38,7 +37,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.navigation.Route
-import com.example.combanquemisrspeedo.uielements.BottomAppBar
 import com.example.combanquemisrspeedo.uielements.MoreMenuItem
 import edu.android_security.ui.theme.P
 
@@ -59,95 +57,93 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
             HelpSheet()
         }
     }
-    Scaffold(
-        bottomBar = { BottomAppBar() },
-        content = { innerPadding ->
+    var showBottomSheet1 = showBottomSheet
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding()  //RoundCorner??
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFFFF8E7),
+                        P,
+                    )
+                )
+            )
+            .padding(16.dp)
+            .verticalScroll(
+                rememberScrollState()
+            )
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start,
 
+                ) {
+                Image(
+                    painter = painterResource(id = R.drawable.drop_down),
+                    contentDescription = "Back",
+                    modifier = Modifier
+                        //.align(Alignment.Start)
+                        .clickable {
+                            navController.popBackStack()
+                        }
+                )
+            }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
-                    .padding()  //RoundCorner??
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color(0xFFFFF8E7),
-                                P,
-                            )
-                        )
-                    )
-                    .padding(16.dp)
-                    .verticalScroll(
-                        rememberScrollState()
-                    )
+                verticalArrangement = Arrangement.Center,
+                modifier = modifier.weight(1f)
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-
-                        ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.drop_down),
-                            contentDescription = "Back",
-                            modifier = Modifier
-                                //.align(Alignment.Start)
-                                .clickable {
-                                    navController.popBackStack()
-                                }
-                        )
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = modifier.weight(1f)
-                    ) {
-                        Text(
-                            text = "More",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.W500,
-                            fontSize = 20.sp
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                MoreMenuItem("Transfer From Website", R.drawable.website, R.drawable.arrow_right)
-                { }
-                HorizontalDivider(
-                    thickness = 0.5.dp,
-                    color = Color.LightGray
+                Text(
+                    text = "More",
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.W500,
+                    fontSize = 20.sp
                 )
-                MoreMenuItem("Favorite", R.drawable.favorite, R.drawable.arrow_right)
-                { navController.navigate(Route.FAVOURITESCREEN)}
-                HorizontalDivider(
-                    thickness = 0.5.dp,
-                    color = Color.LightGray
-                )
-                MoreMenuItem("Profile", R.drawable.user, R.drawable.arrow_right)
-                {
-                    navController.navigate(Route.PROFILE)
-                }
-                HorizontalDivider(
-                    thickness = 0.5.dp,
-                    color = Color.LightGray
-                )
-                MoreMenuItem("Help", R.drawable.fill, R.drawable.arrow_right)
-                { showBottomSheet = true }
-                HorizontalDivider(
-                    thickness = 0.5.dp,
-                    color = Color.LightGray
-                )
-                MoreMenuItem("Logout", R.drawable.logout)
-                {}
-                Spacer(modifier = Modifier.height(100.dp))
             }
         }
-    )
+        Spacer(modifier = Modifier.height(16.dp))
+        MoreMenuItem("Transfer From Website", R.drawable.website, R.drawable.arrow_right)
+        { }
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            color = Color.LightGray
+        )
+        MoreMenuItem("Favorite", R.drawable.favorite, R.drawable.arrow_right)
+        { navController.navigate(Route.FAVOURITESCREEN) }
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            color = Color.LightGray
+        )
+        MoreMenuItem("Profile", R.drawable.user, R.drawable.arrow_right)
+        {
+            navController.navigate(Route.PROFILE)
+        }
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            color = Color.LightGray
+        )
+        MoreMenuItem("Help", R.drawable.fill, R.drawable.arrow_right)
+        { showBottomSheet1 = true }
+        HorizontalDivider(
+            thickness = 0.5.dp,
+            color = Color.LightGray
+        )
+        MoreMenuItem("Logout", R.drawable.logout)
+        {}
+        Spacer(modifier = Modifier.height(100.dp))
+    }
+
 }
+
+
 
 
 @Preview
