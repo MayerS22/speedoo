@@ -65,24 +65,6 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
         }
     }
     var selectedIndex by remember { mutableStateOf(0) }
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                selectedIndex = selectedIndex,
-                onItemSelected = { selectedIndex = it }
-            )
-        },
-        content = {innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) { // Adjust the padding value as needed
-                when (selectedIndex) {
-                    // 0 -> HomeScreen()
-                    //1 -> ()
-                    2 -> TransactionScreen(rememberNavController())
-                    // 3 -> SettingsScreen()
-                    4-> MoreScreen(rememberNavController())
-                    else -> Text("Unknown Screen")
-                }
-            }
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -178,7 +160,6 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                     )
                 }
             }
-        })
 }
 
 

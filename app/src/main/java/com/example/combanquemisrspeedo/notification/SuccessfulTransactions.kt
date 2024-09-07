@@ -49,24 +49,6 @@ import edu.android_security.ui.theme.P50
 @Composable
 fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
     var selectedIndex by remember { mutableStateOf(0) }
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                selectedIndex = selectedIndex,
-                onItemSelected = { selectedIndex = it }
-            )
-        },
-        content = {innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) { // Adjust the padding value as needed
-                when (selectedIndex) {
-                    // 0 -> HomeScreen()
-                    //1 -> ()
-                    2 -> TransactionScreen(rememberNavController())
-                    // 3 -> SettingsScreen()
-                    4-> MoreScreen(rememberNavController())
-                    else -> Text("Unknown Screen")
-                }
-            }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier
@@ -158,8 +140,6 @@ fun SuccessfulTransactionsScreen(modifier: Modifier = Modifier) {
                  }
             }
         }
-    )
-}
 
 @Composable
 fun DataTransfer(modifier: Modifier = Modifier) {
