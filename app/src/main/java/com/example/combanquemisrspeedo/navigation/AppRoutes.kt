@@ -9,6 +9,7 @@ import com.example.combanquemisrspeedo.authentication.SignInScreen
 import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
 import com.example.combanquemisrspeedo.authentication.SplashScreen
+import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.more.FavouriteScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.profile.ChangePassword
@@ -33,6 +34,7 @@ object Route {
     const val MORESCREEN="MoreScreen"
     const val TRANSACTIONSCREEN="TransactionScreen"
     const val BOTTOMNAVSCREEN="BottomNavScreen"
+    const val CARDSSCREEN="CardsScreen"
 
 
 }
@@ -55,6 +57,7 @@ fun AppNavHost() {
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
+        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
 
 

@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
 import com.example.combanquemisrspeedo.transactions.TransactionsDetails
@@ -43,7 +44,7 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                      0 -> TransactionsDetails()
                     //1 -> ()
                     2 -> TransactionScreen(navController)
-                    // 3 -> SettingsScreen()
+                    3 -> CardsScreen(navController)
                     4 -> MoreScreen(navController)
 
                     else -> Text("Unknown Screen")
