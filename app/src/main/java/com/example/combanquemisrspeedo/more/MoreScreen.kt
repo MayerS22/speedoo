@@ -94,7 +94,7 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
                     modifier = Modifier
                         //.align(Alignment.Start)
                         .clickable {
-                            navController.popBackStack()
+                            navController.navigate(Route.BOTTOMNAVSCREEN)
                         }
                 )
             }

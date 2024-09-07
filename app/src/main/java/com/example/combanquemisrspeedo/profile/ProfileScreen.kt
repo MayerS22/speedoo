@@ -55,7 +55,7 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.popBackStack()
+                        navController.navigate(Route.MORESCREEN)
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -164,7 +164,7 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     title = stringResource(R.string.my_favorite_list),
                     description = stringResource(R.string.view_your_favourites),
                     onClick = {
-                        navController.navigate(Route.FAVOURITESCREEN)
+                       // navController.navigate(Route.FAVOURITESCREEN)
                     },
                     onArrowClick = {
                         navController.navigate(Route.FAVOURITESCREEN)

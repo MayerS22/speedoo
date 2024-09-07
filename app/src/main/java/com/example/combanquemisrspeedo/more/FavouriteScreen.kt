@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
 
@@ -104,7 +105,7 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                                 modifier = Modifier
                                     //.align(Alignment.Start)
                                     .clickable {
-                                        navController.popBackStack()
+                                        navController.navigate(Route.MORESCREEN)
                                     }
                             )
                         }
