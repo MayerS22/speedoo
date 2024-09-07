@@ -73,7 +73,7 @@ fun FavouriteListSheet(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
+@Preview(showSystemUi = false, showBackground = true)
 @Composable
 private fun FavouriteListSheetPreview() {
     FavouriteListSheet()

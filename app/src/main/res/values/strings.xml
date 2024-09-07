@@ -85,4 +85,5 @@
     <string name="confirmation_descrip">Transfer funds instantly to friends and family worldwide, strong shield protecting money.</string>
     <string name="payment">Payment</string>
     <string name="payment_descip">Enjoy peace of mind with our secure platform. Transfer funds instantly to friends.</string>
+    <string name="recent_transactions">Recent transactions</string>
 </resources>
