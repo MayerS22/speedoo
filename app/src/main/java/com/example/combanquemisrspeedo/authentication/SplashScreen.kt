@@ -29,7 +29,7 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
     val circleRadius = remember { Animatable(0f) }
     val scope = rememberCoroutineScope()
     val textProgress = remember { Animatable(0f) }
-    val fullText = "Speedo Transfer"
+    val fullText = "Speedo Transfer "
 
     //circlee
     LaunchedEffect(Unit) {
