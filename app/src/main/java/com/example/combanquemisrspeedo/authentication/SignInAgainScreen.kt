@@ -66,7 +66,7 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
                         )
                     )
             ) {
-                if (true) {
+                if (showTimeoutDialog) {
                     scope.launch {
                         snackbarHostState.showSnackbar(
                             message = "Hello, Jetpack Compose!"
@@ -131,7 +131,11 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
                     contentAlignment = Alignment.TopCenter, //Change to your desired position
                 ) {
                     SnackbarHost(hostState = snackbarHostState,
-                        snackbar = { CustomSnackBar(it) })
+                        snackbar = { CustomSnackBar(
+                            it,
+                            { it.dismiss() }
+                        )
+                        })
                 }
         }
 

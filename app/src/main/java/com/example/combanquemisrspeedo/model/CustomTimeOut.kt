@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.combanquemisrspeedo.R
 import edu.android_security.ui.theme.G40
 import edu.android_security.ui.theme.G500
@@ -30,7 +32,7 @@ import edu.android_security.ui.theme.G500
 @Composable
 fun CustomSnackBar(
     snackbarData: SnackbarData,
-    modifier: Modifier = Modifier
+    onDismiss: () -> Unit,
 )
 
 {
@@ -85,9 +87,12 @@ fun CustomSnackBar(
                 painter = painterResource(id = R.drawable.baseline_close_24),
                 contentDescription = "",
                 tint = Color.Black,
-                modifier = Modifier.clickable {  }
+                modifier = Modifier.clickable {
+                    onDismiss()
+                }
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
     }
 }
+

@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.G200
@@ -29,7 +31,7 @@ fun BottomNavigationBar(
     BottomNavigation(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .height(60.dp)
             .background(P)
             .shadow(0.5.dp, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
         backgroundColor = G0,
@@ -45,25 +47,35 @@ fun BottomNavigationBar(
 
         items.forEachIndexed { index, item ->
             BottomNavigationItem(
-                modifier = Modifier.background(G0),
+                modifier = Modifier
+                    .background(G0),
                 icon = {
                     Icon(
+                        modifier = Modifier.height(30.dp),
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                                modifier = Modifier.wrapContentWidth(),
+                                //modifier = Modifier
+                                    //.height(30.dp)
+                                   // .wrapContentWidth(),
                         tint = if (index == selectedIndex) P300 else G200
                     )
                 },
                 label = { Text(item.label,
-                    fontSize = 10.sp,
+                    fontSize = 9.sp,
                     color = if (index == selectedIndex) P300 else G200
                     ) },
                 selected = index == selectedIndex,
                 onClick = {
                     onItemSelected(index)
                     println("Item clicked: $index")
+
                 }
             )
         }
     }
+}
+@Preview
+@Composable
+private fun BottomNavScreenPreview() {
+    BottomNavScreen(rememberNavController())
 }

@@ -15,10 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.authentication.SignInAgain
 import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
 import com.example.combanquemisrspeedo.transactions.TransactionsDetails
+import com.example.combanquemisrspeedo.transfer.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -41,8 +43,8 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                 println("++++++++++++++++++$selectedIndex")
                 when (selectedIndex) {
 
-                     0 -> TransactionsDetails()
-                    //1 -> ()
+                    0 -> HomeScreen(navController)
+                    1 -> SignInAgain(navController)
                     2 -> TransactionScreen(navController)
                     3 -> CardsScreen(navController)
                     4 -> MoreScreen(navController)

@@ -19,6 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.G100
@@ -30,7 +32,7 @@ import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -278,5 +280,5 @@ val transactionsList = listOf(
 @Preview(showBackground = true)
 @Composable
 private fun HomePreview() {
-    HomeScreen()
+    HomeScreen(rememberNavController())
 }

@@ -10,6 +10,7 @@ import com.example.combanquemisrspeedo.authentication.SignUpScreen1
 import com.example.combanquemisrspeedo.authentication.SignUpScreen2
 import com.example.combanquemisrspeedo.authentication.SplashScreen
 import com.example.combanquemisrspeedo.card.CardsScreen
+import com.example.combanquemisrspeedo.model.CustomSnackBar
 import com.example.combanquemisrspeedo.more.FavouriteScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.profile.ChangePassword
@@ -18,6 +19,7 @@ import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
 import com.example.combanquemisrspeedo.profile.ProfileScreen
 import com.example.combanquemisrspeedo.profile.SettingsScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.transfer.HomeScreen
 
 object Route {
     const val START= "splash"
@@ -35,6 +37,8 @@ object Route {
     const val TRANSACTIONSCREEN="TransactionScreen"
     const val BOTTOMNAVSCREEN="BottomNavScreen"
     const val CARDSSCREEN="CardsScreen"
+    const val HOMESCREEN="HomeScreen"
+    //const val CUSTOMTIMEOUT="TimeOut"
 
 
 }
@@ -58,7 +62,9 @@ fun AppNavHost() {
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
         composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
+        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
+       // composable(route=Route.CUSTOMTIMEOUT){ CustomSnackBar(navController, snackbarData = , modifier = TODO() }
 
 
         }
