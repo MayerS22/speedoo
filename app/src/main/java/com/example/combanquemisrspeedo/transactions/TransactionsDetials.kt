@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,69 +39,65 @@ import com.example.combanquemisrspeedo.navigation.BottomNavigationBar
 import com.example.combanquemisrspeedo.uielements.SuccessCardWithIcon
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G700
+import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
 fun TransactionsDetails(modifier: Modifier = Modifier) {
     var selectedIndex by remember { mutableStateOf(0) }
-    Scaffold(
-        bottomBar = {
-            BottomNavigationBar(
-                selectedIndex = selectedIndex,
-                onItemSelected = { selectedIndex = it }
+    Column(
+        modifier = modifier
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFFFF8E7),
+                        P,
+                    )
+                )
             )
-        },
-        content = {innerPadding ->
-            Box(modifier = Modifier.padding(innerPadding)) { // Adjust the padding value as needed
-                when (selectedIndex) {
-                    // 0 -> HomeScreen()
-                    //1 -> ()
-                    2 -> TransactionScreen(rememberNavController())
-                    // 3 -> SettingsScreen()
-                    4-> MoreScreen(rememberNavController())
-                    else -> Text("Unknown Screen")
-                }}
-
-                Spacer(modifier = Modifier.height(10.dp))
-                Row(
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+            modifier = modifier
+                //.background(Color.Transparent)
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.Start,
-
-                        ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.drop_down),
-                            contentDescription = "Back",
-                            modifier = Modifier
-                                //.align(Alignment.Start)
-                                .clickable {
-                                    //navigation
-                                }
-                        )
-                    }
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = modifier.weight(1f)
-                    ) {
-                        Text(
-                            text = "Successful Transactions",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.W500,
-                            fontSize = 20.sp
-                        )
-                    }
-
-                }
-                Spacer(modifier = Modifier.height(20.dp))
-                Column(
+                Image(
+                    painter = painterResource(id = R.drawable.drop_down),
+                    contentDescription = "Back",
+                    modifier = Modifier
+                        //.align(Alignment.Start)
+                        .clickable {
+                            //navigation
+                        }
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = modifier.weight(1f)
+                    //.background(Color.Transparent)
+            ) {
+                Text(
+                    text = "Successful Transactions",
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.W500,
+                    fontSize = 20.sp
+                ) } }
+        Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = modifier.fillMaxSize()
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(22.dp)
+                        .background(Color.Transparent)
                 ) {
                     Image(painter = painterResource(id=R.drawable.group_18305),
                         contentDescription = ""
@@ -132,16 +129,14 @@ fun TransactionsDetails(modifier: Modifier = Modifier) {
                     SuccessCardWithIcon("Dina", "123456789", "Ahmed", "987654321")
                     DataTransferDetails()
                 }
-        }
-    )
-}
+}}
 
 @Composable
 fun DataTransferDetails(modifier: Modifier = Modifier) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
+        //verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .width(343.dp)
+            .fillMaxWidth()
             .height(162.dp)
             .background(P50, RoundedCornerShape(8.dp))
     ) {
@@ -153,8 +148,9 @@ fun DataTransferDetails(modifier: Modifier = Modifier) {
             Row(
                 //verticalAlignment = Alignment.CenterHorizontally,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = modifier.fillMaxWidth()
-                    .padding(horizontal =  32.dp)
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
             ) {
                 Text("Transfer amount amount",
                     fontWeight = FontWeight.W400,
@@ -179,8 +175,9 @@ fun DataTransferDetails(modifier: Modifier = Modifier) {
             Row(
                 //verticalAlignment = Alignment.CenterHorizontally,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = modifier.fillMaxWidth()
-                    .padding(horizontal =  32.dp)
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
             ) {
                 Text("Reference",
                     fontWeight = FontWeight.W400,
@@ -198,7 +195,8 @@ fun DataTransferDetails(modifier: Modifier = Modifier) {
             Spacer(modifier = modifier.height(14.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier
+                    .fillMaxWidth()
                     .padding(horizontal = 32.dp)
             ) {
                 Text("Date",
@@ -220,7 +218,7 @@ fun DataTransferDetails(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun SuccessfulTransactionsPreview() {
     TransactionsDetails()

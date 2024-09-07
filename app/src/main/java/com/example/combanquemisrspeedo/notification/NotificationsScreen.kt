@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.more.MoreScreen
@@ -46,13 +47,13 @@ import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P50
 
 @Composable
-fun NotificationsScreen(modifier: Modifier = Modifier) {
+fun NotificationsScreen(navController: NavController,modifier: Modifier = Modifier) {
     var selectedIndex by remember { mutableStateOf(0) }
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
                 selectedIndex = selectedIndex,
-                onItemSelected = { selectedIndex = it }
+                onItemSelected = { selectedIndex = it },
             )
         },
         content = {innerPadding ->
@@ -202,6 +203,6 @@ fun NotifcationCard(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun NotificationsScreenPreview() {
-   NotificationsScreen()
+   NotificationsScreen(rememberNavController())
   //  NotifcationCard()
 }

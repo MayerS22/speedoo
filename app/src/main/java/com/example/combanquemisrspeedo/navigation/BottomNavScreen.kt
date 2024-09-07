@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.transactions.TransactionsDetails
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -30,7 +31,7 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                 onItemSelected = {
                     selectedIndex = it
                     println("++++++++++++++++++$selectedIndex")
-                }
+                },
             )
         },
         content = { innerPadding ->
@@ -39,11 +40,11 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                 println("++++++++++++++++++$selectedIndex")
                 when (selectedIndex) {
 
-                    // 0 -> HomeScreen()
+                     0 -> TransactionsDetails()
                     //1 -> ()
-                    2 -> TransactionScreen(rememberNavController())
+                    2 -> TransactionScreen(navController)
                     // 3 -> SettingsScreen()
-                    4 -> MoreScreen(rememberNavController())
+                    4 -> MoreScreen(navController)
 
                     else -> Text("Unknown Screen")
                 }

@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,7 +46,9 @@ import edu.android_security.ui.theme.P
 @Composable
 fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
     val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
+
     if (showBottomSheet) {
         ModalBottomSheet(
             containerColor = Color.White,
@@ -57,7 +60,6 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
             HelpSheet()
         }
     }
-    var showBottomSheet1 = showBottomSheet
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
@@ -117,7 +119,9 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
             color = Color.LightGray
         )
         MoreMenuItem("Favorite", R.drawable.favorite, R.drawable.arrow_right)
-        { navController.navigate(Route.FAVOURITESCREEN) }
+        {
+            navController.navigate(Route.FAVOURITESCREEN)
+        }
         HorizontalDivider(
             thickness = 0.5.dp,
             color = Color.LightGray
@@ -131,7 +135,7 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
             color = Color.LightGray
         )
         MoreMenuItem("Help", R.drawable.fill, R.drawable.arrow_right)
-        { showBottomSheet1 = true }
+        { showBottomSheet = true }
         HorizontalDivider(
             thickness = 0.5.dp,
             color = Color.LightGray

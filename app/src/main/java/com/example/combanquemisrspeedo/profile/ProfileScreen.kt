@@ -43,7 +43,6 @@ import edu.android_security.ui.theme.P50
 @Composable
 fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
-
         topBar = {
             CenterAlignedTopAppBar(
                 title = {

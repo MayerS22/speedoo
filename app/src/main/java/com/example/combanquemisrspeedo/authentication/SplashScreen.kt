@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,23 +21,42 @@ import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.P500
 import edu.android_security.ui.theme.SplashScreenHeading
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
     val circleRadius = remember { Animatable(0f) }
     val scope = rememberCoroutineScope()
+    val textProgress = remember { Animatable(0f) }
+    val fullText = "Speedo Transfer"
 
+    //circlee
     LaunchedEffect(Unit) {
         scope.launch {
             circleRadius.animateTo(
                 targetValue = 3000f,
-                animationSpec = tween(durationMillis = 5500)
+                animationSpec = tween(durationMillis = 5000)
             )
         }
 
-    }
+        // Animate the text
+        scope.launch {
+            delay(2000)  // Delay before starting text animation
+            textProgress.animateTo(
+                targetValue = fullText.length.toFloat(),
+                animationSpec = tween(durationMillis = 3000)
+            )
+        }
 
+
+        // Navigate after animations are complete
+        scope.launch {
+            delay(5000)  // Adjust this delay to match the total animation duration
+            navController.navigate(Route.SIGNUP) {
+                popUpTo(Route.START) { inclusive = true }
+            }
+    }}
 
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -53,19 +75,25 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
             }
 
             if (circleRadius.value > 2000f) {
+                val visibleText =
+                    fullText.substring(0, textProgress.value.toInt().coerceIn(0, fullText.length))
                 Text(
-                    text = "Speedo Transfer",
+                    text = visibleText,
                     color = G0,
                     style = SplashScreenHeading
                 )
-                navController.navigate(Route.SIGNUP)
             }
-        }
-    }
-}
+
+            }
+        }}
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun SplashScreenPreview() {
     SplashScreen(rememberNavController())
 }
+
+
+
+//                    popUpTo(Route.START) { inclusive = true }
+//                    launchSingleTop = true
