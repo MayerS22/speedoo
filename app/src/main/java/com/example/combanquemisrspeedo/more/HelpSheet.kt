@@ -1,5 +1,7 @@
 package com.example.combanquemisrspeedo.more
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +37,7 @@ import edu.android_security.ui.theme.P50
 
 @Composable
 fun HelpSheet(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     Column(
     ) {
         Row(
@@ -48,7 +52,13 @@ fun HelpSheet(modifier: Modifier = Modifier) {
                 ContactOption(
                     iconRes = R.drawable.outline_email_24,
                     text = "Send Email",
-                    onClick = { /* Handle Send Email click */ }
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("mailto:someone@example.com")
+                            putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+                        }
+                        context.startActivity(intent)
+                    }
                 )
             }
             Spacer(modifier = Modifier.width(13.dp))
@@ -58,7 +68,12 @@ fun HelpSheet(modifier: Modifier = Modifier) {
                 ContactOption(
                     iconRes = R.drawable.call,
                     text = "Call Us\n000000",
-                    onClick = { /* Handle Call Us click */ }
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_DIAL).apply {
+                            data = Uri.parse("tel:000000")
+                        }
+                        context.startActivity(intent)
+                    }
                 )
             }
         }
@@ -74,7 +89,7 @@ fun ContactOption(iconRes: Int, text: String, onClick: () -> Unit) {
             .shadow(8.dp, RoundedCornerShape(8.dp))
             .background(Color.White)
             //.weight(1f)
-            .clickable { onClick }
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier

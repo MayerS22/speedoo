@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.more
 
+import FavouriteListScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,10 +40,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.navigation.Route
-import com.example.combanquemisrspeedo.transactions.TransactionScreen
-import com.example.combanquemisrspeedo.navigation.BottomNavigationBar
-import com.example.combanquemisrspeedo.uielements.FavouriteListItem
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P
 
@@ -133,31 +130,9 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                         color = G900
                     )
                     Spacer(modifier = Modifier.height(20.dp))
-                    FavouriteListItem(
-                        name = "Asmaa Dosuky",
-                        account = "xxxx7890",
-                        editIcon = R.drawable.edit,
-                        deleteIcon = R.drawable.delete,
-                        onclickEdit = {
-                            showBottomSheet = true
-                        },
-                        onclickDelete = {
-
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    FavouriteListItem(
-                        name = "Asmaa Dosuky",
-                        account = "xxxx7890",
-                        editIcon = R.drawable.edit,
-                        deleteIcon = R.drawable.delete,
-                        onclickEdit = {
-                            showBottomSheet = true
-                        },
-                        onclickDelete = {
-                            //only for test
-                            navController.navigate(Route.MORESCREEN)}
-                    )
+                    FavouriteListScreen(){
+                        showBottomSheet = true
+                    }
                 }
             }
 }

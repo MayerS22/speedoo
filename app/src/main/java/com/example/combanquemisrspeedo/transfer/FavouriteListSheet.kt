@@ -1,12 +1,11 @@
 package com.example.combanquemisrspeedo.transfer
 
 
+import FavouriteListItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,9 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.uielements.FavouriteListItem
-import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
-import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
 
