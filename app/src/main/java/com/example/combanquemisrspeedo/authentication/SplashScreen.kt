@@ -53,7 +53,7 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
         // Navigate after animations are complete
         scope.launch {
             delay(5000)  // Adjust this delay to match the total animation duration
-            navController.navigate(Route.SIGNUP) {
+            navController.navigate(Route.ONBOARDING) {
                 popUpTo(Route.START) { inclusive = true }
             }
     }}

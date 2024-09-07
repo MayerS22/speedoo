@@ -13,6 +13,7 @@ import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.model.CustomSnackBar
 import com.example.combanquemisrspeedo.more.FavouriteScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
+import com.example.combanquemisrspeedo.onBoarding.OnboardingPager
 import com.example.combanquemisrspeedo.profile.ChangePassword
 import com.example.combanquemisrspeedo.profile.EditProfile
 import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
@@ -38,6 +39,7 @@ object Route {
     const val BOTTOMNAVSCREEN="BottomNavScreen"
     const val CARDSSCREEN="CardsScreen"
     const val HOMESCREEN="HomeScreen"
+    const val ONBOARDING="OnBoarding"
     //const val CUSTOMTIMEOUT="TimeOut"
 
 
@@ -64,6 +66,7 @@ fun AppNavHost() {
         composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
         composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
+        composable(route=Route.ONBOARDING){ OnboardingPager(navController) }
        // composable(route=Route.CUSTOMTIMEOUT){ CustomSnackBar(navController, snackbarData = , modifier = TODO() }
 
 

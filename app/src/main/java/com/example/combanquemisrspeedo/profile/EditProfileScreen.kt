@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +37,7 @@ import edu.android_security.ui.theme.White
 @Composable
 fun EditProfile(navController: NavController) {
 
+
     val countries = listOf(
         Country("United States", R.drawable.email),
         Country("Canada", R.drawable.email),
@@ -45,7 +47,11 @@ fun EditProfile(navController: NavController) {
     var selectedCountry by remember { mutableStateOf<Country?>(null) }
     var dateOfBirth by remember { mutableStateOf("") }
     var fullName by remember { mutableStateOf("") }
+    val emailError = remember { mutableStateOf<String?>(null) }
+    val hasTypedEmail = remember { mutableStateOf(false) }
     var email by remember { mutableStateOf("") }
+
+
 
     val isButtonEnabled = fullName.isNotEmpty() && email.isNotEmpty() && selectedCountry != null && dateOfBirth.isNotEmpty()
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
@@ -104,7 +110,15 @@ fun EditProfile(navController: NavController) {
                 SpeedoTextField(
                     labelText = stringResource(id = R.string.email),
                     placeholderText = stringResource(R.string.enter_cardholder_email),
-                    onTextChange = { email = it },
+                    onTextChange =
+                    {
+                        email = it
+                        hasTypedEmail.value = true
+                        emailError.value = validateEmail(it)
+                    },
+                    keyboardType = KeyboardType.Email,
+                    errorMessage = if (hasTypedEmail.value) emailError.value else null,
+                    errorColor = if (hasTypedEmail.value) Color.Red else Color.Transparent,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )
                 Spacer(modifier = Modifier.size(16.dp))
@@ -145,6 +159,15 @@ fun EditProfile(navController: NavController) {
             }
         }
     )
+
+}
+
+fun validateEmail(email: String): String? {
+    return if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        "Invalid email address"
+    } else {
+        null
+    }
 }
 
 @Preview(showBackground = true)
