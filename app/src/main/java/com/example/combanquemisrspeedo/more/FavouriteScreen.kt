@@ -105,7 +105,8 @@ fun FavouriteScreen(navController: NavController, modifier: Modifier = Modifier)
                                 modifier = Modifier
                                     //.align(Alignment.Start)
                                     .clickable {
-                                        navController.navigate(Route.MORESCREEN)
+//                                        navController.navigate(Route.MORESCREEN)
+                                        navController.popBackStack()
                                     }
                             )
                         }

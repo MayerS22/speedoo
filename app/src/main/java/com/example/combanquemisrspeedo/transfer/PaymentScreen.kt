@@ -29,6 +29,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SuccessCardWithIcon
@@ -40,7 +42,7 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PaymentScreen(modifier: Modifier = Modifier) {
+fun PaymentScreen(navController: NavController,modifier: Modifier = Modifier) {
 
     Scaffold(
         topBar = {
@@ -55,7 +57,7 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-
+navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -169,5 +171,5 @@ fun PaymentScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun PaymentScreenPreview() {
-    PaymentScreen()
+    PaymentScreen(rememberNavController())
 }

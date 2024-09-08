@@ -79,7 +79,8 @@ fun EditProfile(navController: NavController) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Route.SETTING)
+                        //navController.navigate(Route.SETTING)
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),

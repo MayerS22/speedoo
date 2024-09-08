@@ -108,9 +108,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             borderColor = buttonColor
         ) {
             if (isButtonEnabled) {
-                // Handle sign-in logic here
-                //only for test
-                navController.navigate(Route.SIGNINADAIN)
+                navController.popBackStack()
+                navController.navigate(Route.BOTTOMNAVSCREEN)
             }
         }
         SignText(

@@ -28,7 +28,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.TransactionCardWithIcon
 import edu.android_security.ui.theme.G40
@@ -38,7 +41,7 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConfirmationScreen(modifier: Modifier = Modifier) {
+fun ConfirmationScreen(navController: NavController,modifier: Modifier = Modifier) {
 
     Scaffold(
         topBar = {
@@ -53,7 +56,7 @@ fun ConfirmationScreen(modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -147,7 +150,7 @@ fun ConfirmationScreen(modifier: Modifier = Modifier) {
                         backgroundColor = P300,
                         borderColor = P300,
                     ) {
-
+                           navController.navigate(Route.PAYMENTSCREEN)
                     }
                 }
                 Spacer(modifier = Modifier.size(20.dp))
@@ -161,7 +164,7 @@ fun ConfirmationScreen(modifier: Modifier = Modifier) {
                         backgroundColor = Color.Transparent,
                         borderColor = P300,
                     ) {
-
+                         navController.popBackStack()
                     }
                 }
             }
@@ -172,5 +175,5 @@ fun ConfirmationScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ConfirmationScreenPreview() {
-    ConfirmationScreen()
+    ConfirmationScreen(rememberNavController())
 }

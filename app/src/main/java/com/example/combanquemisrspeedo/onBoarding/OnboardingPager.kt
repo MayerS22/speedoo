@@ -80,6 +80,7 @@ fun OnboardingPager(navController: NavController) {
                         color = G900,
                         modifier = Modifier
                             .clickable(onClick = {
+                                navController.popBackStack() // remove current item from history
                                 navController.navigate(Route.SIGNUP)
                             })
                     )
@@ -107,6 +108,7 @@ fun OnboardingPager(navController: NavController) {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
                         else{
+                            navController.popBackStack()
                             navController.navigate(Route.SIGNUP)
                         }
                     }

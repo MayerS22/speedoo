@@ -1,8 +1,8 @@
 package com.example.combanquemisrspeedo.transfer
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,12 +22,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +47,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G900
@@ -54,11 +59,28 @@ import edu.android_security.ui.theme.White
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AmountScreen(modifier: Modifier = Modifier) {
+fun AmountScreen(navController: NavController,modifier: Modifier = Modifier) {
     var recipientName by remember { mutableStateOf("") }
     var recipientAmount by remember { mutableStateOf("") }
     val isButtonEnabled = recipientName.isNotEmpty() && recipientAmount.isNotEmpty()
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
+    val sheetState = rememberModalBottomSheetState()
+    var showBottomSheet by remember { mutableStateOf(false) }
+    BackHandler {
+        navController.popBackStack()
+        navController.navigate(Route.BOTTOMNAVSCREEN)
+    }
+    if (showBottomSheet) {
+        ModalBottomSheet(
+            containerColor = Color.White,
+            onDismissRequest = {
+                showBottomSheet = false
+            },
+            sheetState = sheetState
+        ) {
+            FavouriteListSheet()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -73,7 +95,8 @@ fun AmountScreen(modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-
+                        navController.popBackStack()
+                    navController.navigate(Route.BOTTOMNAVSCREEN)
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -137,7 +160,9 @@ fun AmountScreen(modifier: Modifier = Modifier) {
                         modifier=Modifier.padding(start = 4.dp)
                     )
                     Spacer(modifier = Modifier.weight(1f))
-                    TextButton(onClick = {  }) {
+                    TextButton(onClick = {
+                        showBottomSheet = true
+                    }) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             // Load the drawable resource using painterResource
                             Image(
@@ -197,7 +222,7 @@ fun AmountScreen(modifier: Modifier = Modifier) {
                         borderColor = buttonColor,
                     ) {
                         if (isButtonEnabled) {
-                            // Handle sign-in logic here
+                            navController.navigate(Route.CONFIRMATIONSCREEN)
                         }
                     }
                 }
@@ -243,5 +268,5 @@ fun InputField(label: String, initialValue: String) {
 @Preview
 @Composable
 private fun AmountPreview() {
-    AmountScreen()
+    AmountScreen(rememberNavController())
 }

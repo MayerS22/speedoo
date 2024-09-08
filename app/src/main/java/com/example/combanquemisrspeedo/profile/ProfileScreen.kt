@@ -55,7 +55,8 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Route.MORESCREEN)
+                        //navController.navigate(Route.MORESCREEN)
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -151,10 +152,10 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     title = stringResource(R.string.payment_history),
                     description = stringResource(R.string.view_your_transactions),
                     onClick = {
-                        navController.navigate(Route.TRANSACTIONSCREEN)
+                       // navController.navigate(Route.TRANSACTIONSCREEN)
                     },
                     onArrowClick = {
-                        navController.navigate(Route.TRANSACTIONSCREEN)
+                        //navController.navigate(Route.TRANSACTIONSCREEN)
                     }
                 )
 

@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.more
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -48,6 +49,10 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
+    BackHandler {
+        navController.popBackStack()
+        navController.navigate(Route.BOTTOMNAVSCREEN)
+    }
 
     if (showBottomSheet) {
         ModalBottomSheet(
@@ -92,8 +97,8 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
                     painter = painterResource(id = R.drawable.drop_down),
                     contentDescription = "Back",
                     modifier = Modifier
-                        //.align(Alignment.Start)
                         .clickable {
+                            navController.popBackStack()
                             navController.navigate(Route.BOTTOMNAVSCREEN)
                         }
                 )
