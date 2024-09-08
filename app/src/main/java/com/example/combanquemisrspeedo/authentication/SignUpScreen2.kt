@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.authentication
 
+import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -52,6 +53,9 @@ import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
+import kotlinx.coroutines.launch
+import java.util.Calendar
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,13 +68,13 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
         Country("United States", R.drawable.email),
         Country("Canada", R.drawable.email),
         Country("United Kingdom", R.drawable.email)
-        // Add more countries as needed
     )
 
     var selectedCountry by remember { mutableStateOf<Country?>(null) }
     var dateOfBirth by remember { mutableStateOf("") }
+    var dateErrorMessage by remember { mutableStateOf("") }
 
-    val isButtonEnabled = selectedCountry != null && dateOfBirth.isNotEmpty()
+    val isButtonEnabled = selectedCountry != null && dateOfBirth.isNotEmpty() && dateErrorMessage.isEmpty()
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
     val interTextStyle = TextStyle(
@@ -86,12 +90,12 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
         textAlign = TextAlign.Center
     )
 
-    // Show bottom sheet when the state is true
+    // Bottom sheet logic
     if (showBottomSheet) {
         ModalBottomSheet(
             containerColor = Color.White,
-//            scrimColor = Color.Transparent,
             onDismissRequest = {
+                scope.launch { sheetState.hide() }
                 showBottomSheet = false
             },
             sheetState = sheetState
@@ -99,7 +103,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp) // Set a fixed height for the dropdown
+                    .height(200.dp)
                     .background(Color.White)
                     .padding(8.dp)
             ) {
@@ -109,6 +113,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
                             .fillMaxWidth()
                             .clickable {
                                 selectedCountry = country
+                                scope.launch { sheetState.hide() }
                                 showBottomSheet = false
                             }
                             .padding(8.dp)
@@ -180,17 +185,34 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             labelText = "Date Of Birth",
             placeholderText = "DD/MM/YYYY",
             trailingIcon = painterResource(id = R.drawable.date),
-            onDateSelected = { dateOfBirth = it },
+            onDateSelected = { date ->
+                // Ensure the user is at least 18 years old
+                val isValidAge = checkIfAgeIsValid(date, 18)
+                if (isValidAge) {
+                    dateOfBirth = date
+                    dateErrorMessage = ""
+                } else {
+                    dateErrorMessage = "You must be at least 18 years old."
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
-
         )
+        if (dateErrorMessage.isNotEmpty()) {
+            Text(
+                text = dateErrorMessage,
+                color = Color.Red,
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
         Spacer(modifier = Modifier.height(32.dp))
         SpeedoTextButton(
             text = "Continue",
             textColor = White,
             backgroundColor = buttonColor,
             borderColor = buttonColor,
-            modifier = Modifier.animateTranslation(scope)
+            modifier = Modifier
+                .fillMaxWidth()
+                .animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
                 //Only for testing-------
@@ -205,6 +227,16 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             onSecondTextClick = { navController.navigate(Route.SIGNIN) }
         )
     }
+}
+
+// Helper function to check if the user is at least a specific age
+fun checkIfAgeIsValid(date: String, minAge: Int): Boolean {
+    val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val birthDate = formatter.parse(date)
+    val currentCalendar = Calendar.getInstance()
+
+    val age = currentCalendar.get(Calendar.YEAR) - birthDate.year
+    return age >= minAge
 }
 
 @Preview(showSystemUi = true, showBackground = true)

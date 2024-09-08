@@ -52,7 +52,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
     val hasTypedPassword = remember { mutableStateOf(false) }
     val hasTypedConfirmPassword = remember { mutableStateOf(false) }
     val hasTypedEmail = remember { mutableStateOf(false) }
-    val buttonColor = remember { mutableStateOf(P300) }
+//    val buttonColor = remember { mutableStateOf(P300) }
     val scope = rememberCoroutineScope()
 
     // Animation for Sign Up Button
@@ -94,6 +94,8 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
             passwordError.value == null &&
             confirmPasswordError.value == null &&
             emailError.value == null
+    val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -173,7 +175,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         )
         SpeedoTextField(
             labelText = stringResource(R.string.confirm_password),
-            placeholderText = stringResource(R.string.enter_your_password),
+            placeholderText = stringResource(R.string.enter_your_confirm_password),
             trailingIcon = painterResource(id = R.drawable.eyeclose),
             onTextChange = {
                 hasTypedConfirmPassword.value = true
@@ -192,8 +194,8 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         SpeedoTextButton(
             text = stringResource(R.string.sign_up),
             textColor = White,
-            backgroundColor = buttonColor.value,
-            borderColor = buttonColor.value,
+            backgroundColor = buttonColor,
+            borderColor = buttonColor,
             modifier = Modifier.animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
@@ -204,7 +206,7 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         SignText(
             firstText = stringResource(R.string.already_have_an_account),
             secondText = stringResource(R.string.sign_in),
-            onSecondTextClick = { navController.navigate(Route.BOTTOMNAVSCREEN) } //TODO remove this
+            onSecondTextClick = { navController.navigate(Route.SIGNUP2) } //TODO remove this
         )
     }
 }
