@@ -86,4 +86,10 @@
     <string name="payment">Payment</string>
     <string name="payment_descip">Enjoy peace of mind with our secure platform. Transfer funds instantly to friends.</string>
     <string name="recent_transactions">Recent transactions</string>
+    <string name="transfer">Transfer</string>
+    <string name="how_much_are_you_sending">How much are you sending?</string>
+    <string name="recipient_name">Recipient Name</string>
+    <string name="enter_recipient_name">Enter Recipient Name</string>
+    <string name="recipient_amount">Recipient Amount</string>
+    <string name="your_transfer_was_successful">Your transfer was successful</string>
 </resources>

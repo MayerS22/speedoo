@@ -66,5 +66,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation ("com.google.accompanist:accompanist-pager:0.28.0")
     implementation ("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation ("androidx.compose.material3:material3:1.0.1")
+    implementation ("androidx.compose.ui:ui:1.5.0")
+    implementation ("androidx.compose.runtime:runtime:1.5.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
 }
