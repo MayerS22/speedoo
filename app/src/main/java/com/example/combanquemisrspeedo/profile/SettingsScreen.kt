@@ -49,7 +49,8 @@ fun SettingsScreen(navController: NavController, modifier: Modifier = Modifier) 
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Route.PROFILE)
+                        //navController.navigate(Route.PROFILE)
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),

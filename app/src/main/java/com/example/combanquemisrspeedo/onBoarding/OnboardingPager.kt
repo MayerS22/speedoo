@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.onBoarding
 
+import androidx.collection.emptyLongSet
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,8 +20,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.OnboardingPageData
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -31,7 +35,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnboardingPager() {
+fun OnboardingPager(navController: NavController) {
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
 
@@ -75,7 +79,10 @@ fun OnboardingPager() {
                         text = "Skip",
                         color = G900,
                         modifier = Modifier
-                            .clickable(onClick = {}) // Add click listener
+                            .clickable(onClick = {
+                                navController.popBackStack() // remove current item from history
+                                navController.navigate(Route.SIGNUP)
+                            })
                     )
                 }
             },
@@ -100,8 +107,13 @@ fun OnboardingPager() {
                         if (pagerState.currentPage < onboardingPages.size - 1) {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
+                        else{
+                            navController.popBackStack()
+                            navController.navigate(Route.SIGNUP)
+                        }
                     }
                 }
+
             )
         }
     }
@@ -111,5 +123,5 @@ fun OnboardingPager() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingPager() {
-    OnboardingPager()
+    OnboardingPager(rememberNavController())
 }

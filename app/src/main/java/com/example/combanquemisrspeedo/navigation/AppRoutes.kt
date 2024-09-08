@@ -13,13 +13,17 @@ import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.model.CustomSnackBar
 import com.example.combanquemisrspeedo.more.FavouriteScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
+import com.example.combanquemisrspeedo.onBoarding.OnboardingPager
 import com.example.combanquemisrspeedo.profile.ChangePassword
 import com.example.combanquemisrspeedo.profile.EditProfile
 import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
 import com.example.combanquemisrspeedo.profile.ProfileScreen
 import com.example.combanquemisrspeedo.profile.SettingsScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.transfer.AmountScreen
+import com.example.combanquemisrspeedo.transfer.ConfirmationScreen
 import com.example.combanquemisrspeedo.transfer.HomeScreen
+import com.example.combanquemisrspeedo.transfer.PaymentScreen
 
 object Route {
     const val START= "splash"
@@ -38,7 +42,10 @@ object Route {
     const val BOTTOMNAVSCREEN="BottomNavScreen"
     const val CARDSSCREEN="CardsScreen"
     const val HOMESCREEN="HomeScreen"
-    //const val CUSTOMTIMEOUT="TimeOut"
+    const val ONBOARDING="OnBoarding"
+    const val AMOUNTSCREEN="AmountScreen"
+    const val CONFIRMATIONSCREEN="ConfirmationScreen"
+    const val PAYMENTSCREEN="PaymentScreen"
 
 
 }
@@ -59,12 +66,16 @@ fun AppNavHost() {
         composable(route=Route.SETTING){ SettingsScreen(navController)}
         composable(route=Route.CHANGPASS){ ChangePassword(navController) }
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
-        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
+//        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
-        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
-        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
+//        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
+//        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
-       // composable(route=Route.CUSTOMTIMEOUT){ CustomSnackBar(navController, snackbarData = , modifier = TODO() }
+        composable(route=Route.ONBOARDING){ OnboardingPager(navController) }
+        composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
+        composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
+        composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
+
 
 
         }

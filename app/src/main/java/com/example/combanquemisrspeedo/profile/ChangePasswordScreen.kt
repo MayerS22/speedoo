@@ -30,6 +30,10 @@ import edu.android_security.ui.theme.White
 fun ChangePassword(navController: NavController) {
 
     var currentPassword by remember { mutableStateOf("") }
+    val currentPasswordError = remember { mutableStateOf<String?>(null) }
+    val newPasswordError = remember { mutableStateOf<String?>(null) }
+    val hasTypedPassword = remember { mutableStateOf(false) }
+    val hasTypednewPassword = remember { mutableStateOf(false) }
     var newPassword by remember { mutableStateOf("") }
     val currentPasswordVisible = remember { mutableStateOf(false) }
     val newPasswordVisible = remember { mutableStateOf(false) }
@@ -61,7 +65,8 @@ fun ChangePassword(navController: NavController) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Route.SETTING)
+                    //navController.navigate(Route.SETTING)
+                        navController.popBackStack()
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.back_arrow),
@@ -91,7 +96,11 @@ fun ChangePassword(navController: NavController) {
                     } else {
                         painterResource(id = R.drawable.eyeclose)
                     },
-                    onTextChange = { currentPassword = it },
+                    onTextChange = { currentPassword = it
+                        hasTypedPassword.value = true
+                        currentPassword = it
+                        currentPasswordError.value= validatePassword(it)
+                                   },
                     isPassword = true,
                     passwordVisible = currentPasswordVisible,
                     onPasswordVisibilityToggle = {
@@ -99,7 +108,9 @@ fun ChangePassword(navController: NavController) {
                     },
                     modifier = Modifier
                         .padding(bottom = 24.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    errorMessage = if (hasTypedPassword.value) currentPasswordError.value else null,
+                    errorColor = if (hasTypedPassword.value) Color.Red else Color.Transparent
                 )
 
                 SpeedoTextField(
@@ -110,7 +121,11 @@ fun ChangePassword(navController: NavController) {
                     } else {
                         painterResource(id = R.drawable.eyeclose)
                     },
-                    onTextChange = { newPassword = it },
+                    onTextChange = {  newPassword = it
+                        hasTypedPassword.value = true
+                        newPasswordError.value= validatePassword(it)
+                        newPasswordError.value = validatenewPassword(it, currentPassword)
+                    },
                     isPassword = true,
                     passwordVisible = newPasswordVisible,
                     onPasswordVisibilityToggle = {
@@ -118,7 +133,9 @@ fun ChangePassword(navController: NavController) {
                     },
                     modifier = Modifier
                         .padding(bottom = 24.dp)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    errorMessage = if (hasTypedPassword.value) newPasswordError.value else null,
+                    errorColor = if (hasTypedPassword.value) Color.Red else Color.Transparent
                 )
 
 
@@ -143,6 +160,25 @@ fun ChangePassword(navController: NavController) {
             }
         }
     )
+}
+
+
+fun validatenewPassword(currentPassword: String, newPassword: String): String? {
+    return if (newPassword.isNotEmpty() && currentPassword != newPassword) {
+        "Passwords do not match"
+    } else {
+        null
+    }
+}
+fun validatePassword(password: String): String? {
+    return when {
+        password.length < 6 -> "Password must be at least 6 characters long"
+        !password.any { it.isUpperCase() } -> "Password must contain at least one uppercase letter"
+        !password.any { it.isLowerCase() } -> "Password must contain at least one lowercase letter"
+        !password.any { it.isDigit() } -> "Password must contain at least one digit"
+        !password.any { "!@#$%^&*()_+[]{}|;:'\",.<>?".contains(it) } -> "Password must contain at least one special character"
+        else -> null
+    }
 }
 
 @Preview(showBackground = true)

@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.transactions
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G700
 import edu.android_security.ui.theme.G900
@@ -47,6 +49,10 @@ import edu.android_security.ui.theme.P50
 
 @Composable
 fun TransactionScreen(navController: NavController, modifier: Modifier = Modifier) {
+    BackHandler {
+        navController.popBackStack()
+        navController.navigate(Route.BOTTOMNAVSCREEN)
+    }
     var selectedIndex by remember { mutableStateOf(0) }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,9 +86,9 @@ fun TransactionScreen(navController: NavController, modifier: Modifier = Modifie
                             painter = painterResource(id = R.drawable.drop_down),
                             contentDescription = "Back",
                             modifier = Modifier
-                                //.align(Alignment.Start)
                                 .clickable {
                                     navController.popBackStack()
+                                    navController.navigate(Route.BOTTOMNAVSCREEN)
                                 }
                         )
                     }

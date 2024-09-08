@@ -51,7 +51,7 @@ fun ProfileInformationScreen(navController: NavController) {
                     },
                     navigationIcon = {
                         IconButton(onClick = {
-
+                               navController.navigate(Route.PROFILE)
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.back_arrow),

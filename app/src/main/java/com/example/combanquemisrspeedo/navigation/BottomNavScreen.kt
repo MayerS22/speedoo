@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,12 +21,13 @@ import com.example.combanquemisrspeedo.card.CardsScreen
 import com.example.combanquemisrspeedo.more.MoreScreen
 import com.example.combanquemisrspeedo.transactions.TransactionScreen
 import com.example.combanquemisrspeedo.transactions.TransactionsDetails
+import com.example.combanquemisrspeedo.transfer.AmountScreen
 import com.example.combanquemisrspeedo.transfer.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier) {
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by rememberSaveable  { mutableStateOf(0) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -44,7 +46,7 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                 when (selectedIndex) {
 
                     0 -> HomeScreen(navController)
-                    1 -> SignInAgain(navController)
+                    1 -> AmountScreen(navController)
                     2 -> TransactionScreen(navController)
                     3 -> CardsScreen(navController)
                     4 -> MoreScreen(navController)

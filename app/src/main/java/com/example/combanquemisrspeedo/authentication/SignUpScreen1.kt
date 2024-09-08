@@ -206,7 +206,10 @@ fun SignUpScreen1(navController: NavController, modifier: Modifier = Modifier) {
         SignText(
             firstText = stringResource(R.string.already_have_an_account),
             secondText = stringResource(R.string.sign_in),
-            onSecondTextClick = { navController.navigate(Route.SIGNUP2) } //TODO remove this
+            onSecondTextClick = {
+                navController.popBackStack()
+                navController.navigate(Route.SIGNIN)
+            }
         )
     }
 }

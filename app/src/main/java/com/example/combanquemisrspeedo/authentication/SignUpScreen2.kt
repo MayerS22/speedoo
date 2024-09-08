@@ -215,8 +215,8 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
                 .animateTranslation(scope)
         ) {
             if (isButtonEnabled) {
-                //Only for testing-------
-                navController.navigate(Route.PROFILE)
+                navController.popBackStack()
+                navController.navigate(Route.BOTTOMNAVSCREEN)
             }
         }
 

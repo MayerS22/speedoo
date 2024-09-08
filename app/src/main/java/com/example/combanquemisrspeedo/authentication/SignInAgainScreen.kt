@@ -52,7 +52,7 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
     Scaffold(
-        content = { innerPadding ->
+        content = { _ ->
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier

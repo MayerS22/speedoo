@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.card
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.uielements.SpeedoTextButton
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G30
@@ -45,6 +47,10 @@ import edu.android_security.ui.theme.P50
 
 @Composable
 fun CardsScreen(navController: NavController, modifier: Modifier = Modifier) {
+    BackHandler {
+        navController.popBackStack()
+        navController.navigate(Route.BOTTOMNAVSCREEN)
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -84,9 +90,9 @@ fun CardsScreen(navController: NavController, modifier: Modifier = Modifier) {
                         painter = painterResource(id = R.drawable.drop_down),
                         contentDescription = "Back",
                         modifier = Modifier
-                            //.align(Alignment.Start)
                             .clickable {
                                 navController.popBackStack()
+                                navController.navigate(Route.BOTTOMNAVSCREEN)
                             }
                     )
                 }
