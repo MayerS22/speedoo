@@ -163,6 +163,6 @@ fun SignInAgain(navController: NavController, modifier: Modifier = Modifier) {
 
         }
     else {
-InternetError()
+//InternetError()
     }
 }

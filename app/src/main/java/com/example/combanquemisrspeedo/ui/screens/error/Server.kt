@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.ui.uielements.SpeedoTextButton
 import edu.android_security.ui.theme.G700
@@ -30,7 +32,7 @@ import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 
 @Composable
-fun ServerError(modifier: Modifier = Modifier) {
+fun ServerError(navController: NavController,modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -95,5 +97,5 @@ fun ServerError(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ServerErrorPreview() {
-    ServerError()
+    ServerError(rememberNavController())
 }

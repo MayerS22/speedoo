@@ -11,6 +11,8 @@ import com.example.combanquemisrspeedo.ui.screens.authentication.SignUpScreen2
 import com.example.combanquemisrspeedo.ui.screens.authentication.SplashScreen
 import com.example.combanquemisrspeedo.ui.screens.main.card.CardsScreen
 import com.example.combanquemisrspeedo.model.CustomSnackBar
+import com.example.combanquemisrspeedo.ui.screens.error.InternetError
+import com.example.combanquemisrspeedo.ui.screens.error.ServerError
 import com.example.combanquemisrspeedo.ui.screens.more.FavouriteScreen
 import com.example.combanquemisrspeedo.ui.screens.more.MoreScreen
 import com.example.combanquemisrspeedo.ui.screens.onBoarding.OnboardingPager
@@ -46,6 +48,8 @@ object Route {
     const val AMOUNTSCREEN="AmountScreen"
     const val CONFIRMATIONSCREEN="ConfirmationScreen"
     const val PAYMENTSCREEN="PaymentScreen"
+    const val INTERNETERROR="InternetError"
+    const val SERVERERROR="ServerError"
 
 
 }
@@ -75,6 +79,8 @@ fun AppNavHost() {
         composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
         composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
         composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
+        composable(route=Route.INTERNETERROR){ InternetError(navController) }
+        composable(route=Route.SERVERERROR){ ServerError(navController) }
 
 
 

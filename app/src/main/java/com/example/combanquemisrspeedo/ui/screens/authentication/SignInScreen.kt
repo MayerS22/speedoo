@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.ui.screens.authentication
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,13 +12,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -28,30 +30,39 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.navigation.Route
 import com.example.combanquemisrspeedo.R
-import com.example.combanquemisrspeedo.ui.screens.error.InternetError
 import com.example.combanquemisrspeedo.model.isNetworkAvailable
 import com.example.combanquemisrspeedo.ui.uielements.SignText
 import com.example.combanquemisrspeedo.ui.uielements.SpeedoTextButton
 import com.example.combanquemisrspeedo.ui.uielements.SpeedoTextField
 import edu.android_security.ui.theme.G900
-import edu.android_security.ui.theme.P
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.combanquemisrspeedo.ui.viewmodel.SignInViewModel
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
 import kotlinx.coroutines.delay
 
+
 @Composable
-fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
+fun SignInScreen(navController: NavController,
+                 viewModel: SignInViewModel = viewModel(),
+                 modifier: Modifier = Modifier) {
+    val context = navController.context
+    val pref = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+    val savedEmail = pref.getString("email", "")!!
+    val savedPassword = pref.getString("password", "")!!
+    var email by remember { mutableStateOf(savedEmail) }
+    var password by remember { mutableStateOf(savedPassword) }
+
     val passwordVisible = remember { mutableStateOf(false) }
 
     // Determine the button color based on whether both fields have input
 
-    val isButtonEnabled = email.value.isNotEmpty() && password.value.isNotEmpty()
+    val isButtonEnabled = email.isNotEmpty() && password.isNotEmpty()
     val buttonColor = if (isButtonEnabled) P300 else P300.copy(alpha = 0.6f)
 
-    val context = LocalContext.current
     val isConnected = remember { mutableStateOf(true) }
+    var buttonClicked by remember { mutableStateOf(false) }
+
 
     // Periodically check network status using LaunchedEffect
     LaunchedEffect(Unit) {
@@ -101,7 +112,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
                 labelText = stringResource(R.string.email),
                 placeholderText = stringResource(R.string.enter_you_email),
                 trailingIcon = painterResource(id = R.drawable.email),
-                onTextChange = { email.value = it },
+                onTextChange = { email
+                               },
                 modifier = Modifier
                     .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
                     .fillMaxWidth()
@@ -110,7 +122,8 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
                 labelText = stringResource(R.string.password),
                 placeholderText = stringResource(R.string.enter_your_password),
                 trailingIcon = painterResource(id = R.drawable.email), // This will be replaced with your icon for password visibility
-                onTextChange = { password.value = it },
+                onTextChange = { password
+                               },
                 isPassword = true,
                 passwordVisible = passwordVisible,
                 onPasswordVisibilityToggle = { passwordVisible.value = !passwordVisible.value },
@@ -121,14 +134,17 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             SpeedoTextButton(
                 text = stringResource(R.string.sign_in),
                 textColor = White,
-                backgroundColor = buttonColor,
+                backgroundColor =buttonColor,
                 borderColor = buttonColor
             ) {
-                if (isButtonEnabled) {
-                    navController.popBackStack()
-                    navController.navigate(Route.BOTTOMNAVSCREEN)
+//                if (isButtonEnabled) {
+//                    navController.popBackStack()
+//                    navController.navigate(Route.BOTTOMNAVSCREEN)
+
+                    buttonClicked = true
+                viewModel.callLoginAPI()
                 }
-            }
+//        }
             SignText(
                 firstText = stringResource(R.string.don_t_have_an_account),
                 secondText = stringResource(R.string.sign_up)
@@ -137,8 +153,21 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
             }
         }
     }else {
-            InternetError()
+            //InternetError()
     }
+}
+
+
+fun saveData(email: String, password: String, cbState: Boolean, context: Context) {
+    val editor = context.getSharedPreferences("user_data", Context.MODE_PRIVATE).edit()
+    if (cbState) {
+        editor.putString("email", email)
+        editor.putString("password", password)
+    } else {
+        editor.putString("email", "")
+        editor.putString("password", "")
+    }
+    editor.apply()
 }
 
 @Preview(showSystemUi = true, showBackground = true)
