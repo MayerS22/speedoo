@@ -4,26 +4,26 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.authentication.SignInAgain
-import com.example.combanquemisrspeedo.authentication.SignInScreen
-import com.example.combanquemisrspeedo.authentication.SignUpScreen1
-import com.example.combanquemisrspeedo.authentication.SignUpScreen2
-import com.example.combanquemisrspeedo.authentication.SplashScreen
-import com.example.combanquemisrspeedo.card.CardsScreen
+import com.example.combanquemisrspeedo.ui.screens.authentication.SignInAgain
+import com.example.combanquemisrspeedo.ui.screens.authentication.SignInScreen
+import com.example.combanquemisrspeedo.ui.screens.authentication.SignUpScreen1
+import com.example.combanquemisrspeedo.ui.screens.authentication.SignUpScreen2
+import com.example.combanquemisrspeedo.ui.screens.authentication.SplashScreen
+import com.example.combanquemisrspeedo.ui.screens.main.card.CardsScreen
 import com.example.combanquemisrspeedo.model.CustomSnackBar
-import com.example.combanquemisrspeedo.more.FavouriteScreen
-import com.example.combanquemisrspeedo.more.MoreScreen
-import com.example.combanquemisrspeedo.onBoarding.OnboardingPager
-import com.example.combanquemisrspeedo.profile.ChangePassword
-import com.example.combanquemisrspeedo.profile.EditProfile
-import com.example.combanquemisrspeedo.profile.ProfileInformationScreen
-import com.example.combanquemisrspeedo.profile.ProfileScreen
-import com.example.combanquemisrspeedo.profile.SettingsScreen
-import com.example.combanquemisrspeedo.transactions.TransactionScreen
-import com.example.combanquemisrspeedo.transfer.AmountScreen
-import com.example.combanquemisrspeedo.transfer.ConfirmationScreen
-import com.example.combanquemisrspeedo.transfer.HomeScreen
-import com.example.combanquemisrspeedo.transfer.PaymentScreen
+import com.example.combanquemisrspeedo.ui.screens.more.FavouriteScreen
+import com.example.combanquemisrspeedo.ui.screens.more.MoreScreen
+import com.example.combanquemisrspeedo.ui.screens.onBoarding.OnboardingPager
+import com.example.combanquemisrspeedo.ui.screens.profile.ChangePassword
+import com.example.combanquemisrspeedo.ui.screens.profile.EditProfile
+import com.example.combanquemisrspeedo.ui.screens.profile.ProfileInformationScreen
+import com.example.combanquemisrspeedo.ui.screens.profile.ProfileScreen
+import com.example.combanquemisrspeedo.ui.screens.profile.SettingsScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.AmountScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.ConfirmationScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.HomeScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.PaymentScreen
 
 object Route {
     const val START= "splash"
@@ -60,10 +60,10 @@ fun AppNavHost() {
         composable(route=Route.SIGNUP2){ SignUpScreen2(navController) }
         composable(route=Route.SIGNIN){ SignInScreen(navController) }
         composable(route=Route.SIGNINADAIN){ SignInAgain(navController) }
-        composable(route=Route.PROFILE){ ProfileScreen(navController)}
-        composable(route=Route.PROFILEINFO){ ProfileInformationScreen(navController)}
-        composable(route=Route.EDITPROFILE){ EditProfile (navController)}
-        composable(route=Route.SETTING){ SettingsScreen(navController)}
+        composable(route=Route.PROFILE){ ProfileScreen(navController) }
+        composable(route=Route.PROFILEINFO){ ProfileInformationScreen(navController) }
+        composable(route=Route.EDITPROFILE){ EditProfile (navController) }
+        composable(route=Route.SETTING){ SettingsScreen(navController) }
         composable(route=Route.CHANGPASS){ ChangePassword(navController) }
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
 //        composable(route=Route.MORESCREEN){ MoreScreen(navController) }

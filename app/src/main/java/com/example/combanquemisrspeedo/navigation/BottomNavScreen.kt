@@ -16,13 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.combanquemisrspeedo.authentication.SignInAgain
-import com.example.combanquemisrspeedo.card.CardsScreen
-import com.example.combanquemisrspeedo.more.MoreScreen
-import com.example.combanquemisrspeedo.transactions.TransactionScreen
-import com.example.combanquemisrspeedo.transactions.TransactionsDetails
-import com.example.combanquemisrspeedo.transfer.AmountScreen
-import com.example.combanquemisrspeedo.transfer.HomeScreen
+import com.example.combanquemisrspeedo.ui.screens.authentication.SignInAgain
+import com.example.combanquemisrspeedo.ui.screens.main.card.CardsScreen
+import com.example.combanquemisrspeedo.ui.screens.more.MoreScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transactions.TransactionScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transactions.TransactionsDetails
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.AmountScreen
+import com.example.combanquemisrspeedo.ui.screens.main.transfer.HomeScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
