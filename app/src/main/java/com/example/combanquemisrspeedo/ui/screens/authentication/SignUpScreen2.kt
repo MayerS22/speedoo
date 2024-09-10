@@ -22,6 +22,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -39,35 +41,41 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.model.Country
 import com.example.combanquemisrspeedo.model.animateTranslation
+import com.example.combanquemisrspeedo.model.isNetworkAvailable
 import com.example.combanquemisrspeedo.navigation.AppNavHost
 import com.example.combanquemisrspeedo.navigation.Route
+import com.example.combanquemisrspeedo.ui.screens.error.InternetError
 import com.example.combanquemisrspeedo.ui.uielements.CountrySelector
 import com.example.combanquemisrspeedo.ui.uielements.DatePickerTextField
 import com.example.combanquemisrspeedo.ui.uielements.SignText
 import com.example.combanquemisrspeedo.ui.uielements.SpeedoTextButton
+import com.example.combanquemisrspeedo.ui.viewmodel.SignUpViewModel
 import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.White
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
+fun SignUpScreen2(navController: NavController,
+                  modifier: Modifier = Modifier) {
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
 
     val countries = listOf(
-        Country("United States", R.drawable.email),
-        Country("Canada", R.drawable.email),
-        Country("United Kingdom", R.drawable.email)
+        Country("United States", R.drawable.us),
+        Country("Egypt", R.drawable.eg),
+        Country("Palestine", R.drawable.eg)
     )
 
     var selectedCountry by remember { mutableStateOf<Country?>(null) }
@@ -89,6 +97,19 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
         lineHeight = 29.sp,
         textAlign = TextAlign.Center
     )
+    val context = LocalContext.current
+    val isConnected = remember { mutableStateOf(true) }
+
+    // Periodically check network status using LaunchedEffect
+    LaunchedEffect(Unit) {
+        while (true) {
+            isConnected.value = isNetworkAvailable(context)
+            delay(1000L) // Adjust delay as necessary
+        }
+    }
+
+    if (isConnected.value){
+
 
     // Bottom sheet logic
     if (showBottomSheet) {
@@ -130,6 +151,7 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
             }
         }
     }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -228,6 +250,10 @@ fun SignUpScreen2(navController: NavController, modifier: Modifier = Modifier) {
         )
     }
 }
+    else{
+        InternetError()
+    }
+}
 
 // Helper function to check if the user is at least a specific age
 fun checkIfAgeIsValid(date: String, minAge: Int): Boolean {
@@ -238,6 +264,7 @@ fun checkIfAgeIsValid(date: String, minAge: Int): Boolean {
     val age = currentCalendar.get(Calendar.YEAR) - birthDate.year
     return age >= minAge
 }
+
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

@@ -61,8 +61,6 @@ fun SignInScreen(navController: NavController, modifier: Modifier = Modifier) {
         }
     }
 
-
-
     if (isConnected.value) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
