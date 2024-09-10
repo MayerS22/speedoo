@@ -44,13 +44,11 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
 
                 println("++++++++++++++++++$selectedIndex")
                 when (selectedIndex) {
-
                     0 -> HomeScreen(navController)
                     1 -> AmountScreen(navController)
                     2 -> TransactionScreen(navController)
                     3 -> CardsScreen(navController)
                     4 -> MoreScreen(navController)
-
                     else -> Text("Unknown Screen")
                 }
             }

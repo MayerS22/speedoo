@@ -251,7 +251,7 @@ fun SignUpScreen2(navController: NavController,
     }
 }
     else{
-        //InternetError()
+        InternetError()
     }
 }
 

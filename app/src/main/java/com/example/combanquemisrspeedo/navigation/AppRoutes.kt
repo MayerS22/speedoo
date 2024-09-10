@@ -70,19 +70,16 @@ fun AppNavHost() {
         composable(route=Route.SETTING){ SettingsScreen(navController) }
         composable(route=Route.CHANGPASS){ ChangePassword(navController) }
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
-//        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
+        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
-//        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
-//        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
+        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
+        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
         composable(route=Route.ONBOARDING){ OnboardingPager(navController) }
         composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
         composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
         composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
-        composable(route=Route.INTERNETERROR){ InternetError(navController) }
+        composable(route=Route.INTERNETERROR){ InternetError() }
         composable(route=Route.SERVERERROR){ ServerError(navController) }
-
-
-
         }
     }

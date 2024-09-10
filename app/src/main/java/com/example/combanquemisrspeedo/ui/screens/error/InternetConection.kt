@@ -31,7 +31,7 @@ import edu.android_security.ui.theme.P
 import edu.android_security.ui.theme.P300
 
 @Composable
-fun InternetError(navController: NavController,modifier: Modifier = Modifier) {
+fun InternetError(modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -79,5 +79,5 @@ fun InternetError(navController: NavController,modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun InternetErrorPreview() {
-    InternetError(rememberNavController())
+    InternetError()
 }

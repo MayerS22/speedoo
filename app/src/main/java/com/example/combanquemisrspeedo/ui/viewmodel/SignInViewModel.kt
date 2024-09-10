@@ -1,50 +1,63 @@
 package com.example.combanquemisrspeedo.ui.viewmodel
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.combanquemisrspeedo.api.LoginAPIService
-import com.example.combanquemisrspeedo.model.LoginRequest
-import com.example.combanquemisrspeedo.model.LoginResponseDTO
+import androidx.test.core.app.ApplicationProvider
+import com.example.combanquemisrspeedo.api.SignInAPIService
+import com.example.combanquemisrspeedo.api.SignUpAPIService
+import com.example.combanquemisrspeedo.model.TokenStorage
+import com.example.combanquemisrspeedo.model.signInData.SignInRequest
+import com.example.combanquemisrspeedo.model.signInData.SignInResponse
+import com.example.combanquemisrspeedo.model.signInData.SignInState
+import com.example.combanquemisrspeedo.model.signUpData.RegisterRequestDTO
+import com.example.combanquemisrspeedo.model.signUpData.RegisterResponseDTO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+class SignInViewModel : ViewModel() {
 
-class SignInViewModel() : ViewModel() {
+    private val repository = RepositorySignIn()
+    private val _signInState = MutableStateFlow<SignInState>(SignInState.Idle)
+    val signInState: StateFlow<SignInState> = _signInState
 
-    private val emptyLoginDTO: LoginResponseDTO = LoginResponseDTO(
-        userid = 0.0,
-        token = "",
-        tokenType = "",
-        message = "",
-        status = ""
-    )
-
-    private val _loginResponse = MutableStateFlow<LoginResponseDTO?>(emptyLoginDTO)
-    val loginResponse = _loginResponse.asStateFlow()
-
-
-    fun saveLoginResponse(loginResponseDTO: LoginResponseDTO?) {
-        _loginResponse.update {
-            loginResponseDTO
-        }
-        Log.d("TAG", "saveLoginResponse: ${loginResponse.value}")
-
-    }
-
-
-    fun callLoginAPI(){
+    fun signIn(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _signInState.value = SignInState.Loading
             try {
-                val loginRequest = LoginRequest("string@st", "stringst")
-                Log.d("TAG", "Logging in: $loginRequest")
-                LoginAPIService.loginAPI.login(loginRequest)
-
+                val response = repository.signIn(SignInRequest(email, password))
+                if (response != null) {
+                    _signInState.value = SignInState.Success(response)
+                } else {
+                    _signInState.value = SignInState.Error("Sign-in failed")
+                }
             } catch (e: Exception) {
-                Log.d("TAG", "Logging in Error: ${e.message}")
+                _signInState.value = SignInState.Error("Error occurred: ${e.message}")
             }
+        }
+    }
+}
+
+
+class RepositorySignIn {
+    suspend fun signIn(signInRequest: SignInRequest): SignInResponse? {
+        return try {
+            val response = SignInAPIService.userAPI.signIn(signInRequest)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                Log.e("Repository", "Sign-in failed: ${response.code()} - ${response.message()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("Repository", "Error occurred: ${e.message}", e)
+            null
         }
     }
 }
