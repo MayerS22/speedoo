@@ -10,6 +10,10 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
@@ -35,7 +39,7 @@ fun BottomNavigationBar(
             .background(P)
             .shadow(0.5.dp, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
         backgroundColor = G0,
-        elevation = 10.dp
+        //elevation = 10.dp
     ) {
         val items = listOf(
             NavigationItem(icon = R.drawable.home, label = "Home"),
@@ -54,16 +58,16 @@ fun BottomNavigationBar(
                         modifier = Modifier.height(30.dp),
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                                //modifier = Modifier
-                                    //.height(30.dp)
-                                   // .wrapContentWidth(),
-                        tint = if (index == selectedIndex) P300 else G200
+                        tint = if (index == selectedIndex) P300 else G200,
                     )
                 },
-                label = { Text(item.label,
-                    fontSize = 9.sp,
-                    color = if (index == selectedIndex) P300 else G200
-                    ) },
+                label = {
+                    Text(
+                        item.label,
+                        fontSize = 9.sp,
+                        color = if (index == selectedIndex) P300 else G200
+                    )
+                },
                 selected = index == selectedIndex,
                 onClick = {
                     onItemSelected(index)
@@ -74,6 +78,7 @@ fun BottomNavigationBar(
         }
     }
 }
+
 @Preview
 @Composable
 private fun BottomNavScreenPreview() {

@@ -152,10 +152,10 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     title = stringResource(R.string.payment_history),
                     description = stringResource(R.string.view_your_transactions),
                     onClick = {
-                       // navController.navigate(Route.TRANSACTIONSCREEN)
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     },
                     onArrowClick = {
-                        //navController.navigate(Route.TRANSACTIONSCREEN)
+                        navController.navigate(Route.TRANSACTIONSCREEN)
                     }
                 )
 
@@ -165,7 +165,7 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier) {
                     title = stringResource(R.string.my_favorite_list),
                     description = stringResource(R.string.view_your_favourites),
                     onClick = {
-                       // navController.navigate(Route.FAVOURITESCREEN)
+                       navController.navigate(Route.FAVOURITESCREEN)
                     },
                     onArrowClick = {
                         navController.navigate(Route.FAVOURITESCREEN)

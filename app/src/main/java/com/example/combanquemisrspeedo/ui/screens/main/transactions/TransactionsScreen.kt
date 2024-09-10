@@ -51,7 +51,7 @@ import edu.android_security.ui.theme.P50
 fun TransactionScreen(navController: NavController, modifier: Modifier = Modifier) {
     BackHandler {
         navController.popBackStack()
-        navController.navigate(Route.BOTTOMNAVSCREEN)
+        //navController.navigate(Route.BOTTOMNAVSCREEN)
     }
     var selectedIndex by remember { mutableStateOf(0) }
             Column(
@@ -88,7 +88,7 @@ fun TransactionScreen(navController: NavController, modifier: Modifier = Modifie
                             modifier = Modifier
                                 .clickable {
                                     navController.popBackStack()
-                                    navController.navigate(Route.BOTTOMNAVSCREEN)
+                                    //navController.navigate(Route.BOTTOMNAVSCREEN)
                                 }
                         )
                     }

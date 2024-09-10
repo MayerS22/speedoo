@@ -146,7 +146,10 @@ fun MoreScreen(navController: NavController, modifier: Modifier = Modifier) {
             color = Color.LightGray
         )
         MoreMenuItem("Logout", R.drawable.logout)
-        {}
+        {
+            navController.popBackStack()
+            navController.navigate(Route.SIGNIN)
+        }
         Spacer(modifier = Modifier.height(100.dp))
     }
 
