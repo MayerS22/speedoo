@@ -47,5 +47,7 @@ Clone the repository:
 > git clone   https://github.com/MayerS22/speedoo.git
 
 Open the project in Android Studio.
+
 Sync the project with Gradle files.
+
 Run the app on an emulator or physical device.
