@@ -2,33 +2,33 @@
 **Money Transfer Application**
 This mobile application provides a secure and user-friendly platform for managing personal finances. Users can create accounts, view balances, transfer funds, and access their transaction history with ease.
 ## Key Features
-•**Sign In and Sign Up**
+•**Sign In and Sign Up:**
 
 Secure user authentication with validation for name, email, and password on both the UI and database levels.
 Database validation during login ensures a seamless and secure experience.
 
-•**Funds Transfer**
+•**Funds Transfer:**
 
 Transfer money securely to other users with verification and confirmation steps for added security.
 
-•**Error Handling**
+•**Error Handling:**
 
 Informative and user-friendly error messages and notifications to guide users through various scenarios.
 
-•**Transaction History**
+•**Transaction History:**
 
 Access a detailed view of past transactions, including date, recipient, and amount.
 
-•**User Profile**
+•**User Profile:**
 
 View, update, and manage personal profile information easily within the app.
 
 ## Additional Features
-•**Notifications**
+•**Notifications:**
 
 Stay updated with timely notifications for important events.
 
-•**Onboarding**
+•**Onboarding:**
 
 Interactive onboarding screens to guide new users through the setup process.
 ## Technologies Used	
