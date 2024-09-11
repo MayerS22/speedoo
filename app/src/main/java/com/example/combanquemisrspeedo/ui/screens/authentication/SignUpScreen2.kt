@@ -238,7 +238,7 @@ fun SignUpScreen2(navController: NavController,
         ) {
             if (isButtonEnabled) {
                 navController.popBackStack()
-                navController.navigate(Route.BOTTOMNAVSCREEN)
+                navController.navigate(Route.SIGNIN)
             }
         }
 

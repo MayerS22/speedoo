@@ -55,9 +55,9 @@ fun SplashScreen(navController: NavController,context: Context, modifier: Modifi
             val isOnboardingCompleted = getIsOnboardingCompleted(context) // Add this function below
 
             when {
-                token != null -> navController.navigate(Route.BOTTOMNAVSCREEN) {
-                    popUpTo(Route.START) { inclusive = true }
-                }
+//                token != null -> navController.navigate(Route.BOTTOMNAVSCREEN) {
+//                    popUpTo(Route.START) { inclusive = true }
+//                }
                 isOnboardingCompleted -> navController.navigate(Route.SIGNIN) {
                     popUpTo(Route.START) { inclusive = true }
                 }

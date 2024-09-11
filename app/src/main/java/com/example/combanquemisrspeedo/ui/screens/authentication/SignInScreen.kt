@@ -34,6 +34,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.model.TokenStorage
+import com.example.combanquemisrspeedo.model.TokenStoragee
 import com.example.combanquemisrspeedo.model.isNetworkAvailable
 import com.example.combanquemisrspeedo.model.signInData.SignInState
 import com.example.combanquemisrspeedo.navigation.Route
@@ -56,6 +58,7 @@ fun SignInScreen(
     val viewModel: SignInViewModel = viewModel() // No factory needed
     val signInState by viewModel.signInState.collectAsState()
     val context = LocalContext.current
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val passwordVisible = remember { mutableStateOf(false) }
@@ -75,18 +78,30 @@ fun SignInScreen(
         }
     }
 
-    LaunchedEffect(signInState) {
-        if (signInState is SignInState.Success) {
-            Log.d("SignInScreen", "Navigation to BOTTOMNAVSCREEN")
-            navController.navigate(Route.BOTTOMNAVSCREEN) {
-                popUpTo(Route.SIGNIN) { inclusive = true }
-            }
-        } else if (signInState is SignInState.Error) {
-            val errorMessage = (signInState as SignInState.Error).message
 
-            Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
-            Log.e("SignInScreen", "Sign-in error: $errorMessage")
-            buttonClicked = false
+    LaunchedEffect(signInState) {
+        when (signInState) {
+            is SignInState.Success -> {
+                val accountId = (signInState as SignInState.Success).accountId
+                fun onLoginSuccess(token: String) {
+                    TokenStoragee.setToken(token)
+                    // Proceed with the rest of your logic, like navigating to another screen
+                }
+
+                Log.d("SignInScreen", "Navigation to BOTTOMNAVSCREEN with accountId: $accountId")
+                navController.navigate("${Route.BOTTOMNAVSCREEN}/$accountId") {
+                    popUpTo(Route.SIGNIN) { inclusive = true }
+                }
+            }
+            is SignInState.Error -> {
+                val errorMessage = (signInState as SignInState.Error).message
+                Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                Log.e("SignInScreen", "Sign-in error: $errorMessage")
+                buttonClicked = false
+            }
+            else -> {
+                // Handle other states if necessary
+            }
         }
     }
     if (isConnected.value) {
@@ -152,7 +167,7 @@ fun SignInScreen(
             ) {
                 if (isButtonEnabled) {
                     buttonClicked = true
-                    viewModel.signIn(email, password)
+                    viewModel.signIn(email, password,context)
                 }
             }
 

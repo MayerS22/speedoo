@@ -10,11 +10,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
-import com.example.combanquemisrspeedo.api.AccountAPIService
 import com.example.combanquemisrspeedo.api.SignInAPIService
 import com.example.combanquemisrspeedo.api.SignUpAPIService
 import com.example.combanquemisrspeedo.model.TokenStorage
-import com.example.combanquemisrspeedo.model.accountData.AccountDTO
 import com.example.combanquemisrspeedo.model.signInData.SignInRequest
 import com.example.combanquemisrspeedo.model.signInData.SignInResponse
 import com.example.combanquemisrspeedo.model.signInData.SignInState
@@ -25,7 +23,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
+
 class SignInViewModel : ViewModel() {
+
 
     private val repository = RepositorySignIn()
     private val _signInState = MutableStateFlow<SignInState>(SignInState.Idle)
@@ -34,20 +35,30 @@ class SignInViewModel : ViewModel() {
     val userId: State<Long?> get() = _userId
     private val _token = mutableStateOf<String?>(null)
     val token: State<String?> get() = _token
+    private val _loginState = mutableStateOf<Boolean?>(null)
+    val loginState: State<Boolean?> = _loginState
 
     fun handleLoginResponse(response: SignInResponse) {
         _userId.value = response.userid.toLong()
         _token.value = response.token
     }
 
-    fun signIn(email: String, password: String) {
+    fun signIn(email: String, password: String,context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
             _signInState.value = SignInState.Loading
             try {
                 val response = repository.signIn(SignInRequest(email, password))
                 if (response != null) {
-                    _signInState.value = SignInState.Success(response)
                     handleLoginResponse(response)
+                    _signInState.value = SignInState.Success(response)
+                    val token = response.token
+                    TokenStorage.saveToken(context, token)
+
+                    // Log the token for debugging purposes
+                    Log.d("SignInViewModel", "Token saved: $token")
+
+                    // Update the login state to true
+                    _loginState.value = true
                 } else {
                     _signInState.value = SignInState.Error("Sign-in failed")
                 }

@@ -1,6 +1,6 @@
 package com.example.combanquemisrspeedo.api
 
-import com.example.combanquemisrspeedo.model.accountData.AccountDTO
+import com.example.combanquemisrspeedo.model.userDato.AccountDTO
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -14,3 +14,4 @@ interface AccountAPICallable {
     @POST("/api/account")
     suspend fun createAccount(@Body accountDTO: AccountDTO): AccountDTO
 }
+

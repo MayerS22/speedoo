@@ -1,46 +1,56 @@
 package com.example.combanquemisrspeedo.ui.viewmodel
 
+import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.combanquemisrspeedo.api.AccountAPIService
-import com.example.combanquemisrspeedo.model.accountData.AccountDTO
+import com.example.combanquemisrspeedo.api.UserAPICallable
+import com.example.combanquemisrspeedo.api.UserAPIService
+import com.example.combanquemisrspeedo.model.userDato.UserDTO
 import com.example.combanquemisrspeedo.ui.screens.main.transfer.Transaction
 import com.example.combanquemisrspeedo.ui.screens.main.transfer.transactionsList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
-    private val _account = mutableStateOf<AccountDTO?>(null)
-    val account: State<AccountDTO?> = _account
+    private val userRepository = UserRepository() // Adjust to use the service directly if needed
 
-    private val _transactions = mutableStateOf<List<Transaction>>(emptyList())
-    val transactions: State<List<Transaction>> = _transactions
+    private val _account = MutableStateFlow<UserDTO?>(null)
+    val account: StateFlow<UserDTO?> = _account
 
-    private val _accountId = MutableStateFlow<Long?>(null)
-    val accountId: StateFlow<Long?> = _accountId
+    private val _transactions = MutableStateFlow<List<Transaction>>(emptyList())
+    val transactions: StateFlow<List<Transaction>> = _transactions
 
-    // Function to get account details
-    fun getAccountDetails(accountId: Long) {
+    fun getAccountDetails(userId: Long) {
         viewModelScope.launch {
             try {
-                val accountDetails = AccountAPIService.userAPI.getAccountById(accountId)
-                _account.value = accountDetails
-                _accountId.value = accountId
+                val response = userRepository.getUserDetails(userId)
+                if (response.isSuccessful) {
+                    _account.value = response.body()
+                } else {
+                    Log.e("HomeViewModel", "Error fetching account details: ${response.errorBody()?.string()}")
+                }
             } catch (e: Exception) {
-                // Handle error here (e.g., log it or show a message to the user)
-                Log.e("HomeViewModel", "Error fetching account details", e)
+                Log.e("HomeViewModel", "Error fetching account details: ${e.message}")
             }
         }
     }
 
-    // Function to get recent transactions
     fun getRecentTransactions() {
-        // In reality, this should call the API for transactions. Here we are using the static list.
-        _transactions.value = transactionsList
+        // Mocked transactions data for now
+        _transactions.value = transactionsList // Replace with real API call if available
     }
 }
+
+class UserRepository {
+    private val userAPIService = UserAPIService.createService()
+
+    suspend fun getUserDetails(userId: Long): Response<UserDTO> {
+        return userAPIService.getUserById(userId)
+    }
+}
+
+

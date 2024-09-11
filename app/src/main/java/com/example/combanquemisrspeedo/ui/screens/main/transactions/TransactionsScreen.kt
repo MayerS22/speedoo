@@ -123,17 +123,17 @@ fun TransactionScreen(navController: NavController, modifier: Modifier = Modifie
                         )
                     Spacer(modifier = Modifier.height(16.dp))
                     PayCard(
-                        name = "Ahmed Mohamed",
+                        name = "Khaled Hazem",
                         cardNumber = "Visa . Mater Card . 1234",
-                        timestamp ="Today 11:00 - Received" ,
+                        timestamp ="Today 1:00 - Received" ,
                         amount = "\$1000",
                         status = "Successful",
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     PayCard(
-                        name = "Ahmed Mohamed",
+                        name = "Mayer Mohamed",
                         cardNumber = "Visa . Mater Card . 1234",
-                        timestamp ="Today 11:00 - Received" ,
+                        timestamp ="Last Week 11:00 - Received" ,
                         amount = "\$1000",
                         status = "Successful",
                     )

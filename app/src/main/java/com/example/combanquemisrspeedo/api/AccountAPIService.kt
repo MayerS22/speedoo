@@ -1,5 +1,7 @@
 package com.example.combanquemisrspeedo.api
 
+import android.content.Context
+import com.example.combanquemisrspeedo.model.TokenStorage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,24 +13,35 @@ object AccountAPIService {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val client: OkHttpClient by lazy {
-        OkHttpClient.Builder().apply {
-            this.addInterceptor(interceptor)
+    fun getClient(context: Context): OkHttpClient {
+        return OkHttpClient.Builder().apply {
+            addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder()
+                val token = TokenStorage.getToken(context) // Get the token from TokenStorage
+                if (token != null) {
+                    requestBuilder.addHeader("Authorization", "Bearer $token")
+                }
+                chain.proceed(requestBuilder.build())
+            }
+            this.addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
                 .connectTimeout(3, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(25, TimeUnit.SECONDS)
         }.build()
     }
 
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
+    fun getRetrofit(context: Context): Retrofit {
+        return Retrofit.Builder()
             .baseUrl("https://speedo-production.up.railway.app/") // Ensure this is your actual base URL
-            .client(client)
+            .client(getClient(context)) // Pass the OkHttpClient with the token
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    val userAPI: AccountAPICallable by lazy {
-        retrofit.create(AccountAPICallable::class.java)
+    fun getAccountAPI(context: Context): AccountAPICallable {
+        return getRetrofit(context).create(AccountAPICallable::class.java)
     }
 }
+

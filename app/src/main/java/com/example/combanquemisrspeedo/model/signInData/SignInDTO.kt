@@ -13,10 +13,11 @@ data class SignInRequest(
     val email: String,
     val password: String
 )
-
 sealed class SignInState {
     object Idle : SignInState()
     object Loading : SignInState()
-    data class Success(val signInResponse: SignInResponse) : SignInState()
+    data class Success(val response: SignInResponse) : SignInState() {
+        val accountId: Long = response.userid.toLong()
+    }
     data class Error(val message: String) : SignInState()
 }

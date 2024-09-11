@@ -29,6 +29,18 @@ object TokenStorage {
     }
 }
 
+object TokenStoragee {
+    private var token: String? = null
+
+    fun getToken(): String? {
+        return token
+    }
+
+    fun setToken(newToken: String) {
+        token = newToken
+    }
+}
+
 
 
 

@@ -79,8 +79,8 @@ fun BottomNavigationBar(
     }
 }
 
-@Preview
-@Composable
-private fun BottomNavScreenPreview() {
-    BottomNavScreen(rememberNavController())
-}
+//@Preview
+//@Composable
+//private fun BottomNavScreenPreview() {
+//    BottomNavScreen(rememberNavController())
+//}

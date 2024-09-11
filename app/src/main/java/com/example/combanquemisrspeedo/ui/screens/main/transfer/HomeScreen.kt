@@ -1,13 +1,31 @@
 package com.example.combanquemisrspeedo.ui.screens.main.transfer
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -16,37 +34,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
 import com.example.combanquemisrspeedo.ui.viewmodel.HomeViewModel
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G200
 import edu.android_security.ui.theme.G40
-import edu.android_security.ui.theme.G50
 import edu.android_security.ui.theme.G900
 import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
 fun HomeScreen(navController: NavController,
-               accountId: Long?,
+               userId: Long?,
                ) {
-    val homeViewModel: HomeViewModel = viewModel()
-    LaunchedEffect(accountId) {
-        if (accountId != null) {
-            homeViewModel.getAccountDetails(accountId)
-        }
-        homeViewModel.getRecentTransactions()
+    val viewModel: HomeViewModel = viewModel() // Using default ViewModel provider
+    LaunchedEffect(userId) {
+        viewModel.getAccountDetails(userId!!)
+        viewModel.getRecentTransactions()
     }
 
-    val account = homeViewModel.account.value
-    val transactions = homeViewModel.transactions.value
+    val account by viewModel.account.collectAsState()
+    val transactions by viewModel.transactions.collectAsState()
+
+    LaunchedEffect(userId) {
+        viewModel.getAccountDetails(userId!!)
+        viewModel.getRecentTransactions()
+    }
 
     Box(
         modifier = Modifier
@@ -84,7 +102,7 @@ fun HomeScreen(navController: NavController,
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text =  account?.accountName?.take(2) ?: "AD",
+                            text = account?.name?.take(2) ?: "HI",
                             fontSize = 20.sp,
                             color = G100,
                             fontWeight = FontWeight.Bold
@@ -101,12 +119,12 @@ fun HomeScreen(navController: NavController,
                             fontSize = 14.sp,
                             color = P300
                         )
-
                         Text(
-                            text = account?.accountName ?: "Asmaa Dosuky",
-                            fontSize = 16.sp,
-                            color = G900
-                        )
+                                text = account?.name ?: "Hi User",
+                                fontSize = 16.sp,
+                                color = G900
+                            )
+                        }
                     }
                 }
 
@@ -143,7 +161,7 @@ fun HomeScreen(navController: NavController,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "${account?.balance ?: "Loading..."} ${account?.currency ?: ""}",
+                        text = "${account?.accounts?.firstOrNull()?.balance ?: 0.0} ${account?.accounts?.firstOrNull()?.currency ?: "EGY"}",
                         style = MaterialTheme.typography.headlineLarge,
                         color = Color.White
                     )
@@ -196,7 +214,6 @@ fun HomeScreen(navController: NavController,
             }
         }
     }
-}
 
 @Composable
 fun TransactionItem(name: String, amount: String, date: String, time: String, type: String) {
@@ -285,10 +302,10 @@ data class Transaction(
 
 // Example of a list of transactions
 val transactionsList = listOf(
-    Transaction("Ahmed Mohamed", "500 EGP", "Yesterday", "12:30 PM", "Received"),
-    Transaction("Ahmed Mohamed", "500 EGP", "Today", "9:45 AM", "Sent"),
-    Transaction("Ahmed Mohamed", "500 EGP", "Today", "11:15 AM", "Sent"),
-    Transaction("Ahmed Mohamed", "500 EGP", "Today", "1:00 PM", "Received"),
-    Transaction("Ahmed Mohamed", "500 EGP", "Today", "2:45 PM", "Received")
+    Transaction("Ahmed Mohamed", "550 EGP", "Yesterday", "12:30 PM", "Received"),
+    Transaction("Dina ALi", "100 EGP", "Last Week", "9:45 AM", "Sent"),
+    Transaction("Fady Mohamed", "7500 EGP", "Today", "11:15 AM", "Sent"),
+    Transaction("Mohamed Atef", "9900 EGP", "Today", "1:00 PM", "Received"),
+    Transaction("Ahmed Ahmed", "100 EGP", "Today", "2:45 PM", "Received")
 )
 

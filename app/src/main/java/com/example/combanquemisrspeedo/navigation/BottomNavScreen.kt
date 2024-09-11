@@ -1,6 +1,7 @@
 package com.example.combanquemisrspeedo.navigation
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,7 +27,7 @@ import com.example.combanquemisrspeedo.ui.viewmodel.HomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun BottomNavScreen(navController: NavController, userId: Long, modifier: Modifier = Modifier) {
     var selectedIndex by rememberSaveable  { mutableStateOf(0) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -45,7 +46,7 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
                 println("++++++++++++++++++$selectedIndex")
                 when (selectedIndex) {
 
-                    0 -> HomeScreen(navController, accountId = 1)
+                    0 -> HomeScreen(navController,userId)
                     1 -> AmountScreen(navController)
                     2 -> TransactionScreen(navController)
                     3 -> CardsScreen(navController)
@@ -57,8 +58,8 @@ fun BottomNavScreen(navController: NavController, modifier: Modifier = Modifier)
         }
     )
 }
-@Preview
-@Composable
-private fun BottomNavScreenPreview() {
-    BottomNavScreen(rememberNavController())
-}
+//@Preview
+//@Composable
+//private fun BottomNavScreenPreview() {
+//    BottomNavScreen(rememberNavController())
+//}
