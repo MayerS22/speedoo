@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.ui.screens.authentication
 
+import android.content.Context
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.combanquemisrspeedo.model.TokenStorage
 import com.example.combanquemisrspeedo.navigation.Route
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.P500
@@ -25,7 +27,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun SplashScreen(navController: NavController,context: Context, modifier: Modifier = Modifier) {
     val circleRadius = remember { Animatable(0f) }
     val scope = rememberCoroutineScope()
     val textProgress = remember { Animatable(0f) }
@@ -33,6 +35,8 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
 
     //circlee
     LaunchedEffect(Unit) {
+        val prefs = context.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
+        val onboardingCompleted = prefs.getBoolean("onboardingCompleted", false)
         scope.launch {
             circleRadius.animateTo(
                 targetValue = 3000f,
@@ -47,16 +51,31 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
                 targetValue = fullText.length.toFloat(),
                 animationSpec = tween(durationMillis = 3000)
             )
-        }
+            val token = TokenStorage.getToken(context)
+            val isOnboardingCompleted = getIsOnboardingCompleted(context) // Add this function below
 
-
-        // Navigate after animations are complete
-        scope.launch {
-            delay(5000)  // Adjust this delay to match the total animation duration
-            navController.navigate(Route.ONBOARDING) {
-                popUpTo(Route.START) { inclusive = true }
+            when {
+                token != null -> navController.navigate(Route.BOTTOMNAVSCREEN) {
+                    popUpTo(Route.START) { inclusive = true }
+                }
+                isOnboardingCompleted -> navController.navigate(Route.SIGNIN) {
+                    popUpTo(Route.START) { inclusive = true }
+                }
+                else -> navController.navigate(Route.ONBOARDING) {
+                    popUpTo(Route.START) { inclusive = true }
+                }
             }
-    }}
+        }
+    }
+
+
+//        // Navigate after animations are complete
+//        scope.launch {
+//            delay(5000)  // Adjust this delay to match the total animation duration
+//            navController.navigate(Route.ONBOARDING) {
+//                popUpTo(Route.START) { inclusive = true }
+//            }
+//    }}
 
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -85,15 +104,12 @@ fun SplashScreen(navController: NavController, modifier: Modifier = Modifier) {
             }
 
             }
-        }}
+        }
+}
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-private fun SplashScreenPreview() {
-    SplashScreen(rememberNavController())
+fun getIsOnboardingCompleted(context: Context): Boolean {
+    val prefs = context.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
+    return prefs.getBoolean("onboardingCompleted", false)
 }
 
 
-
-//                    popUpTo(Route.START) { inclusive = true }
-//                    launchSingleTop = true

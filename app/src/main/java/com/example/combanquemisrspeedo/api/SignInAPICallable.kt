@@ -9,5 +9,4 @@ import retrofit2.http.POST
 interface SignInAPICallable {
         @POST("api/auth/login")
         suspend fun signIn(@Body request: SignInRequest): Response<SignInResponse>
-
 }

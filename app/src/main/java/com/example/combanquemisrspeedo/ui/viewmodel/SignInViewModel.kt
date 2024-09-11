@@ -3,14 +3,18 @@ package com.example.combanquemisrspeedo.ui.viewmodel
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.test.core.app.ApplicationProvider
+import com.example.combanquemisrspeedo.api.AccountAPIService
 import com.example.combanquemisrspeedo.api.SignInAPIService
 import com.example.combanquemisrspeedo.api.SignUpAPIService
 import com.example.combanquemisrspeedo.model.TokenStorage
+import com.example.combanquemisrspeedo.model.accountData.AccountDTO
 import com.example.combanquemisrspeedo.model.signInData.SignInRequest
 import com.example.combanquemisrspeedo.model.signInData.SignInResponse
 import com.example.combanquemisrspeedo.model.signInData.SignInState
@@ -26,6 +30,15 @@ class SignInViewModel : ViewModel() {
     private val repository = RepositorySignIn()
     private val _signInState = MutableStateFlow<SignInState>(SignInState.Idle)
     val signInState: StateFlow<SignInState> = _signInState
+    private val _userId = mutableStateOf<Long?>(null)
+    val userId: State<Long?> get() = _userId
+    private val _token = mutableStateOf<String?>(null)
+    val token: State<String?> get() = _token
+
+    fun handleLoginResponse(response: SignInResponse) {
+        _userId.value = response.userid.toLong()
+        _token.value = response.token
+    }
 
     fun signIn(email: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,6 +47,7 @@ class SignInViewModel : ViewModel() {
                 val response = repository.signIn(SignInRequest(email, password))
                 if (response != null) {
                     _signInState.value = SignInState.Success(response)
+                    handleLoginResponse(response)
                 } else {
                     _signInState.value = SignInState.Error("Sign-in failed")
                 }
@@ -50,7 +64,10 @@ class RepositorySignIn {
         return try {
             val response = SignInAPIService.userAPI.signIn(signInRequest)
             if (response.isSuccessful) {
-                response.body()
+                response.body()?.let {
+                    Log.d("Repository", "Sign-in successful: ${it}")
+                    it
+                }
             } else {
                 Log.e("Repository", "Sign-in failed: ${response.code()} - ${response.message()}")
                 null

@@ -1,5 +1,6 @@
 package com.example.combanquemisrspeedo.ui.screens.onBoarding
 
+import android.content.Context
 import androidx.collection.emptyLongSet
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -35,7 +37,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnboardingPager(navController: NavController) {
+fun OnboardingPager(navController: NavController, context: Context) {
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
 
@@ -80,6 +82,7 @@ fun OnboardingPager(navController: NavController) {
                         color = G900,
                         modifier = Modifier
                             .clickable(onClick = {
+                                setOnboardingCompleted(context)
                                 navController.popBackStack() // remove current item from history
                                 navController.navigate(Route.SIGNUP)
                             })
@@ -108,6 +111,7 @@ fun OnboardingPager(navController: NavController) {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }
                         else{
+                            setOnboardingCompleted(context)
                             navController.popBackStack()
                             navController.navigate(Route.SIGNUP)
                         }
@@ -118,10 +122,13 @@ fun OnboardingPager(navController: NavController) {
         }
     }
 }
-
+fun setOnboardingCompleted(context: Context) {
+    val prefs = context.getSharedPreferences("OnboardingPrefs", Context.MODE_PRIVATE)
+    prefs.edit().putBoolean("onboardingCompleted", true).apply()
+}
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewOnboardingPager() {
-    OnboardingPager(rememberNavController())
+    OnboardingPager(rememberNavController(),LocalContext.current)
 }

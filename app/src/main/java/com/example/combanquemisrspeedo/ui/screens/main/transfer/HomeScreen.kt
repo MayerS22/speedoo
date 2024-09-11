@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,9 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.combanquemisrspeedo.R
+import com.example.combanquemisrspeedo.ui.viewmodel.HomeViewModel
 import edu.android_security.ui.theme.G0
 import edu.android_security.ui.theme.G100
 import edu.android_security.ui.theme.G200
@@ -31,7 +34,19 @@ import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController,
+               accountId: Long?,
+               homeViewModel: HomeViewModel = viewModel()) {
+    LaunchedEffect(accountId) {
+        if (accountId != null) {
+            homeViewModel.getAccountDetails(accountId)
+        }
+        homeViewModel.getRecentTransactions()
+    }
+
+    val account = homeViewModel.account.value
+    val transactions = homeViewModel.transactions.value
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -68,7 +83,7 @@ fun HomeScreen(navController: NavController) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "AD",
+                            text =  account?.accountName?.take(2) ?: "AD",
                             fontSize = 20.sp,
                             color = G100,
                             fontWeight = FontWeight.Bold
@@ -87,7 +102,7 @@ fun HomeScreen(navController: NavController) {
                         )
 
                         Text(
-                            text = "Asmaa Dosuky",
+                            text = account?.accountName ?: "Asmaa Dosuky",
                             fontSize = 16.sp,
                             color = G900
                         )
@@ -127,7 +142,7 @@ fun HomeScreen(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "10000EGP",
+                        text = "${account?.balance ?: "Loading..."} ${account?.currency ?: ""}",
                         style = MaterialTheme.typography.headlineLarge,
                         color = Color.White
                     )
@@ -276,8 +291,3 @@ val transactionsList = listOf(
     Transaction("Ahmed Mohamed", "500 EGP", "Today", "2:45 PM", "Received")
 )
 
-@Preview(showBackground = true)
-@Composable
-private fun HomePreview() {
-    HomeScreen(rememberNavController())
-}

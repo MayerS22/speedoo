@@ -1,9 +1,12 @@
 package com.example.combanquemisrspeedo.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.combanquemisrspeedo.ui.screens.authentication.SignInAgain
 import com.example.combanquemisrspeedo.ui.screens.authentication.SignInScreen
 import com.example.combanquemisrspeedo.ui.screens.authentication.SignUpScreen1
@@ -57,9 +60,10 @@ object Route {
 @Composable
 fun AppNavHost() {
     val navController= rememberNavController()
+    val context = LocalContext.current
     NavHost(navController= navController, startDestination = Route.START ){
 
-        composable(route=Route.START){ SplashScreen(navController) }
+        composable(route=Route.START){ SplashScreen(navController,context) }
         composable(route=Route.SIGNUP){ SignUpScreen1(navController) }
         composable(route=Route.SIGNUP2){ SignUpScreen2(navController) }
         composable(route=Route.SIGNIN){ SignInScreen(navController) }
@@ -73,9 +77,17 @@ fun AppNavHost() {
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
         composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
-        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
+        composable(
+            route = "${Route.HOMESCREEN}/{userid}",
+            arguments = listOf(navArgument("userid") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getLong("userid")
+            HomeScreen(navController, id)
+//            val id = backStackEntry.arguments?.getLong("id")
+//            HomeScreen(navController = navController, id = accountId)
+        }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
-        composable(route=Route.ONBOARDING){ OnboardingPager(navController) }
+        composable(route=Route.ONBOARDING){ OnboardingPager(navController,context) }
         composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
         composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
         composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
