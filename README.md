@@ -43,11 +43,11 @@ Interactive onboarding screens to guide new users through the setup process.
 •**Coroutines:** For efficient and asynchronous operations.
 
 ## Installation
-Clone the repository:
+1.Clone the repository:
 > git clone   https://github.com/MayerS22/speedoo.git
 
-Open the project in Android Studio.
+2.Open the project in Android Studio.
 
-Sync the project with Gradle files.
+3.Sync the project with Gradle files.
 
-Run the app on an emulator or physical device.
+4.Run the app on an emulator or physical device.
