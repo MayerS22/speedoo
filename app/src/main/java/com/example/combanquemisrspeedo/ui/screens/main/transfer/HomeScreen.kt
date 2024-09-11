@@ -36,7 +36,8 @@ import edu.android_security.ui.theme.P50
 @Composable
 fun HomeScreen(navController: NavController,
                accountId: Long?,
-               homeViewModel: HomeViewModel = viewModel()) {
+               ) {
+    val homeViewModel: HomeViewModel = viewModel()
     LaunchedEffect(accountId) {
         if (accountId != null) {
             homeViewModel.getAccountDetails(accountId)

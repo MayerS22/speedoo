@@ -57,12 +57,49 @@ object Route {
 
 }
 
+//@Composable
+//fun AppNavHost() {
+//    val navController= rememberNavController()
+//    val context = LocalContext.current
+//    NavHost(navController= navController, startDestination = Route.START ){
+//
+//        composable(route=Route.START){ SplashScreen(navController,context) }
+//        composable(route=Route.SIGNUP){ SignUpScreen1(navController) }
+//        composable(route=Route.SIGNUP2){ SignUpScreen2(navController) }
+//        composable(route=Route.SIGNIN){ SignInScreen(navController) }
+//        composable(route=Route.SIGNINADAIN){ SignInAgain(navController) }
+//        composable(route=Route.PROFILE){ ProfileScreen(navController) }
+//        composable(route=Route.PROFILEINFO){ ProfileInformationScreen(navController) }
+//        composable(route=Route.EDITPROFILE){ EditProfile (navController) }
+//        composable(route=Route.SETTING){ SettingsScreen(navController) }
+//        composable(route=Route.CHANGPASS){ ChangePassword(navController) }
+//        composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
+//        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
+//        composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
+//        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
+//        composable(
+//            route = "${Route.HOMESCREEN}/{userid}",
+//            arguments = listOf(navArgument("userid") { type = NavType.LongType })
+//        ) { backStackEntry ->
+//            val id = backStackEntry.arguments?.getLong("userid")
+//            HomeScreen(navController, id)
+////            val id = backStackEntry.arguments?.getLong("id")
+////            HomeScreen(navController = navController, id = accountId)
+//        }
+//        composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
+//        composable(route=Route.ONBOARDING){ OnboardingPager(navController,context) }
+//        composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
+//        composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
+//        composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
+//        composable(route=Route.INTERNETERROR){ InternetError() }
+//        composable(route=Route.SERVERERROR){ ServerError(navController) }
+//        }
+//    }
 @Composable
 fun AppNavHost() {
     val navController= rememberNavController()
     val context = LocalContext.current
     NavHost(navController= navController, startDestination = Route.START ){
-
         composable(route=Route.START){ SplashScreen(navController,context) }
         composable(route=Route.SIGNUP){ SignUpScreen1(navController) }
         composable(route=Route.SIGNUP2){ SignUpScreen2(navController) }
@@ -74,8 +111,11 @@ fun AppNavHost() {
         composable(route=Route.SETTING){ SettingsScreen(navController) }
         composable(route=Route.CHANGPASS){ ChangePassword(navController) }
         composable(route=Route.FAVOURITESCREEN){ FavouriteScreen(navController) }
+//        composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.MORESCREEN){ MoreScreen(navController) }
         composable(route=Route.TRANSACTIONSCREEN){ TransactionScreen(navController) }
+//        composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
+//        composable(route=Route.HOMESCREEN){ HomeScreen(navController) }
         composable(route=Route.CARDSSCREEN){ CardsScreen(navController) }
         composable(
             route = "${Route.HOMESCREEN}/{userid}",
@@ -87,11 +127,15 @@ fun AppNavHost() {
 //            HomeScreen(navController = navController, id = accountId)
         }
         composable(route=Route.BOTTOMNAVSCREEN){ BottomNavScreen(navController) }
-        composable(route=Route.ONBOARDING){ OnboardingPager(navController,context) }
+        composable(route=Route.ONBOARDING){ OnboardingPager(navController, context ) }
         composable(route=Route.AMOUNTSCREEN){ AmountScreen(navController) }
         composable(route=Route.CONFIRMATIONSCREEN){ ConfirmationScreen(navController) }
         composable(route=Route.PAYMENTSCREEN){ PaymentScreen(navController) }
+//        composable(route=Route.INTERNETERROR){ InternetError(navController) }
         composable(route=Route.INTERNETERROR){ InternetError() }
         composable(route=Route.SERVERERROR){ ServerError(navController) }
-        }
+
+
+
     }
+}
