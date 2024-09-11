@@ -16,7 +16,7 @@ View, update, and manage personal profile information easily within the app.
 ## Additional Features
 Notifications: Stay updated with timely notifications for important events.
 Onboarding: Interactive onboarding screens to guide new users through the setup process.
-## Technologies Used
+## Technologies Used	
 Jetpack Compose: For building responsive and modern UI components.
 Kotlin: The primary programming language for the app.
 MVVM Architecture: Clean architecture pattern for maintainable and testable code.
