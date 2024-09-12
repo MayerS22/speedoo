@@ -49,9 +49,7 @@ import edu.android_security.ui.theme.P300
 import edu.android_security.ui.theme.P50
 
 @Composable
-fun HomeScreen(navController: NavController,
-               userId: Long?,
-               ) {
+fun HomeScreen(navController: NavController ,userId: Long?) {
     val viewModel: HomeViewModel = viewModel() // Using default ViewModel provider
     LaunchedEffect(userId) {
         viewModel.getAccountDetails(userId!!)
@@ -65,7 +63,6 @@ fun HomeScreen(navController: NavController,
         viewModel.getAccountDetails(userId!!)
         viewModel.getRecentTransactions()
     }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -102,7 +99,7 @@ fun HomeScreen(navController: NavController,
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = account?.name?.take(2) ?: "HI",
+                            text = account?.name?.take(2)?:"AM",
                             fontSize = 20.sp,
                             color = G100,
                             fontWeight = FontWeight.Bold
@@ -119,12 +116,12 @@ fun HomeScreen(navController: NavController,
                             fontSize = 14.sp,
                             color = P300
                         )
+
                         Text(
-                                text = account?.name ?: "Hi User",
-                                fontSize = 16.sp,
-                                color = G900
-                            )
-                        }
+                            text = account?.name?:"Dina Abdullah",
+                            fontSize = 16.sp,
+                            color = G900
+                        )
                     }
                 }
 
@@ -161,7 +158,7 @@ fun HomeScreen(navController: NavController,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "${account?.accounts?.firstOrNull()?.balance ?: 0.0} ${account?.accounts?.firstOrNull()?.currency ?: "EGY"}",
+                        text = "Loading...",
                         style = MaterialTheme.typography.headlineLarge,
                         color = Color.White
                     )
@@ -214,6 +211,7 @@ fun HomeScreen(navController: NavController,
             }
         }
     }
+}
 
 @Composable
 fun TransactionItem(name: String, amount: String, date: String, time: String, type: String) {
@@ -302,10 +300,10 @@ data class Transaction(
 
 // Example of a list of transactions
 val transactionsList = listOf(
-    Transaction("Ahmed Mohamed", "550 EGP", "Yesterday", "12:30 PM", "Received"),
-    Transaction("Dina ALi", "100 EGP", "Last Week", "9:45 AM", "Sent"),
-    Transaction("Fady Mohamed", "7500 EGP", "Today", "11:15 AM", "Sent"),
-    Transaction("Mohamed Atef", "9900 EGP", "Today", "1:00 PM", "Received"),
+    Transaction("Ahmed Atef", "550 EGP", "Yesterday", "12:30 PM", "Received"),
+    Transaction("Dina Abdullah", "100 EGP", "Last Week", "9:45 AM", "Sent"),
+    Transaction("Hazem Tamer", "7500 EGP", "Today", "11:15 AM", "Sent"),
+    Transaction("Mayer Soliman", "9900 EGP", "Today", "1:00 PM", "Received"),
     Transaction("Ahmed Ahmed", "100 EGP", "Today", "2:45 PM", "Received")
 )
 

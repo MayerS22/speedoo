@@ -13,6 +13,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.example.combanquemisrspeedo.api.SignInAPIService
 import com.example.combanquemisrspeedo.api.SignUpAPIService
 import com.example.combanquemisrspeedo.model.TokenStorage
+import com.example.combanquemisrspeedo.model.TokenStoragee
 import com.example.combanquemisrspeedo.model.signInData.SignInRequest
 import com.example.combanquemisrspeedo.model.signInData.SignInResponse
 import com.example.combanquemisrspeedo.model.signInData.SignInState
@@ -53,9 +54,11 @@ class SignInViewModel : ViewModel() {
                     _signInState.value = SignInState.Success(response)
                     val token = response.token
                     TokenStorage.saveToken(context, token)
+                    TokenStoragee.setToken(token)
 
                     // Log the token for debugging purposes
                     Log.d("SignInViewModel", "Token saved: $token")
+                    Log.d("SignInViewModel", "Token saved SP: ${TokenStorage.getToken(context)}")
 
                     // Update the login state to true
                     _loginState.value = true
