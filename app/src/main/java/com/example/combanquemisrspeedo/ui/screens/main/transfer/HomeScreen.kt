@@ -99,7 +99,7 @@ fun HomeScreen(navController: NavController ,userId: Long?) {
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = account?.name?.take(2)?:"AM",
+                            text = account?.name?.take(2)?:"",
                             fontSize = 20.sp,
                             color = G100,
                             fontWeight = FontWeight.Bold
@@ -118,7 +118,7 @@ fun HomeScreen(navController: NavController ,userId: Long?) {
                         )
 
                         Text(
-                            text = account?.name?:"Dina Abdullah",
+                            text = account?.name?:" ",
                             fontSize = 16.sp,
                             color = G900
                         )
